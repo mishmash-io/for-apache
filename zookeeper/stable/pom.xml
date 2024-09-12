@@ -85,6 +85,8 @@
     <mishmash.io.zookeeper.stable.version>${zookeeper.stable.version}</mishmash.io.zookeeper.stable.version>
     <mishmash.io.zookeeper.stable.patch>${zookeeper.stable.mishmash.io.patch}</mishmash.io.zookeeper.stable.patch>
 
+    <surefire-forkcount>8</surefire-forkcount>
+
     <slf4j.version>2.0.16</slf4j.version>
     <logback-version>1.5.8</logback-version>
     <audience-annotations.version>0.15.0</audience-annotations.version>
@@ -201,11 +203,13 @@
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
         <version>${junit.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
         <version>${junit.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -215,14 +219,15 @@
       </dependency>
       <dependency>
         <groupId>org.junit.platform</groupId>
-        <artifactId>junit-platform-runner</artifactId>
+        <artifactId>junit-platform-suite-api</artifactId>
         <version>${junit-platform.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.junit.vintage</groupId>
-        <artifactId>junit-vintage-engine</artifactId>
-        <version>${junit.version}</version>
+        <groupId>org.junit.platform</groupId>
+        <artifactId>junit-platform-suite-engine</artifactId>
+        <version>${junit-platform.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
@@ -434,7 +439,12 @@
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-runner</artifactId>
+      <artifactId>junit-platform-suite-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-engine</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -642,6 +652,23 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+          <forkCount>${surefire-forkcount}</forkCount>
+          <reuseForks>false</reuseForks>
+          <argLine>-Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
+          <basedir>${project.basedir}</basedir>
+          <systemPropertyVariables>
+            <build.test.dir>${project.build.directory}/surefire</build.test.dir>
+            <zookeeper.DigestAuthenticationProvider.superDigest>super:D/InIHSb7yEEbrWz8b9l71RjZJU=</zookeeper.DigestAuthenticationProvider.superDigest>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
