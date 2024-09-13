@@ -663,7 +663,7 @@
           <forkCount>${surefire-forkcount}</forkCount>
           <reuseForks>false</reuseForks>
           <argLine>-Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
-          <basedir>${project.basedir}</basedir>
+          <workingDirectory>${project.build.directory}/zookeeper-release-${zookeeper.stable.version}/zookeeper-server</workingDirectory>
           <systemPropertyVariables>
             <build.test.dir>${project.build.directory}/surefire</build.test.dir>
             <zookeeper.DigestAuthenticationProvider.superDigest>super:D/InIHSb7yEEbrWz8b9l71RjZJU=</zookeeper.DigestAuthenticationProvider.superDigest>
