@@ -34,7 +34,7 @@
     Apache ZooKeeper is a service for coordinating processes of distributed applications.
 
     This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
-    specific modifications visit our website or github.
+    specific modifications visit our website and github.
 
     It is recommended that you don't use this package directly, but rather - one of the 
     dependency-reduced client or server packages.

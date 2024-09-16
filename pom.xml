@@ -25,7 +25,7 @@
   <description>
     Contains modifications and extensions of Apache Software Foundation projects, developed by mishmash io.
 
-    Includes security updates, reduced-dependecy packages and other. Visit our website or github for more.
+    Includes security updates, reduced-dependecy packages and other. Visit our website and github for more.
   </description>
   <url>https://mishmash.io/open_source/apache_big_data</url>
 
@@ -85,8 +85,8 @@
     <module>zookeeper/stable</module>
     <module>zookeeper/stable-common</module>
     <module>zookeeper/stable-client</module>
-    <module>zookeeper/stable-server</module>
-    <module>zookeeper/stable-server-metrics</module>
+    <!--module>zookeeper/stable-server</module>
+    <module>zookeeper/stable-server-metrics</module-->
   </modules>
 
   <build>
