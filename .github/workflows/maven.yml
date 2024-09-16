@@ -22,6 +22,7 @@ jobs:
     # allow 'Update dependency graph' step below to submit the generated graph
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
     - uses: actions/checkout@v4
