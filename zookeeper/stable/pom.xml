@@ -534,6 +534,15 @@
             </configuration>
           </execution>
           <execution>
+            <id>tbuild-hostname</id>
+            <goals>
+              <goal>hostname</goal>
+            </goals>
+            <configuration>
+              <hostnameProperty>tests.hostname</hostnameProperty>
+            </configuration>
+          </execution>
+          <execution>
             <id>parse-version</id>
             <goals>
               <goal>parse-version</goal>
@@ -623,6 +632,22 @@
               </resources>
             </configuration>
           </execution>
+          <execution>
+            <id>prepare-filtered-test-resource</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>process-test-classes</phase>
+            <configuration>
+              <outputDirectory>${project.build.directory}/generated-test-resources</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/zookeeper-release-${zookeeper.stable.version}/zookeeper-server/src/test/resources/filtered</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -662,7 +687,7 @@
           </includes>
           <forkCount>${surefire-forkcount}</forkCount>
           <reuseForks>false</reuseForks>
-          <argLine>-Djdk.net.hosts.file=src/test/resources/data/ssl/hosts -Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
+          <argLine>-Djdk.net.hosts.file=${project.build.directory}/generated-test-resources/hosts -Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
           <workingDirectory>${project.build.directory}/zookeeper-release-${zookeeper.stable.version}/zookeeper-server</workingDirectory>
           <systemPropertyVariables>
             <build.test.dir>${project.build.directory}/surefire</build.test.dir>
