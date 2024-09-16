@@ -98,7 +98,7 @@
     <jetty.version>9.4.56.v20240826</jetty.version>
     <jackson.version>2.17.2</jackson.version>
     <jline.version>2.14.6</jline.version>
-    <snappy.version>1.1.10.6</snappy.version>
+    <snappy.version>1.1.10.7</snappy.version>
     <kerby.version>2.1.0</kerby.version>
     <bouncycastle.version>1.78.1</bouncycastle.version>
     <commons-collections.version>4.5.0-M2</commons-collections.version>
