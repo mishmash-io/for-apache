@@ -140,7 +140,6 @@
                     **/zookeeper/server/SnapshotFormatter*.java,
                     **/zookeeper/server/PurgeTxnLog*.java,
                     **/zookeeper/server/auth/KerberosName*.java,
-                    **/zookeeper/server/metric/**,
                     **/zookeeper/server/persistence/TxnLogToolkit*.java,
                     **/zookeeper/server/util/KerberosUtil*.java,
                     **/zookeeper/server/util/VerifyingFileFactory*.java,

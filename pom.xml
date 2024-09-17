@@ -85,8 +85,7 @@
     <module>zookeeper/stable</module>
     <module>zookeeper/stable-common</module>
     <module>zookeeper/stable-client</module>
-    <!--module>zookeeper/stable-server</module>
-    <module>zookeeper/stable-server-metrics</module-->
+    <!--module>zookeeper/stable-server</module-->
   </modules>
 
   <build>
