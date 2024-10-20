@@ -74,20 +74,174 @@
     <zookeeper.stable.version>3.8.3</zookeeper.stable.version>
     <zookeeper.stable.mishmash.io.patch>2</zookeeper.stable.mishmash.io.patch>
 
-    <zookeeper.original.version>3.8.3</zookeeper.original.version>
-    <mishmash.io.patch>2</mishmash.io.patch>
+    <!-- Apache Hadoop versions -->
+    <hadoop.stable.version>3.4.1</hadoop.stable.version>
+    <hadoop.stable.mishmash.io.patch>1</hadoop.stable.mishmash.io.patch>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Versions for dependencies common to all modules -->
+    <bouncycastle.version>1.78.1</bouncycastle.version>
+    <commons-cli.version>1.9.0</commons-cli.version>
+    <commons-codec.version>1.17.1</commons-codec.version>
+    <commons-collections.version>4.5.0-M2</commons-collections.version>
+    <commons-compress.version>1.27.1</commons-compress.version>
+    <commons-io.version>2.16.1</commons-io.version>
+    <jackson.version>2.17.2</jackson.version>
+    <jetty.version>9.4.56.v20240826</jetty.version>
+    <netty.version>4.1.113.Final</netty.version>
+    <kerby.version>2.1.0</kerby.version>
+    <slf4j.version>2.0.16</slf4j.version>
+    <snappy.version>1.1.10.6</snappy.version>
+
+    <mockito.version>5.13.0</mockito.version>
   </properties>
 
   <modules>
     <module>zookeeper/stable</module>
     <module>zookeeper/stable-common</module>
     <module>zookeeper/stable-client</module>
-    <!--module>zookeeper/stable-server</module>
-    <module>zookeeper/stable-server-metrics</module-->
+    <!--module>zookeeper/stable-server</module-->
+    <module>hadoop/stable</module>
+    <module>hadoop/hadoop-auth-stable</module>
+    <module>hadoop/hadoop-common-stable</module>
   </modules>
+
+  <dependencyManagement>
+    <!-- set versions for some deps that are used across all modules-->
+    <dependencies>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-server</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-servlet</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-cli</groupId>
+        <artifactId>commons-cli</artifactId>
+        <version>${commons-cli.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>${commons-collections.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>${commons-compress.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.xerial.snappy</groupId>
+        <artifactId>snappy-java</artifactId>
+        <version>${snappy.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.kerby</groupId>
+        <artifactId>kerb-core</artifactId>
+        <version>${kerby.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.kerby</groupId>
+        <artifactId>kerb-simplekdc</artifactId>
+        <version>${kerby.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.kerby</groupId>
+        <artifactId>kerby-config</artifactId>
+        <version>${kerby.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.kerby</groupId>
+        <artifactId>kerby-util</artifactId>
+        <version>${kerby.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-handler</artifactId>
+        <version>${netty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-transport-native-epoll</artifactId>
+        <version>${netty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk18on</artifactId>
+        <version>${bouncycastle.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-jdk18on</artifactId>
+        <version>${bouncycastle.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>${mockito.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <pluginManagement>
@@ -117,8 +271,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.13.0</version>
           <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
+            <source>17</source>
+            <target>17</target>
           </configuration>
         </plugin>
         <plugin>

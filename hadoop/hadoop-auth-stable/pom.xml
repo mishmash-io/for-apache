@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2024 Mishmash IO UK Ltd.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.mishmash.apache</groupId>
+    <artifactId>mmio-for-apache-parent</artifactId>
+    <version>0.0.1</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <groupId>io.mishmash.apache.hadoop</groupId>
+  <artifactId>mmio-hadoop-auth-stable</artifactId>
+  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
+  <packaging>jar</packaging>
+
+  <name>Modifications and extensions of Apache ZooKeeper, by mishmash io</name>
+  <description>
+    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+
+    This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
+    specific modifications visit our website and github.
+
+    It is recommended that you don't use this package directly, but rather - one of the 
+    dependency-reduced client or server packages.
+  </description>
+  <url>https://mishmash.io/open_source/apache_big_data</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>mishmash io</name>
+    <url>https://mishmash.io</url>
+  </organization>
+
+  <scm>
+    <connection>scm:git:https://github.com/mishmash-io/for-apache.git</connection>
+    <developerConnection>scm:git:https://github.com/mishmash-io/for-apache.git</developerConnection>
+    <url>https://github.com/mishmash-io/for-apache</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Ivan Kountchev</name>
+      <email>i.kountchev@mishmash.io</email>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Andrey Rusev</name>
+      <email>a.rusev@mishmash.io</email>
+      <url>www.linkedin.com/in/andrey-rusev-21894172</url>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>architect</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <properties>
+    <apacheds.version>2.0.0.AM27</apacheds.version>
+    <ldap-api.version>2.1.7</ldap-api.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- import the original dependency versions -->
+      <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-project</artifactId>
+        <version>${hadoop.stable.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- import dependency version overrides -->
+      <dependency>
+        <groupId>io.mishmash.apache.hadoop</groupId>
+        <artifactId>stable</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- override deps specific to this artifact only-->
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-core</artifactId>
+        <version>${apacheds.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-protocol-ldap</artifactId>
+        <version>${apacheds.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-ldif-partition</artifactId>
+        <version>${apacheds.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.api</groupId>
+        <artifactId>api-ldap-codec-core</artifactId>
+        <version>${ldap-api.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.api</groupId>
+        <artifactId>api-ldap-model</artifactId>
+        <version>${ldap-api.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-server-integ</artifactId>
+        <version>${apacheds.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-core-integ</artifactId>
+        <version>${apacheds.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>9.41.2</version>
+        <scope>compile</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlet</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.reload4j</groupId>
+      <artifactId>reload4j</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-reload4j</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-minikdc</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents.core5</groupId>
+      <artifactId>httpcore5</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>nimbus-jose-jwt</artifactId>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcprov-jdk18on</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Update zookeeper -->
+    <!-- dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+    </dependency-->
+    <dependency>
+      <groupId>io.mishmash.apache.zookeeper</groupId>
+      <artifactId>mmio-zookeeper-stable-client</artifactId>
+      <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.xerial.snappy</groupId>
+      <artifactId>snappy-java</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-framework</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kerby</groupId>
+      <artifactId>kerb-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kerby</groupId>
+      <artifactId>kerb-util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-protocol-ldap</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-ldif-partition</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.api</groupId>
+      <artifactId>api-ldap-codec-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.api</groupId>
+      <artifactId>api-ldap-model</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-server-integ</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.directory.server</groupId>
+      <artifactId>apacheds-core-integ</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop.thirdparty</groupId>
+      <artifactId>hadoop-shaded-guava</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-patch</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://github.com/mishmash-io/hadoop/compare/rel/release-${hadoop.stable.version}...mishmash-io:hadoop:patch-${hadoop.stable.version}_${hadoop.stable.mishmash.io.patch}.diff</url>
+              <outputFileName>mishmash_io_hadoop.patch</outputFileName>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>download-original-source</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://github.com/apache/hadoop/archive/refs/tags/rel/release-${hadoop.stable.version}.zip</url>
+              <unpack>true</unpack>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-patch-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>patch-original-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>apply</goal>
+            </goals>
+            <configuration>
+              <patchFile>${project.build.directory}/mishmash_io_hadoop.patch</patchFile>
+              <patchTrackingFile>${project.build.directory}/mishmash_io_hadoop_changes.txt</patchTrackingFile>
+              <strip>1</strip>
+              <removeEmptyFiles>true</removeEmptyFiles>
+              <targetDirectory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}</targetDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Add the original sources for compilation -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-sources</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-auth/src/main/java</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-test-sources</id>
+            <phase>process-test-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-auth/src/test/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -140,7 +140,8 @@
                   <overWrite>false</overWrite>
                   <includes>
                     **/zookeeper/common/**,
-                    **/zookeeper/metrics/*.java,
+                    **/zookeeper/metrics/**,
+                    **/zookeeper/metrics/provider/**,
                     **/zookeeper/util/**,
                     **/zookeeper/version/**
                   </includes>
