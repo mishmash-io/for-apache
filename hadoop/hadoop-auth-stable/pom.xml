@@ -29,7 +29,7 @@
   <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>Modifications and extensions of Apache ZooKeeper, by mishmash io</name>
+  <name>Modifications and extensions of Apache Hadoop auth, by mishmash io</name>
   <description>
     Apache ZooKeeper is a service for coordinating processes of distributed applications.
 
@@ -111,12 +111,28 @@
         <artifactId>apacheds-core</artifactId>
         <version>${apacheds.version}</version>
         <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.apache.directory.server</groupId>
         <artifactId>apacheds-protocol-ldap</artifactId>
         <version>${apacheds.version}</version>
         <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.apache.directory.server</groupId>
