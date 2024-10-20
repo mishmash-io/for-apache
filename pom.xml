@@ -88,7 +88,7 @@
     <commons-collections.version>4.5.0-M2</commons-collections.version>
     <commons-compress.version>1.27.1</commons-compress.version>
     <commons-io.version>2.16.1</commons-io.version>
-    <jackson.version>2.17.2</jackson.version>
+    <jackson.version>2.18.0</jackson.version>
     <jetty.version>9.4.56.v20240826</jetty.version>
     <netty.version>4.1.113.Final</netty.version>
     <kerby.version>2.1.0</kerby.version>
