@@ -87,7 +87,6 @@
     <jmockit.version>1.49</jmockit.version>
     <junit-platform.version>1.11.0</junit-platform.version>
     <jline.version>2.14.6</jline.version>
-    <spotbugsannotations.version>4.8.6</spotbugsannotations.version>
     <burningwave.mockdns.version>0.26.2</burningwave.mockdns.version>
   </properties>
 
@@ -566,6 +565,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
