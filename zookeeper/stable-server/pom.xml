@@ -29,15 +29,14 @@
   <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>Modifications and extensions of Apache ZooKeeper, by mishmash io</name>
+  <name>mishmash io pack of a minimal Apache ZooKeeper server</name>
   <description>
     Apache ZooKeeper is a service for coordinating processes of distributed applications.
 
-    This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
-    specific modifications visit our website or github.
+    This package contains a minimal Apache ZooKeeper server with modifications by 
+    mishmash io. For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and GitHub.
 
-    It is recommended that you don't use this package directly, but rather - one of the 
-    dependency-reduced client or server packages.
+    Use this package when you only need a base ZooKeeper server and minimum extra dependencies.    
   </description>
   <url>https://mishmash.io/open_source/apache_big_data</url>
 
@@ -105,6 +104,16 @@
       <artifactId>mmio-zookeeper-stable-client</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.xerial.snappy</groupId>
+      <artifactId>snappy-java</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -129,27 +138,19 @@
                   <classifier>sources</classifier>
                   <overWrite>false</overWrite>
                   <includes>
-                    **/zookeeper/server/**
+                    **/zookeeper/audit/**,
+                    **/zookeeper/server/**,
+                    **/zookeeper/server/admin/*.java,
+                    **/zookeeper/jmx/**
                   </includes>
                   <excludes>
-                    **/zookeeper/server/admin/**,
+                    **/zookeeper/server/admin/jetty/**,
+                    **/zookeeper/server/controller/**,
 
-                    **/zookeeper/server/ByteBufferInputStream*.java,
-                    **/zookeeper/server/ByteBufferOutputStream*.java,
                     **/zookeeper/server/SnapshotComparer*.java,
                     **/zookeeper/server/SnapshotFormatter*.java,
-                    **/zookeeper/server/PurgeTxnLog*.java,
-                    **/zookeeper/server/auth/KerberosName*.java,
                     **/zookeeper/server/persistence/TxnLogToolkit*.java,
-                    **/zookeeper/server/util/KerberosUtil*.java,
-                    **/zookeeper/server/util/VerifyingFileFactory*.java,
                     **/zookeeper/server/util/LogChopper*.java,
-                    **/zookeeper/server/watch/PathParentIterator*.java,
-                    **/zookeeper/server/watch/WatcherCleaner*.java,
-                    **/zookeeper/server/watch/WatcherModeManager*.java,
-                    **/zookeeper/server/watch/WatchManager*.java,
-                    **/zookeeper/server/watch/WatchManagerFactory*.java,
-                    **/zookeeper/server/watch/WatchManagerOptimized*.java,
                   </excludes>
                 </artifactItem>
                 <artifactItem>

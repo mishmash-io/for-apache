@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2024 Mishmash IO UK Ltd.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.mishmash.apache</groupId>
+    <artifactId>mmio-for-apache-parent</artifactId>
+    <version>0.0.1</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <groupId>io.mishmash.apache.hadoop</groupId>
+  <artifactId>mmio-hadoop-minikdc-stable</artifactId>
+  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
+  <packaging>jar</packaging>
+
+  <name>Apache Hadoop MiniKDC, rebuilt by mishmash io</name>
+  <description>
+    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+
+    This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
+    specific modifications visit our website and github.
+
+    It is recommended that you don't use this package directly, but rather - one of the 
+    dependency-reduced client or server packages.
+  </description>
+  <url>https://mishmash.io/open_source/apache_big_data</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>mishmash io</name>
+    <url>https://mishmash.io</url>
+  </organization>
+
+  <scm>
+    <connection>scm:git:https://github.com/mishmash-io/for-apache.git</connection>
+    <developerConnection>scm:git:https://github.com/mishmash-io/for-apache.git</developerConnection>
+    <url>https://github.com/mishmash-io/for-apache</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Ivan Kountchev</name>
+      <email>i.kountchev@mishmash.io</email>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Andrey Rusev</name>
+      <email>a.rusev@mishmash.io</email>
+      <url>www.linkedin.com/in/andrey-rusev-21894172</url>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>architect</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- import the original dependency versions -->
+      <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-project</artifactId>
+        <version>${hadoop.stable.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- import dependency version overrides -->
+      <dependency>
+        <groupId>io.mishmash.apache.hadoop</groupId>
+        <artifactId>stable</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kerby</groupId>
+      <artifactId>kerb-simplekdc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-reload4j</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-patch</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://github.com/mishmash-io/hadoop/compare/rel/release-${hadoop.stable.version}...mishmash-io:hadoop:patch-${hadoop.stable.version}_${hadoop.stable.mishmash.io.patch}.diff</url>
+              <outputFileName>mishmash_io_hadoop.patch</outputFileName>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>download-original-source</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://github.com/apache/hadoop/archive/refs/tags/rel/release-${hadoop.stable.version}.zip</url>
+              <unpack>true</unpack>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-patch-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>patch-original-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>apply</goal>
+            </goals>
+            <configuration>
+              <patchFile>${project.build.directory}/mishmash_io_hadoop.patch</patchFile>
+              <patchTrackingFile>${project.build.directory}/mishmash_io_hadoop_changes.txt</patchTrackingFile>
+              <strip>1</strip>
+              <removeEmptyFiles>true</removeEmptyFiles>
+              <targetDirectory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}</targetDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Add the original sources for compilation -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-sources</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-minikdc/src/main/java</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-test-sources</id>
+            <phase>process-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-minikdc/src/test/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <reuseForks>false</reuseForks>
+          <includes>
+            <include>**/Test*.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/Test*$*.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -29,7 +29,7 @@
   <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
   <packaging>pom</packaging>
 
-  <name>Modifications and extensions of Apache ZooKeeper, by mishmash io</name>
+  <name>Modifications and extensions of Apache Hadoop, by mishmash io</name>
   <description>
     Apache ZooKeeper is a service for coordinating processes of distributed applications.
 
@@ -84,6 +84,7 @@
   <properties>
     <guava.version>33.3.1-jre</guava.version>
     <httpcomponents.core.version>5.3</httpcomponents.core.version>
+    <httpcomponents.client.version>5.4</httpcomponents.client.version>
     <javax-servlet.version>4.0.1</javax-servlet.version>
     <curator.version>5.7.1</curator.version>
   </properties>
@@ -99,6 +100,12 @@
         <groupId>org.apache.httpcomponents.core5</groupId>
         <artifactId>httpcore5</artifactId>
         <version>${httpcomponents.core.version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents.client5</groupId>
+        <artifactId>httpclient5</artifactId>
+        <version>${httpcomponents.client.version}</version>
         <scope>compile</scope>
       </dependency>
       <dependency>
@@ -182,5 +189,5 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  
+
 </project>
