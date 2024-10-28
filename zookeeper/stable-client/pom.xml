@@ -29,16 +29,14 @@
   <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>Apache ZooKeeper client code, repackaged by mishmash io</name>
+  <name>mishmash io pack of a minimal Apache ZooKeeper client</name>
   <description>
     Apache ZooKeeper is a service for coordinating processes of distributed applications.
 
-    This package contains the dependency-reduced Apache ZooKeeper client code, as modified by 
-    mishmash io.
+    This package contains a minimal Apache ZooKeeper client with modifications by 
+    mishmash io. For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and GitHub.
 
-    Use it when you only need a ZooKeeper client, with minimum extra dependencies.
-    
-    For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and github.
+    Use this package when you only need a ZooKeeper client and minimum extra dependencies.
   </description>
   <url>https://mishmash.io/open_source/apache_big_data</url>
 
@@ -102,9 +100,20 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-common</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.apache.yetus</groupId>
+      <artifactId>audience-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-handler</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport-native-epoll</artifactId>
     </dependency>
   </dependencies>
 
@@ -132,11 +141,27 @@
                   <includes>
                     **/zookeeper/*.java,
                     **/zookeeper/admin/**,
-                    **/zookeeper/client/**
+                    **/zookeeper/client/**,
+                    **/zookeeper/common/**,
+                    **/zookeeper/metrics/**,
+                    **/zookeeper/metrics/provider/**,
+                    **/zookeeper/util/**,
+                    **/zookeeper/version/**
                   </includes>
                   <excludes>
                     **/zookeeper/JLineZNodeCompleter*.java,
                     **/zookeeper/ZooKeeperMain*.java,
+                  </excludes>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.apache.zookeeper</groupId>
+                  <artifactId>zookeeper-jute</artifactId>
+                  <version>${zookeeper.stable.version}</version>
+                  <type>jar</type>
+                  <classifier>sources</classifier>
+                  <overWrite>false</overWrite>
+                  <excludes>
+                    **/zookeeper/server/**
                   </excludes>
                 </artifactItem>
               </artifactItems>
