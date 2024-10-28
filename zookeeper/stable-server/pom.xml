@@ -105,6 +105,16 @@
       <artifactId>mmio-zookeeper-stable-client</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.xerial.snappy</groupId>
+      <artifactId>snappy-java</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -129,27 +139,19 @@
                   <classifier>sources</classifier>
                   <overWrite>false</overWrite>
                   <includes>
-                    **/zookeeper/server/**
+                    **/zookeeper/audit/**,
+                    **/zookeeper/server/**,
+                    **/zookeeper/server/admin/*.java,
+                    **/zookeeper/jmx/**
                   </includes>
                   <excludes>
-                    **/zookeeper/server/admin/**,
+                    **/zookeeper/server/admin/jetty/**,
+                    **/zookeeper/server/controller/**,
 
-                    **/zookeeper/server/ByteBufferInputStream*.java,
-                    **/zookeeper/server/ByteBufferOutputStream*.java,
                     **/zookeeper/server/SnapshotComparer*.java,
                     **/zookeeper/server/SnapshotFormatter*.java,
-                    **/zookeeper/server/PurgeTxnLog*.java,
-                    **/zookeeper/server/auth/KerberosName*.java,
                     **/zookeeper/server/persistence/TxnLogToolkit*.java,
-                    **/zookeeper/server/util/KerberosUtil*.java,
-                    **/zookeeper/server/util/VerifyingFileFactory*.java,
                     **/zookeeper/server/util/LogChopper*.java,
-                    **/zookeeper/server/watch/PathParentIterator*.java,
-                    **/zookeeper/server/watch/WatcherCleaner*.java,
-                    **/zookeeper/server/watch/WatcherModeManager*.java,
-                    **/zookeeper/server/watch/WatchManager*.java,
-                    **/zookeeper/server/watch/WatchManagerFactory*.java,
-                    **/zookeeper/server/watch/WatchManagerOptimized*.java,
                   </excludes>
                 </artifactItem>
                 <artifactItem>
