@@ -276,10 +276,6 @@
   
   <dependencies>
     <dependency>
-      <groupId>org.apache.hadoop.thirdparty</groupId>
-      <artifactId>hadoop-shaded-protobuf_3_25</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-annotations</artifactId>
       <scope>compile</scope>
@@ -504,7 +500,8 @@
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
-      <scope>${common.protobuf2.scope}</scope>
+      <version>${protobuf.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -657,6 +654,14 @@
   </dependencies>
 
   <build>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.7.1</version>
+      </extension>
+    </extensions>
+
     <plugins>
       <plugin>
         <groupId>com.googlecode.maven-download-plugin</groupId>
@@ -726,6 +731,18 @@
             </configuration>
           </execution>
           <execution>
+            <id>add-protobuf-sources</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/protobuf/java</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
             <id>add-test-sources</id>
             <phase>process-test-sources</phase>
             <goals>
@@ -736,6 +753,59 @@
                 <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/java</source>
               </sources>
             </configuration>
+          </execution>
+          <execution>
+            <id>add-test-protobuf-sources</id>
+            <phase>process-test-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-test-sources/protobuf/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.xolstice.maven.plugins</groupId>
+        <artifactId>protobuf-maven-plugin</artifactId>
+        <version>0.6.1</version>
+        <configuration>
+          <protocArtifact>
+            com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
+          </protocArtifact>
+          <!--pluginId>grpc-java</pluginId-->
+        </configuration>
+        <executions>
+          <execution>
+            <id>compile-protobuf</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/proto</protoSourceRoot>
+              <excludes>
+                <exclude>ProtobufRpcEngine.proto</exclude>
+              </excludes>
+              <outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
+            </configuration>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>compile-protobuf-tests</id>
+            <phase>generate-test-sources</phase>
+            <configuration>
+              <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/proto</protoSourceRoot>
+              <excludes>
+                <exclude>*legacy.proto</exclude>
+              </excludes>
+              <outputDirectory>${project.build.directory}/generated-test-sources/protobuf/java</outputDirectory>
+            </configuration>
+            <goals>
+              <goal>compile</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
