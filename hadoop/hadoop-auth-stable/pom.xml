@@ -200,6 +200,17 @@
         <version>${jakarta-servlet.version}</version>
         <scope>provided</scope>
       </dependency>
+      <dependency>
+        <groupId>io.mishmash.apache.zookeeper</groupId>
+        <artifactId>mmio-zookeeper-stable-client</artifactId>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.mishmash.apache.zookeeper</groupId>
+        <artifactId>mmio-zookeeper-stable-server</artifactId>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   
@@ -285,7 +296,11 @@
     <dependency>
       <groupId>io.mishmash.apache.zookeeper</groupId>
       <artifactId>mmio-zookeeper-stable-client</artifactId>
-      <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.mishmash.apache.zookeeper</groupId>
+      <artifactId>mmio-zookeeper-stable-server</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.dropwizard.metrics</groupId>
