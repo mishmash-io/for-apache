@@ -83,6 +83,7 @@
 
   <properties>
     <wildfly-openssl.version>2.2.5.Final</wildfly-openssl.version>
+    <jsp-api.version>4.0.0</jsp-api.version>
   </properties>
 
   <dependencyManagement>
@@ -142,9 +143,9 @@
         <scope>compile</scope>
       </dependency>
       <dependency>
-        <groupId>javax.servlet.jsp</groupId>
-        <artifactId>jsp-api</artifactId>
-        <version>2.2</version>
+        <groupId>jakarta.servlet.jsp</groupId>
+        <artifactId>jakarta.servlet.jsp-api</artifactId>
+        <version>${jsp-api.version}</version>
         <scope>runtime</scope>
       </dependency>
       <dependency>
@@ -271,6 +272,12 @@
         <version>1.8.0</version>
         <scope>provided</scope>
       </dependency>
+      <dependency>
+        <groupId>org.glassfish.jersey.containers</groupId>
+        <artifactId>jersey-container-servlet</artifactId>
+        <version>3.1.9</version>
+        <scope>compile</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   
@@ -304,6 +311,11 @@
       <groupId>org.apache.httpcomponents.core5</groupId>
       <artifactId>httpcore5</artifactId>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents.client5</groupId>
+      <artifactId>httpclient5</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
@@ -361,33 +373,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
+      <groupId>jakarta.servlet.jsp</groupId>
+      <artifactId>jakarta.servlet.jsp-api</artifactId>
       <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-core</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-servlet</artifactId>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>javax.enterprise</groupId>
-          <artifactId>cdi-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>javax.servlet</groupId>
-          <artifactId>servlet-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>ch.qos.cal10n</groupId>
-          <artifactId>cal10n-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.github.pjfanning</groupId>
@@ -421,8 +409,8 @@
       <artifactId>jettison</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-server</artifactId>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -589,6 +577,11 @@
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
       <type>test-jar</type>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.mishmash.apache.zookeeper</groupId>
+      <artifactId>mmio-zookeeper-stable-server</artifactId>
+      <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -770,7 +763,7 @@
             <id>add-test-sources</id>
             <phase>process-test-sources</phase>
             <goals>
-              <goal>add-source</goal>
+              <goal>add-test-source</goal>
             </goals>
             <configuration>
               <sources>
@@ -782,7 +775,7 @@
             <id>add-test-protobuf-sources</id>
             <phase>process-test-sources</phase>
             <goals>
-              <goal>add-source</goal>
+              <goal>add-test-source</goal>
             </goals>
             <configuration>
               <sources>
@@ -821,7 +814,7 @@
             <id>compile-protobuf-tests</id>
             <phase>generate-test-sources</phase>
             <configuration>
-              <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/proto</protoSourceRoot>
+              <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/proto</protoSourceRoot>
               <excludes>
                 <exclude>*legacy.proto</exclude>
               </excludes>
