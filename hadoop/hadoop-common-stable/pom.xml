@@ -570,18 +570,18 @@
       <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-core</artifactId>
     </dependency>
-    <!-- Change to contained artifact -->
     <dependency>
       <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-client</artifactId>
+      <artifactId>mmio-zookeeper-stable</artifactId>
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
-      <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-server</artifactId>
+      <artifactId>mmio-zookeeper-stable</artifactId>
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -823,6 +823,45 @@
             <goals>
               <goal>compile</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.avro</groupId>
+        <artifactId>avro-maven-plugin</artifactId>
+        <version>1.12.0</version>
+        <executions>
+          <execution>
+            <id>generate-avro-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>schema</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <testSourceDirectory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/avro</testSourceDirectory>
+          <testOutputDirectory>${project.build.directory}/generated-test-sources/java</testOutputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <!--
+                TODO: Exclude the following tests for now
+              -->
+              <testExcludes>
+                <exclude>**/TestProtoBufRpc.java</exclude>
+              </testExcludes>
+            </configuration>
           </execution>
         </executions>
       </plugin>
