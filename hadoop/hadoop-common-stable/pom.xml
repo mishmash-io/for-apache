@@ -801,6 +801,24 @@
               </sources>
             </configuration>
           </execution>
+          <execution>
+            <id>add-test-resources</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/resources</directory>
+                </resource>
+                <!-- also use the default resources provided in src/main -->
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/resources</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -883,6 +901,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <reuseForks>false</reuseForks>
+          <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError</argLine>
           <includes>
             <include>**/Test*.java</include>
           </includes>
