@@ -419,8 +419,19 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-console</artifactId>
+      <version>${junit-platform.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -467,6 +478,12 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>${mockito.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -611,7 +628,8 @@
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>mockwebserver</artifactId>
+      <artifactId>mockwebserver3-junit5</artifactId>
+      <version>5.0.0-alpha.14</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -815,9 +833,6 @@
             <phase>generate-test-sources</phase>
             <configuration>
               <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/proto</protoSourceRoot>
-              <excludes>
-                <exclude>*legacy.proto</exclude>
-              </excludes>
               <outputDirectory>${project.build.directory}/generated-test-sources/protobuf/java</outputDirectory>
             </configuration>
             <goals>
@@ -855,12 +870,6 @@
               <goal>testCompile</goal>
             </goals>
             <configuration>
-              <!--
-                TODO: Exclude the following tests for now
-              -->
-              <testExcludes>
-                <exclude>**/TestProtoBufRpc.java</exclude>
-              </testExcludes>
             </configuration>
           </execution>
         </executions>
@@ -877,9 +886,6 @@
           <includes>
             <include>**/Test*.java</include>
           </includes>
-          <excludes>
-            <exclude>**/Test*$*.java</exclude>
-          </excludes>
         </configuration>
       </plugin>
       <plugin>
