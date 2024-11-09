@@ -85,7 +85,6 @@
     <logback-version>1.5.8</logback-version>
     <audience-annotations.version>0.15.0</audience-annotations.version>
     <jmockit.version>1.49</jmockit.version>
-    <junit-platform.version>1.11.0</junit-platform.version>
     <jline.version>2.14.6</jline.version>
     <burningwave.mockdns.version>0.26.2</burningwave.mockdns.version>
   </properties>
@@ -123,12 +122,6 @@
         <groupId>org.jmockit</groupId>
         <artifactId>jmockit</artifactId>
         <version>${jmockit.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-params</artifactId>
-        <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
