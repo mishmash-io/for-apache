@@ -40,17 +40,21 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Download latest OpenTelemetry java agent
+      run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
     - name: Build with Maven
-      run: mvn -Dsurefire.rerunFailingTestsCount=2 -B package --file pom.xml
-    
-    - name: Upload telemetry
+      env:
+        OTEL_SERVICE_NAME: maven-test-service
+        OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+        OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:4317
+      run: mvn -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar -B package --file pom.xml
+    - name: Save telemetry
       uses: actions/upload-artifact@v4
       if: always()
       continue-on-error: true
       with:
         name: build-telemetry
         path: /tmp/tests-parquet/*.parquet
-
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6

@@ -103,6 +103,8 @@
     <junit-platform.version>1.11.3</junit-platform.version>
     <mockito.version>5.13.0</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
+
+    <test.instrumentation.opts></test.instrumentation.opts>
   </properties>
 
   <modules>
@@ -328,6 +330,9 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.0</version>
+          <configuration>
+            <argLine>${test.instrumentation.opts}</argLine>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

@@ -548,7 +548,7 @@
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <forkCount>${surefire-forkcount}</forkCount>
           <reuseForks>false</reuseForks>
-          <argLine>-Djdk.net.hosts.file=${project.build.directory}/generated-test-resources/hosts -Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</argLine>
+          <argLine>-Djdk.net.hosts.file=${project.build.directory}/generated-test-resources/hosts -Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar ${test.instrumentation.opts}</argLine>
           <workingDirectory>${project.build.directory}/zookeeper-release-${zookeeper.stable.version}/zookeeper-server</workingDirectory>
           <systemPropertyVariables>
             <build.test.dir>${project.build.directory}/surefire</build.test.dir>
