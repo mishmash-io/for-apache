@@ -84,6 +84,16 @@
   <properties>
     <wildfly-openssl.version>2.2.5.Final</wildfly-openssl.version>
     <jsp-api.version>4.0.0</jsp-api.version>
+    <jersey.version>3.1.9</jersey.version>
+
+    <hadoop.common.build.dir>${project.build.directory}</hadoop.common.build.dir>
+    <hadoop.log.dir>${project.build.directory}/log</hadoop.log.dir>
+    <hadoop.tmp.dir>${project.build.directory}/tmp</hadoop.tmp.dir>
+    <java.security.egd>file:///dev/urandom</java.security.egd>
+    <test.build.dir>${project.build.directory}/test-dir</test.build.dir>
+    <test.build.data>${test.build.dir}</test.build.data>
+    <test.cache.data>${project.build.directory}/test-classes</test.cache.data>
+    <test.build.webapps>${project.build.directory}/test-classes/webapps</test.build.webapps>
   </properties>
 
   <dependencyManagement>
@@ -225,6 +235,12 @@
         <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>org.apache.ftpserver</groupId>
+        <artifactId>ftplet-api</artifactId>
+        <version>1.2.0</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
         <groupId>org.codehaus.woodstox</groupId>
         <artifactId>stax2-api</artifactId>
         <version>4.2.2</version>
@@ -275,7 +291,13 @@
       <dependency>
         <groupId>org.glassfish.jersey.containers</groupId>
         <artifactId>jersey-container-servlet</artifactId>
-        <version>3.1.9</version>
+        <version>${jersey.version}</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish.jersey.inject</groupId>
+        <artifactId>jersey-hk2</artifactId>
+        <version>${jersey.version}</version>
         <scope>compile</scope>
       </dependency>
     </dependencies>
@@ -286,10 +308,6 @@
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-annotations</artifactId>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.hadoop.thirdparty</groupId>
-      <artifactId>hadoop-shaded-guava</artifactId>
     </dependency>
     <!--Guava is required during runtime for curator-->
     <dependency>
@@ -338,8 +356,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>${jakarta-servlet.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -414,13 +433,29 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.glassfish.jersey.inject</groupId>
+      <artifactId>jersey-hk2</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>ch.qos.reload4j</groupId>
       <artifactId>reload4j</artifactId>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-console</artifactId>
+      <version>${junit-platform.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -470,6 +505,17 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.avro</groupId>
       <artifactId>avro</artifactId>
       <scope>compile</scope>
@@ -510,8 +556,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-minikdc</artifactId>
+      <groupId>io.mishmash.apache.hadoop</groupId>
+      <artifactId>mmio-hadoop-minikdc-stable</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -570,18 +617,18 @@
       <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-core</artifactId>
     </dependency>
-    <!-- Change to contained artifact -->
     <dependency>
       <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-client</artifactId>
+      <artifactId>mmio-zookeeper-stable</artifactId>
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
-      <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-server</artifactId>
+      <artifactId>mmio-zookeeper-stable</artifactId>
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -611,7 +658,8 @@
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>mockwebserver</artifactId>
+      <artifactId>mockwebserver3-junit5</artifactId>
+      <version>5.0.0-alpha.14</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -728,6 +776,28 @@
               </target>
             </configuration>
           </execution>
+          <execution>
+            <id>create-log-dir</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <!--
+                TODO: there are tests (TestLocalFileSystem#testCopy) that fail if data
+                TODO: from a previous run is present
+                -->
+                <delete dir="${test.build.data}"/>
+                <mkdir dir="${test.build.data}"/>
+                <mkdir dir="${hadoop.log.dir}"/>
+
+                <copy toDir="${project.build.directory}/test-classes">
+                  <fileset dir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/conf"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <!-- Add the original sources for compilation -->
@@ -783,6 +853,24 @@
               </sources>
             </configuration>
           </execution>
+          <execution>
+            <id>add-test-resources</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/resources</directory>
+                </resource>
+                <!-- also use the default resources provided in src/main -->
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/resources</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -815,14 +903,44 @@
             <phase>generate-test-sources</phase>
             <configuration>
               <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/proto</protoSourceRoot>
-              <excludes>
-                <exclude>*legacy.proto</exclude>
-              </excludes>
               <outputDirectory>${project.build.directory}/generated-test-sources/protobuf/java</outputDirectory>
             </configuration>
             <goals>
               <goal>compile</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.avro</groupId>
+        <artifactId>avro-maven-plugin</artifactId>
+        <version>1.12.0</version>
+        <executions>
+          <execution>
+            <id>generate-avro-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>schema</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <testSourceDirectory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/avro</testSourceDirectory>
+          <testOutputDirectory>${project.build.directory}/generated-test-sources/java</testOutputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -835,12 +953,33 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <reuseForks>false</reuseForks>
+          <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError</argLine>
+          <environmentVariables>
+            <HADOOP_COMMON_HOME>${hadoop.common.build.dir}</HADOOP_COMMON_HOME>
+            <!-- HADOOP_HOME required for tests on Windows to find winutils -->
+            <HADOOP_HOME>${hadoop.common.build.dir}</HADOOP_HOME>
+            <LD_LIBRARY_PATH>${env.LD_LIBRARY_PATH}:${project.build.directory}/native/target/usr/local/lib:${hadoop.common.build.dir}/native/target/usr/local/lib</LD_LIBRARY_PATH>
+            <DYLD_LIBRARY_PATH>${env.DYLD_LIBRARY_PATH}:${project.build.directory}/native/target/usr/local/lib:${hadoop.common.build.dir}/native/target/usr/local/lib</DYLD_LIBRARY_PATH>
+            <MALLOC_ARENA_MAX>4</MALLOC_ARENA_MAX>
+          </environmentVariables>
+          <systemPropertyVariables>
+            <hadoop.log.dir>${hadoop.log.dir}</hadoop.log.dir>
+            <hadoop.tmp.dir>${hadoop.tmp.dir}</hadoop.tmp.dir>
+
+            <test.build.dir>${test.build.dir}</test.build.dir>
+            <test.build.data>${test.build.data}</test.build.data>
+            <test.build.webapps>${test.build.webapps}</test.build.webapps>
+            <test.cache.data>${test.cache.data}</test.cache.data>
+            <test.build.classes>${project.build.directory}/test-classes</test.build.classes>
+
+            <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+            <java.security.krb5.conf>${project.build.directory}/test-classes/krb5.conf</java.security.krb5.conf>
+            <java.security.egd>${java.security.egd}</java.security.egd>
+            <!--require.test.libhadoop>${require.test.libhadoop}</require.test.libhadoop-->
+          </systemPropertyVariables>
           <includes>
             <include>**/Test*.java</include>
           </includes>
-          <excludes>
-            <exclude>**/Test*$*.java</exclude>
-          </excludes>
         </configuration>
       </plugin>
       <plugin>

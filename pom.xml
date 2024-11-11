@@ -100,6 +100,7 @@
     <spotbugsannotations.version>4.8.6</spotbugsannotations.version>
 
     <junit.version>5.11.0</junit.version>
+    <junit-platform.version>1.11.3</junit-platform.version>
     <mockito.version>5.13.0</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
   </properties>
@@ -256,6 +257,12 @@
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
