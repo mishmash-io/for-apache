@@ -497,6 +497,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-reload4j</artifactId>
+      <version>${slf4j.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -622,6 +623,16 @@
       <artifactId>mmio-zookeeper-stable</artifactId>
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.mishmash.apache.zookeeper</groupId>
@@ -629,6 +640,16 @@
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
       <classifier>tests</classifier>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -977,6 +998,8 @@
             <java.security.egd>${java.security.egd}</java.security.egd>
             <!--require.test.libhadoop>${require.test.libhadoop}</require.test.libhadoop-->
           </systemPropertyVariables>
+          <!-- some tests require access to, for example src/main/webapps/static, run tests in the original directory -->
+          <workingDirectory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common</workingDirectory>
           <includes>
             <include>**/Test*.java</include>
           </includes>
