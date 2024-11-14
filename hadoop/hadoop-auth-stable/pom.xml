@@ -484,6 +484,16 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <reuseForks>false</reuseForks>
+          <environmentVariables>
+            <!--
+              Disable the servlet instrumentation for now, because the TestAuthenticationFilter
+              uses Mockito.verifyNoMoreInteractions(<HttpServletResponse mocks>), and OpenTelemetry
+              does interact with HttpServletResponse(s).
+
+              Another solution might be to tell Otel to not instrument Mockito mocked classes, if it can recognize them
+            -->
+            <OTEL_INSTRUMENTATION_SERVLET_ENABLED>false</OTEL_INSTRUMENTATION_SERVLET_ENABLED>
+          </environmentVariables>
           <includes>
             <include>**/Test*.java</include>
           </includes>
