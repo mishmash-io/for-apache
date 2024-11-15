@@ -98,14 +98,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- import the original dependency versions -->
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-project-dist</artifactId>
-        <version>${hadoop.stable.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
       <!-- import dependency version overrides -->
       <dependency>
         <groupId>io.mishmash.apache.hadoop</groupId>
@@ -116,12 +108,6 @@
       </dependency>
 
       <!-- override deps specific to this artifact only-->
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${guava.version}</version>
-        <scope>compile</scope>
-      </dependency>
       <dependency>
         <groupId>commons-net</groupId>
         <artifactId>commons-net</artifactId>
@@ -300,6 +286,18 @@
         <version>${jersey.version}</version>
         <scope>compile</scope>
       </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-math3</artifactId>
+        <version>3.6.1</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.4</version>
+        <scope>compile</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   
@@ -309,7 +307,6 @@
       <artifactId>hadoop-annotations</artifactId>
       <scope>compile</scope>
     </dependency>
-    <!--Guava is required during runtime for curator-->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
@@ -395,37 +392,6 @@
       <groupId>jakarta.servlet.jsp</groupId>
       <artifactId>jakarta.servlet.jsp-api</artifactId>
       <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.github.pjfanning</groupId>
-      <artifactId>jersey-json</artifactId>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.jaxrs</groupId>
-          <artifactId>jackson-jaxrs-json-provider</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.codehaus.jettison</groupId>
-          <artifactId>jettison</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <!--
-      adding jettison as direct dependency (as jersey-json's jettison dependency is vulnerable with verison 1.1),
-      so those who depends on hadoop-common externally will get the non-vulnerable jettison
-      -->
-      <groupId>org.codehaus.jettison</groupId>
-      <artifactId>jettison</artifactId>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
@@ -573,7 +539,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.curator</groupId>
-      <artifactId>curator-client</artifactId>
+      <artifactId>curator-framework</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.curator</groupId>

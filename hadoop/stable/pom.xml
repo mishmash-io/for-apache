@@ -84,12 +84,18 @@
   <properties>
     <httpcomponents.core.version>5.3</httpcomponents.core.version>
     <httpcomponents.client.version>5.4</httpcomponents.client.version>
-    <javax-servlet.version>4.0.1</javax-servlet.version>
     <curator.version>5.7.1</curator.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- the following deps are not patched, so, original artifacts are used -->
+      <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-annotations</artifactId>
+        <version>${hadoop.stable.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
@@ -106,12 +112,6 @@
         <artifactId>httpclient5</artifactId>
         <version>${httpcomponents.client.version}</version>
         <scope>compile</scope>
-      </dependency>
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <version>${javax-servlet.version}</version>
-        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
@@ -172,7 +172,6 @@
         <groupId>org.apache.curator</groupId>
         <artifactId>curator-recipes</artifactId>
         <version>${curator.version}</version>
-        <scope>test</scope>
         <exclusions>
           <!-- The following is already provided -->
           <exclusion>
