@@ -812,6 +812,7 @@
                 <delete dir="${test.build.data}"/>
                 <mkdir dir="${test.build.data}"/>
                 <mkdir dir="${hadoop.log.dir}"/>
+                <mkdir dir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/target"/>
 
                 <copy toDir="${project.build.directory}/test-classes">
                   <fileset dir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/conf"/>
@@ -974,7 +975,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <reuseForks>false</reuseForks>
-          <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -Dorg.apache.avro.SERIALIZABLE_PACKAGES=org.apache.hadoop.io,org.apache.hadoop.fs ${test.instrumentation.opts}</argLine>
+          <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Dorg.apache.avro.SERIALIZABLE_PACKAGES=org.apache.hadoop.io,org.apache.hadoop.fs ${test.instrumentation.opts}</argLine>
           <environmentVariables>
             <HADOOP_COMMON_HOME>${hadoop.common.build.dir}</HADOOP_COMMON_HOME>
             <!-- HADOOP_HOME required for tests on Windows to find winutils -->
@@ -982,6 +983,9 @@
             <LD_LIBRARY_PATH>${env.LD_LIBRARY_PATH}:${project.build.directory}/native/target/usr/local/lib:${hadoop.common.build.dir}/native/target/usr/local/lib</LD_LIBRARY_PATH>
             <DYLD_LIBRARY_PATH>${env.DYLD_LIBRARY_PATH}:${project.build.directory}/native/target/usr/local/lib:${hadoop.common.build.dir}/native/target/usr/local/lib</DYLD_LIBRARY_PATH>
             <MALLOC_ARENA_MAX>4</MALLOC_ARENA_MAX>
+
+            <OTEL_INSTRUMENTATION_SERVLET_ENABLED>false</OTEL_INSTRUMENTATION_SERVLET_ENABLED>
+            <OTEL_INSTRUMENTATION_LOG4J_APPENDER_ENABLED>false</OTEL_INSTRUMENTATION_LOG4J_APPENDER_ENABLED>
           </environmentVariables>
           <systemPropertyVariables>
             <hadoop.log.dir>${hadoop.log.dir}</hadoop.log.dir>
@@ -993,7 +997,6 @@
             <test.cache.data>${test.cache.data}</test.cache.data>
             <test.build.classes>${project.build.directory}/test-classes</test.build.classes>
 
-            <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
             <java.security.krb5.conf>${project.build.directory}/test-classes/krb5.conf</java.security.krb5.conf>
             <java.security.egd>${java.security.egd}</java.security.egd>
             <!--require.test.libhadoop>${require.test.libhadoop}</require.test.libhadoop-->
