@@ -83,14 +83,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- import the original dependency versions -->
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-project</artifactId>
-        <version>${hadoop.stable.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
       <!-- import dependency version overrides -->
       <dependency>
         <groupId>io.mishmash.apache.hadoop</groupId>

@@ -88,14 +88,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- import the original dependency versions -->
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-project</artifactId>
-        <version>${hadoop.stable.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
       <!-- import dependency version overrides -->
       <dependency>
         <groupId>io.mishmash.apache.hadoop</groupId>
@@ -169,12 +161,6 @@
         <artifactId>nimbus-jose-jwt</artifactId>
         <version>9.41.2</version>
         <scope>compile</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${guava.version}</version>
-        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
@@ -371,14 +357,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop.thirdparty</groupId>
-      <artifactId>hadoop-shaded-guava</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -440,6 +420,27 @@
               <strip>1</strip>
               <removeEmptyFiles>true</removeEmptyFiles>
               <targetDirectory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}</targetDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Unshade the original sources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unshade-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <replace token="org.apache.hadoop.thirdparty.com.google.common" value="com.google.common" dir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-auth/src">
+                  <include name="**/*.java"/>
+                </replace>
+              </target>
             </configuration>
           </execution>
         </executions>
