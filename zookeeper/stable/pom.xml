@@ -82,7 +82,7 @@
   </developers>
 
   <properties>
-    <logback-version>1.5.8</logback-version>
+    <logback-version>1.5.12</logback-version>
     <audience-annotations.version>0.15.0</audience-annotations.version>
     <jmockit.version>1.49</jmockit.version>
     <jline.version>2.14.6</jline.version>
