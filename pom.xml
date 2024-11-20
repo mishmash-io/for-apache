@@ -115,6 +115,7 @@
     <module>zookeeper/stable-admin-jetty</module>
     <module>zookeeper/stable-cli</module>
     <module>hadoop/stable</module>
+    <module>hadoop/stable-base</module>
   </modules>
 
   <dependencyManagement>

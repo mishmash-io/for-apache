@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2024 Mishmash IO UK Ltd.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.mishmash.apache</groupId>
+    <artifactId>mmio-for-apache-parent</artifactId>
+    <version>0.0.1</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <groupId>io.mishmash.apache.hadoop</groupId>
+  <artifactId>stable-base</artifactId>
+  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
+  <packaging>jar</packaging>
+
+  <name>mishmash io pack of a minimal Apache ZooKeeper client</name>
+  <description>
+    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+
+    This package contains a minimal Apache ZooKeeper client with modifications by 
+    mishmash io. For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and GitHub.
+
+    Use this package when you only need a ZooKeeper client and minimum extra dependencies.
+  </description>
+  <url>https://mishmash.io/open_source/apache_big_data</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>mishmash io</name>
+    <url>https://mishmash.io</url>
+  </organization>
+
+  <scm>
+    <connection>scm:git:https://github.com/mishmash-io/for-apache.git</connection>
+    <developerConnection>scm:git:https://github.com/mishmash-io/for-apache.git</developerConnection>
+    <url>https://github.com/mishmash-io/for-apache</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Ivan Kountchev</name>
+      <email>i.kountchev@mishmash.io</email>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Andrey Rusev</name>
+      <email>a.rusev@mishmash.io</email>
+      <url>www.linkedin.com/in/andrey-rusev-21894172</url>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>architect</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.mishmash.apache.hadoop</groupId>
+        <artifactId>stable</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-annotations</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-configuration2</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-math3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+    </dependency>
+
+    <!-- logging dependencies -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-reload4j</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.reload4j</groupId>
+      <artifactId>reload4j</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>stax2-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.woodstox</groupId>
+      <artifactId>woodstox-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.avro</groupId>
+      <artifactId>avro</artifactId>
+    </dependency>
+
+    <!-- security dependencies -->
+    <dependency>
+      <groupId>org.apache.kerby</groupId>
+      <artifactId>kerb-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.kerby</groupId>
+      <artifactId>kerb-util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk18on</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.wildfly.openssl</groupId>
+      <artifactId>wildfly-openssl-java</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- high-availability dependencies -->
+    <dependency>
+      <groupId>io.mishmash.apache.zookeeper</groupId>
+      <artifactId>mmio-zookeeper-stable-client</artifactId>
+    </dependency>
+
+    <!-- other dependencies -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.re2j</groupId>
+      <artifactId>re2j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.xerial.snappy</groupId>
+      <artifactId>snappy-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.lz4</groupId>
+      <artifactId>lz4-java</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>dnsjava</groupId>
+      <artifactId>dnsjava</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>io.mishmash.apache.hadoop</groupId>
+                  <artifactId>stable</artifactId>
+                  <version>${project.version}</version>
+                  <type>jar</type>
+                  <classifier>sources</classifier>
+                  <overWrite>false</overWrite>
+                  <includes>
+                    **/hadoop/*.java,
+                    **/hadoop/conf/*.java,
+                    **/hadoop/crypto/*.java,
+                    **/hadoop/crypto/random/*.java,
+                    **/hadoop/fs/*.java,
+                    **/hadoop/fs/impl/*.java,
+                    **/hadoop/fs/permission/*.java,
+                    **/hadoop/fs/statistics/*.java,
+                    **/hadoop/fs/statistics/impl/*.java,
+                    **/hadoop/fs/store/*.java,
+                    **/hadoop/fs/protocolPB/*.java,
+                    **/hadoop/ha/HealthCheckFailedException.java,
+                    **/hadoop/io/*.java,
+                    **/hadoop/io/compress/**,
+                    **/hadoop/io/nativeio/*.java,
+                    **/hadoop/io/serializer/**,
+                    **/hadoop/io/retry/*.java,
+                    **/hadoop/ipc/*.java,
+                    **/hadoop/ipc/internal/*.java,
+                    **/hadoop/ipc/metrics/*.java,
+                    **/hadoop/ipc/protobuf/*.java,
+                    **/hadoop/metrics2/*.java,
+                    **/hadoop/metrics2/annotation/*.java,
+                    **/hadoop/metrics2/filter/*.java,
+                    **/hadoop/metrics2/impl/*.java,
+                    **/hadoop/metrics2/lib/*.java,
+                    **/hadoop/metrics2/util/*.java,
+                    **/hadoop/net/**,
+                    **/hadoop/security/*.java,
+                    **/hadoop/security/alias/*.java,
+                    **/hadoop/security/authentication/client/*.java,
+                    **/hadoop/security/authentication/util/*.java,
+                    **/hadoop/security/authorize/*.java,
+                    **/hadoop/security/proto/*.java,
+                    **/hadoop/security/token/*.java,
+                    **/hadoop/tracing/*.java,
+
+                    **/hadoop/util/BasicDiskValidator.java,
+                    **/hadoop/util/CacheableIPList.java,
+                    **/hadoop/util/ClassUtil.java,
+                    **/hadoop/util/CleanerUtil.java,
+                    **/hadoop/util/CloseableReferenceCount.java,
+                    **/hadoop/util/CombinedIPList.java,
+                    **/hadoop/util/CombinedIPWhiteList.java,
+                    **/hadoop/util/ConfigurationHelper.java,
+                    **/hadoop/util/CrcUtil.java,
+                    **/hadoop/util/Daemon.java,
+                    **/hadoop/util/DataChecksum.java,
+                    **/hadoop/util/DirectBufferPool.java,
+                    **/hadoop/util/DiskChecker.java,
+                    **/hadoop/util/DiskValidator.java,
+                    **/hadoop/util/DiskValidatorFactory.java,
+                    **/hadoop/util/DurationInfo.java,
+                    **/hadoop/util/ExitCodeProvider.java,
+                    **/hadoop/util/ExitUtil.java,
+                    **/hadoop/util/FileBasedIPList.java,
+                    **/hadoop/util/GenericsUtil.java,
+                    **/hadoop/util/GSet.java,
+                    **/hadoop/util/IdentityHashStore.java,
+                    **/hadoop/util/InvalidChecksumSizeException.java,
+                    **/hadoop/util/IPList.java,
+                    **/hadoop/util/JsonSerialization.java,
+                    **/hadoop/util/LambdaUtils.java,
+                    **/hadoop/util/LightWeightCache.java,
+                    **/hadoop/util/LightWeightGSet.java,
+                    **/hadoop/util/LineReader.java,
+                    **/hadoop/util/Lists.java,
+                    **/hadoop/util/MachineList.java,
+                    **/hadoop/util/MergeSort.java,
+                    **/hadoop/util/NativeCodeLoader.java,
+                    **/hadoop/util/NativeCrc32.java,
+                    **/hadoop/util/OperationDuration.java,
+                    **/hadoop/util/Options.java,
+                    **/hadoop/util/PerformanceAdvisory.java,
+                    **/hadoop/util/Preconditions.java,
+                    **/hadoop/util/PlatformName.java,
+                    **/hadoop/util/PriorityQueue.java,
+                    **/hadoop/util/Progress.java,
+                    **/hadoop/util/Progressable.java,
+                    **/hadoop/util/ProtoUtil.java,
+                    **/hadoop/util/PureJavaCrc32.java,
+                    **/hadoop/util/PureJavaCrc32C.java,
+                    **/hadoop/util/ReadWriteDiskValidator.java,
+                    **/hadoop/util/ReadWriteDiskValidatorMetrics.java,
+                    **/hadoop/util/ReflectionUtils.java,
+                    **/hadoop/util/Shell.java,
+                    **/hadoop/util/SignalLogger.java,
+                    **/hadoop/util/ShutdownHookManager.java,
+                    **/hadoop/util/StopWatch.java,
+                    **/hadoop/util/StringInterner.java,
+                    **/hadoop/util/StringUtils.java,
+                    **/hadoop/util/Time.java,
+                    **/hadoop/util/Timer.java,
+                    **/hadoop/util/WeakReferenceMap.java,
+                    **/hadoop/util/XMLUtils.java,
+                    **/hadoop/util/ZKUtil.java,
+                    **/hadoop/util/bloom/*.java,
+                    **/hadoop/util/concurrent/*.java,
+                    **/hadoop/util/functional/*.java,
+                    **/hadoop/util/hash/*.java,
+                  </includes>
+                  <excludes>
+                    **/hadoop/fs/FsShell.java,
+                    **/hadoop/fs/FsShellPermissions.java,
+                    **/hadoop/fs/Trash.java,
+                    **/hadoop/security/KDiag.java,
+                    **/hadoop/security/alias/CredentialShell.java,
+                    **/hadoop/security/token/DtFileOperations.java,
+                    **/hadoop/security/token/DtUtilShell.java,
+
+                    **/hadoop/security/AuthenticationFilterInitializer.java,
+                    **/hadoop/security/HttpCrossOriginFilterInitializer.java,
+                  </excludes>
+                  <!--includes>
+                    **/hadoop/*.java,
+                    **/hadoop/conf/**,
+                    **/hadoop/fs/**,
+                    **/hadoop/io/**,
+                    **/hadoop/net/**,
+                    **/hadoop/security/**,
+                    **/hadoop/tracing/**,
+                    **/hadoop/util/**,
+                  </includes>
+                  <excludes>
+                    **/hadoop/security/http/**,
+                    **/hadoop/security/token/delegation/web/**,
+                  </excludes-->
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-hadoop-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-hadoop-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-test-sources/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
