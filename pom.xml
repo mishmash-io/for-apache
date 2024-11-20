@@ -115,9 +115,6 @@
     <module>zookeeper/stable-admin-jetty</module>
     <module>zookeeper/stable-cli</module>
     <module>hadoop/stable</module>
-    <module>hadoop/hadoop-minikdc-stable</module>
-    <module>hadoop/hadoop-auth-stable</module>
-    <module>hadoop/hadoop-common-stable</module>
   </modules>
 
   <dependencyManagement>
