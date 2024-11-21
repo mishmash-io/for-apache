@@ -220,7 +220,26 @@
   </dependencies>
 
   <build>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.7.1</version>
+      </extension>
+    </extensions>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
     <plugins>
+      <plugin>
+        <groupId>io.github.git-commit-id</groupId>
+        <artifactId>git-commit-id-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -246,27 +265,40 @@
                     **/hadoop/crypto/*.java,
                     **/hadoop/crypto/random/*.java,
                     **/hadoop/fs/*.java,
+                    **/hadoop/fs/audit/*.java,
+                    **/hadoop/fs/crypto/*.java,
+                    **/hadoop/fs/ftp/*.java,
+                    **/hadoop/fs/http/*.java,
                     **/hadoop/fs/impl/*.java,
+                    **/hadoop/fs/impl/prefetch/*.java,
+                    **/hadoop/fs/local/*.java,
                     **/hadoop/fs/permission/*.java,
                     **/hadoop/fs/statistics/*.java,
                     **/hadoop/fs/statistics/impl/*.java,
                     **/hadoop/fs/store/*.java,
+                    **/hadoop/fs/store/audit/*.java,
                     **/hadoop/fs/protocolPB/*.java,
+                    **/hadoop/fs/viewfs/*.java,
                     **/hadoop/ha/HealthCheckFailedException.java,
                     **/hadoop/io/*.java,
                     **/hadoop/io/compress/**,
+                    **/hadoop/io/file/tfile/*.java,
                     **/hadoop/io/nativeio/*.java,
-                    **/hadoop/io/serializer/**,
                     **/hadoop/io/retry/*.java,
+                    **/hadoop/io/serializer/**,
                     **/hadoop/ipc/*.java,
                     **/hadoop/ipc/internal/*.java,
                     **/hadoop/ipc/metrics/*.java,
+                    **/hadoop/ipc/proto/*.java,
                     **/hadoop/ipc/protobuf/*.java,
+                    **/hadoop/ipc/protocolPB/*.java,
+                    **/hadoop/log/*.java,
                     **/hadoop/metrics2/*.java,
                     **/hadoop/metrics2/annotation/*.java,
                     **/hadoop/metrics2/filter/*.java,
                     **/hadoop/metrics2/impl/*.java,
                     **/hadoop/metrics2/lib/*.java,
+                    **/hadoop/metrics2/sink/**,
                     **/hadoop/metrics2/util/*.java,
                     **/hadoop/net/**,
                     **/hadoop/security/*.java,
@@ -318,6 +350,7 @@
                     **/hadoop/util/Preconditions.java,
                     **/hadoop/util/PlatformName.java,
                     **/hadoop/util/PriorityQueue.java,
+                    **/hadoop/util/ProcessUtils.java,
                     **/hadoop/util/Progress.java,
                     **/hadoop/util/Progressable.java,
                     **/hadoop/util/ProtoUtil.java,
@@ -332,8 +365,10 @@
                     **/hadoop/util/StopWatch.java,
                     **/hadoop/util/StringInterner.java,
                     **/hadoop/util/StringUtils.java,
+                    **/hadoop/util/ThreadUtil.java,
                     **/hadoop/util/Time.java,
                     **/hadoop/util/Timer.java,
+                    **/hadoop/util/VersionInfo.java,
                     **/hadoop/util/WeakReferenceMap.java,
                     **/hadoop/util/XMLUtils.java,
                     **/hadoop/util/ZKUtil.java,
@@ -343,31 +378,9 @@
                     **/hadoop/util/hash/*.java,
                   </includes>
                   <excludes>
-                    **/hadoop/fs/FsShell.java,
-                    **/hadoop/fs/FsShellPermissions.java,
-                    **/hadoop/fs/Trash.java,
-                    **/hadoop/security/KDiag.java,
-                    **/hadoop/security/alias/CredentialShell.java,
-                    **/hadoop/security/token/DtFileOperations.java,
-                    **/hadoop/security/token/DtUtilShell.java,
+                    **/hadoop/fs/store/audit/HttpReferrerAuditHeader.java,
 
-                    **/hadoop/security/AuthenticationFilterInitializer.java,
-                    **/hadoop/security/HttpCrossOriginFilterInitializer.java,
                   </excludes>
-                  <!--includes>
-                    **/hadoop/*.java,
-                    **/hadoop/conf/**,
-                    **/hadoop/fs/**,
-                    **/hadoop/io/**,
-                    **/hadoop/net/**,
-                    **/hadoop/security/**,
-                    **/hadoop/tracing/**,
-                    **/hadoop/util/**,
-                  </includes>
-                  <excludes>
-                    **/hadoop/security/http/**,
-                    **/hadoop/security/token/delegation/web/**,
-                  </excludes-->
                 </artifactItem>
               </artifactItems>
               <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
