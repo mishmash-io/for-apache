@@ -307,6 +307,7 @@
                     **/hadoop/security/authentication/util/*.java,
                     **/hadoop/security/authorize/*.java,
                     **/hadoop/security/proto/*.java,
+                    **/hadoop/security/ssl/*.java,
                     **/hadoop/security/token/*.java,
                     **/hadoop/tracing/*.java,
 

@@ -186,7 +186,6 @@
                     **/hadoop/security/authentication/server/*.java,
                     **/hadoop/security/authentication/util/server/*.java,
                     **/hadoop/security/http/*.java,
-                    **/hadoop/security/ssl/*.java,
                     **/hadoop/util/http/*.java,
                   </includes>
                 </artifactItem>
