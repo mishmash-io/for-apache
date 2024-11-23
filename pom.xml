@@ -117,6 +117,7 @@
     <module>zookeeper/stable-cli</module>
     <module>hadoop/stable</module>
     <module>hadoop/stable-base</module>
+    <module>hadoop/stable-base-ha</module>
     <module>hadoop/stable-base-cli</module>
     <module>hadoop/stable-base-http</module>
     <module>hadoop/stable-fs-sftp</module>

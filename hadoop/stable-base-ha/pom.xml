@@ -25,7 +25,7 @@
   </parent>
 
   <groupId>io.mishmash.apache.hadoop</groupId>
-  <artifactId>stable-base-http</artifactId>
+  <artifactId>stable-base-ha</artifactId>
   <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
@@ -99,55 +99,20 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.apache.hadoop</groupId>
-      <artifactId>stable-base-ha</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.nimbusds</groupId>
-      <artifactId>nimbus-jose-jwt</artifactId>
+      <groupId>io.mishmash.apache.zookeeper</groupId>
+      <artifactId>mmio-zookeeper-stable-client</artifactId>
     </dependency>
     <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <scope>provided</scope>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-framework</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-util</artifactId>
+      <groupId>org.apache.curator</groupId>
+      <artifactId>curator-recipes</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-server</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.ee10</groupId>
-      <artifactId>jetty-ee10-servlet</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.ee10</groupId>
-      <artifactId>jetty-ee10-webapp</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.containers</groupId>
-      <artifactId>jersey-container-servlet</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.httpcomponents.core5</groupId>
-      <artifactId>httpcore5</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.wildfly.openssl</groupId>
-      <artifactId>wildfly-openssl-java</artifactId>
-      <scope>provided</scope>
+      <groupId>com.github.mwiede</groupId>
+      <artifactId>jsch</artifactId>
     </dependency>
   </dependencies>
 
@@ -173,14 +138,12 @@
                   <classifier>sources</classifier>
                   <overWrite>false</overWrite>
                   <includes>
-                    **/hadoop/http/*.java,
-                    **/hadoop/http/lib/*.java,
-                    **/hadoop/jmx/*.java,
-                    **/hadoop/security/authentication/server/*.java,
-                    **/hadoop/security/authentication/util/server/*.java,
-                    **/hadoop/security/http/*.java,
-                    **/hadoop/util/http/*.java,
+                    **/hadoop/ha/**,
+                    **/hadoop/util/curator/*.java,
                   </includes>
+                  <excludes>
+                    **/hadoop/ha/HAAdmin.java,
+                  </excludes>
                 </artifactItem>
               </artifactItems>
               <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>

@@ -184,12 +184,6 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- high-availability dependencies -->
-    <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-client</artifactId>
-    </dependency>
-
     <!-- other dependencies -->
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -274,7 +268,6 @@
                     **/hadoop/fs/store/audit/*.java,
                     **/hadoop/fs/protocolPB/*.java,
                     **/hadoop/fs/viewfs/*.java,
-                    **/hadoop/ha/HealthCheckFailedException.java,
                     **/hadoop/io/*.java,
                     **/hadoop/io/compress/**,
                     **/hadoop/io/file/tfile/*.java,
@@ -374,7 +367,6 @@
                     **/hadoop/util/hash/*.java,
                   </includes>
                   <excludes>
-                    **/hadoop/fs/store/audit/HttpReferrerAuditHeader.java,
 
                   </excludes>
                 </artifactItem>
