@@ -87,6 +87,7 @@
     <wildfly-openssl.version>2.2.5.Final</wildfly-openssl.version>
     <jsp-api.version>4.0.0</jsp-api.version>
     <jersey.version>3.1.9</jersey.version>
+    <dropwizard.metrics.version>4.2.28</dropwizard.metrics.version>
 
     <hadoop.common.build.dir>${project.build.directory}</hadoop.common.build.dir>
     <hadoop.log.dir>${project.build.directory}/log</hadoop.log.dir>
@@ -113,6 +114,11 @@
 
       <!-- commons dependencies -->
       <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.4</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-configuration2</artifactId>
         <version>2.11.0</version>
@@ -122,6 +128,11 @@
             <artifactId>servlet-api</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>commons-daemon</groupId>
+        <artifactId>commons-daemon</artifactId>
+        <version>1.4.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -143,13 +154,13 @@
         <artifactId>commons-math3</artifactId>
         <version>3.6.1</version>
       </dependency>
-      <dependency>
-        <groupId>commons-beanutils</groupId>
-        <artifactId>commons-beanutils</artifactId>
-        <version>1.9.4</version>
-      </dependency>
 
       <!-- logging dependencies -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jul-to-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
@@ -170,6 +181,11 @@
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-util</artifactId>
+        <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-util-ajax</artifactId>
         <version>${jetty.version}</version>
       </dependency>
       <dependency>
@@ -208,6 +224,11 @@
         <version>${httpcomponents.core.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.httpcomponents.client5</groupId>
+        <artifactId>httpclient5</artifactId>
+        <version>${httpcomponents.client.version}</version>
+      </dependency>
+      <dependency>
         <groupId>com.nimbusds</groupId>
         <artifactId>nimbus-jose-jwt</artifactId>
         <version>9.41.2</version>
@@ -216,6 +237,17 @@
         <groupId>com.google.code.gson</groupId>
         <artifactId>gson</artifactId>
         <version>2.11.0</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>4.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>4.0.5</version>
+        <scope>runtime</scope>
       </dependency>
 
       <!-- Updated to minimal ZooKeeper -->
@@ -264,7 +296,12 @@
       <dependency>
         <groupId>io.dropwizard.metrics</groupId>
         <artifactId>metrics-core</artifactId>
-        <version>4.2.28</version>
+        <version>${dropwizard.metrics.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.dropwizard.metrics</groupId>
+        <artifactId>metrics-jmx</artifactId>
+        <version>${dropwizard.metrics.version}</version>
       </dependency>
 
       <!-- security dependencies -->
@@ -325,6 +362,11 @@
         <artifactId>lz4-java</artifactId>
         <version>1.8.0</version>
       </dependency>
+      <dependency>
+        <groupId>org.fusesource.leveldbjni</groupId>
+        <artifactId>leveldbjni-all</artifactId>
+        <version>1.8</version>
+      </dependency>
 
       <!-- test dependencies -->
       <dependency>
@@ -334,21 +376,15 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.httpcomponents.client5</groupId>
-        <artifactId>httpclient5</artifactId>
-        <version>${httpcomponents.client.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-util-ajax</artifactId>
-        <version>${jetty.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>mockwebserver3-junit5</artifactId>
         <version>5.0.0-alpha.14</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mock-server</groupId>
+        <artifactId>mockserver-netty</artifactId>
+        <version>5.15.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -504,9 +540,33 @@
         <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-junit</artifactId>
+        <version>2.0.0.0</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
         <version>3.26.3</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.jettison</groupId>
+        <artifactId>jettison</artifactId>
+        <version>1.5.4</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>net.jcip</groupId>
+        <artifactId>jcip-annotations</artifactId>
+        <version>1.0</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
@@ -562,6 +622,10 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>commons-daemon</groupId>
+      <artifactId>commons-daemon</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
@@ -574,6 +638,10 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -596,6 +664,10 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-util-ajax</artifactId>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.ee10</groupId>
@@ -633,6 +705,10 @@
       <artifactId>httpcore5</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.apache.httpcomponents.client5</groupId>
+      <artifactId>httpclient5</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.nimbusds</groupId>
       <artifactId>nimbus-jose-jwt</artifactId>
     </dependency>
@@ -644,6 +720,15 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <scope>runtime</scope>
+    </dependency>
 
     <!-- netty dependencies -->
     <dependency>
@@ -653,6 +738,10 @@
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-transport-native-epoll</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-codec-http</artifactId>
     </dependency>
 
     <!-- Updated to mishmash io minimal ZooKeeper -->
@@ -673,6 +762,10 @@
     <dependency>
       <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-jmx</artifactId>
     </dependency>
 
     <!-- security dependencies -->
@@ -740,6 +833,10 @@
       <artifactId>lz4-java</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.fusesource.leveldbjni</groupId>
+      <artifactId>leveldbjni-all</artifactId>
+    </dependency>
 
     <!-- test dependencies -->
     <dependency>
@@ -762,18 +859,13 @@
       <artifactId>mockwebserver3-junit5</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib-jdk8</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents.client5</groupId>
-      <artifactId>httpclient5</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-util-ajax</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -889,8 +981,28 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.jcip</groupId>
+      <artifactId>jcip-annotations</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -903,6 +1015,13 @@
         <version>1.7.1</version>
       </extension>
     </extensions>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
 
     <plugins>
       <!-- download original hadoop source code and mishmash io patches for it -->
@@ -976,6 +1095,44 @@
                 <replace token="org.apache.hadoop.thirdparty.com.google.common" value="com.google.common" dir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}">
                   <include name="**/*.java"/>
                 </replace>
+                <replace token="GeneratedMessageV3" value="GeneratedMessage" dir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/java">
+                  <include name="**/FSImageFormatProtobuf.java"/>
+                </replace>
+              </target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>create-web-xmls</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <copy file="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/proto-web.xml"
+                      tofile="${project.build.directory}/hdfs-webapps/webapps/hdfs/WEB-INF/web.xml"
+                      filtering="true"/>
+                <copy file="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/proto-web.xml"
+                      tofile="${project.build.directory}/hdfs-webapps/webapps/secondary/WEB-INF/web.xml"
+                      filtering="true"/>
+                <copy file="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/proto-web.xml"
+                      tofile="${project.build.directory}/hdfs-webapps/webapps/datanode/WEB-INF/web.xml"
+                      filtering="true"/>
+                <copy file="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/proto-web.xml"
+                      tofile="${project.build.directory}/hdfs-webapps/webapps/journal/WEB-INF/web.xml"
+                      filtering="true"/>
+                <copy file="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/proto-web.xml"
+                      tofile="${project.build.directory}/hdfs-webapps/webapps/nfs3/WEB-INF/web.xml"
+                      filtering="true"/>
+                <copy toDir="${project.build.directory}/hdfs-webapps/webapps">
+                  <fileset dir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/webapps">
+                    <exclude name="**/proto-web.xml"/>
+                  </fileset>
+                </copy>
+                <replace dir="${project.build.directory}/hdfs-webapps/webapps" value="${release-year}">
+                  <include name="**/*.html"/>
+                  <replacetoken>{release-year-token}</replacetoken>
+                </replace>
               </target>
             </configuration>
           </execution>
@@ -1021,6 +1178,12 @@
                 <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-auth/src/main/java</source>
                 <!-- hadoop common -->
                 <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/java</source>
+                <!-- hadoop kms -->
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-kms/src/main/java</source>
+                <!-- hdfs client -->
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs-client/src/main/java</source>
+                <!-- hdfs -->
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/java</source>
               </sources>
             </configuration>
           </execution>
@@ -1032,7 +1195,9 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/generated-sources/protobuf/java</source>
+                <source>${project.build.directory}/generated-sources/protobuf-common/java</source>
+                <source>${project.build.directory}/generated-sources/protobuf-hdfs-client/java</source>
+                <source>${project.build.directory}/generated-sources/protobuf-hdfs/java</source>
               </sources>
             </configuration>
           </execution>
@@ -1051,6 +1216,12 @@
                 <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-auth/src/test/java</source>
                 <!-- hadoop-common -->
                 <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/java</source>
+                <!-- hadoop-kms -->
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-kms/src/test/java</source>
+                <!-- hdfs client -->
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs-client/src/test/java</source>
+                <!-- hdfs -->
+                <source>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/test/java</source>
               </sources>
             </configuration>
           </execution>
@@ -1067,6 +1238,20 @@
             </configuration>
           </execution>
           <execution>
+            <id>add-resources</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>add-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/hdfs-webapps</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
             <id>add-test-resources</id>
             <phase>generate-test-resources</phase>
             <goals>
@@ -1076,10 +1261,36 @@
               <resources>
                 <resource>
                   <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/resources</directory>
+                  <excludes>
+                    <exclude>**/META-INF/services/**</exclude>
+                  </excludes>
                 </resource>
                 <!-- also use the default resources provided in src/main of hadoop-common -->
                 <resource>
                   <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/resources</directory>
+                  <excludes>
+                    <exclude>**/common-version-info.properties</exclude>
+                    <exclude>**/META-INF/services/**</exclude>
+                  </excludes>
+                </resource>
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-kms/src/main/resources</directory>
+                </resource>
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-kms/src/test/resources</directory>
+                  <includes>
+                    **/mini-kms-acls-default.xml,
+                    **/log4j2-kmsaudit.properties
+                  </includes>
+                  <excludes>
+                    **/log4j2.properties
+                  </excludes>
+                </resource>
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/test/resources</directory>
+                  <excludes>
+                    <exclude>**/META-INF/services/**</exclude>
+                  </excludes>
                 </resource>
               </resources>
             </configuration>
@@ -1094,18 +1305,46 @@
           <protocArtifact>
             com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
           </protocArtifact>
-          <!--pluginId>grpc-java</pluginId-->
         </configuration>
         <executions>
           <execution>
-            <id>compile-protobuf</id>
+            <id>compile-common-protobuf</id>
             <phase>generate-sources</phase>
             <configuration>
               <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/proto</protoSourceRoot>
               <excludes>
                 <exclude>ProtobufRpcEngine.proto</exclude>
               </excludes>
-              <outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
+              <outputDirectory>${project.build.directory}/generated-sources/protobuf-common/java</outputDirectory>
+            </configuration>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>compile-hdfs-client-protobuf</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs-client/src/main/proto</protoSourceRoot>
+              <additionalProtoPathElements>
+                <additionalProtoPathElement>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/proto</additionalProtoPathElement>
+              </additionalProtoPathElements>
+              <outputDirectory>${project.build.directory}/generated-sources/protobuf-hdfs-client/java</outputDirectory>
+            </configuration>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>compile-hdfs-protobuf</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <protoSourceRoot>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/proto</protoSourceRoot>
+              <additionalProtoPathElements>
+                <additionalProtoPathElement>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/proto</additionalProtoPathElement>
+                <additionalProtoPathElement>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs-client/src/main/proto</additionalProtoPathElement>
+              </additionalProtoPathElements>
+              <outputDirectory>${project.build.directory}/generated-sources/protobuf-hdfs/java</outputDirectory>
             </configuration>
             <goals>
               <goal>compile</goal>
@@ -1151,6 +1390,25 @@
             <exclude>**/hadoop/security/authentication/server/package-info.java</exclude>
           </excludes>
         </configuration>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <!--
+                exclude the following test, because it uses a way
+                of tapping (mocking really) the built-in DNS client,
+                a way that is no longer available since java 8.
+              -->
+              <testExcludes>
+                <exclude>**/hadoop/hdfs/TestDFSClientFailover.java</exclude>
+              </testExcludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
