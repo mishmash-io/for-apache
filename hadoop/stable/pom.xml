@@ -1024,6 +1024,10 @@
     </resources>
 
     <plugins>
+      <plugin>
+        <groupId>io.github.git-commit-id</groupId>
+        <artifactId>git-commit-id-maven-plugin</artifactId>
+      </plugin>
       <!-- download original hadoop source code and mishmash io patches for it -->
       <plugin>
         <groupId>com.googlecode.maven-download-plugin</groupId>
@@ -1248,6 +1252,15 @@
                 <resource>
                   <directory>${project.build.directory}/hdfs-webapps</directory>
                 </resource>
+                <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/resources</directory>
+                  <includes>
+                    <include>**/hdfs-default.xml</include>
+                  </includes>
+                  <excludes>
+                    <exclude>**/META-INF/**</exclude>
+                  </excludes>
+                </resource>
               </resources>
             </configuration>
           </execution>
@@ -1418,6 +1431,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
+          <forkCount>0.8C</forkCount>
           <reuseForks>false</reuseForks>
           <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Dorg.apache.avro.SERIALIZABLE_PACKAGES=org.apache.hadoop.io,org.apache.hadoop.fs ${test.instrumentation.opts}</argLine>
           <environmentVariables>
@@ -1452,6 +1466,12 @@
             <java.security.egd>${java.security.egd}</java.security.egd>
             <!--require.test.libhadoop>${require.test.libhadoop}</require.test.libhadoop-->
           </systemPropertyVariables>
+          <properties>
+            <!-- set a default timeout of 10 minutes to all tests -->
+            <configurationParameters>
+              junit.jupiter.execution.timeout.default = 10m
+            </configurationParameters>
+          </properties>
           <!-- some tests require access to, for example src/main/webapps/static (of hadoop-common), run tests in the hadoop-common directory -->
           <workingDirectory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common</workingDirectory>
           <includes>
