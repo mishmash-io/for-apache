@@ -1250,6 +1250,13 @@
             <configuration>
               <resources>
                 <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/resources</directory>
+                  <excludes>
+                    <exclude>**/common-version-info.properties</exclude>
+                    <exclude>**/META-INF/services/**</exclude>
+                  </excludes>
+                </resource>
+                <resource>
                   <directory>${project.build.directory}/hdfs-webapps</directory>
                 </resource>
                 <resource>
@@ -1275,14 +1282,6 @@
                 <resource>
                   <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/resources</directory>
                   <excludes>
-                    <exclude>**/META-INF/services/**</exclude>
-                  </excludes>
-                </resource>
-                <!-- also use the default resources provided in src/main of hadoop-common -->
-                <resource>
-                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/main/resources</directory>
-                  <excludes>
-                    <exclude>**/common-version-info.properties</exclude>
                     <exclude>**/META-INF/services/**</exclude>
                   </excludes>
                 </resource>
@@ -1431,7 +1430,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <forkCount>0.8C</forkCount>
+          <forkCount>1</forkCount>
           <reuseForks>false</reuseForks>
           <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Dorg.apache.avro.SERIALIZABLE_PACKAGES=org.apache.hadoop.io,org.apache.hadoop.fs ${test.instrumentation.opts}</argLine>
           <environmentVariables>
