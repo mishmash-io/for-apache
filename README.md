@@ -6,14 +6,14 @@ Projects and frameworks are originally developed by other parties (find the list
 
 At mishmash.io, we use a lot of open source - in our [distributed database](https://mishmash.io/docs/database) or other software that we publish (such as our [open source analytics for OpenTelemetry](https://github.com/mishmash-io/opentelemetry-server-embedded)). Sometimes we customize the original project's code to better suit our needs and we're publishing our patches here.
 
-Technically speaking - this repository contains a build process that:
+In more technical terms - this repository contains a build process that:
 1. Fetches the original code of a number of open source projects
 2. Applies our changes
 3. Rebuilds
 4. Retests
 5. Packages *smaller, per-feature* components that you can **stack** together on an *as-needed basis.*
 
-You can also find ready-made **stacks** of features for common use case scenarios.
+You can also find ready-made **stacks** for common use case scenarios.
 
 > [!IMPORTANT]
 > This repository is a **Work in progress!**
