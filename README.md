@@ -1,9 +1,19 @@
-# Open Source Stacks for Distributed Computing, by mishmash.io
+# Open Source Stacks for Distributed Computing, rebuilt by mishmash.io
 
-This repository contains [mishmash.io](https://mishmash.io) builds of open source
-projects and frameworks that are popular in distributed computing.
+**This repository contains mishmash.io builds of open source projects and frameworks that are popular in distributed computing.**
 
-At mishmash.io, we use a lot of open source - in our [distributed database](https://mishmash.io/docs/database) or other software that we publish (such as our [open source analytics for OpenTelemetry](https://github.com/mishmash-io/opentelemetry-server-embedded)). Often we patch and adapt open source code to better suit our needs and we're publishing such customizations as **stacks** here.
+Projects and frameworks are originally developed by other parties (find the list below) and then customized by [mishmash.io](https://mishmash.io).
+
+At mishmash.io, we use a lot of open source - in our [distributed database](https://mishmash.io/docs/database) or other software that we publish (such as our [open source analytics for OpenTelemetry](https://github.com/mishmash-io/opentelemetry-server-embedded)). Sometimes we customize the original project's code to better suit our needs and we're publishing our patches here.
+
+Technically speaking - this repository contains a build process that:
+1. Fetches the original code of a number of open source projects
+2. Applies our changes
+3. Rebuilds
+4. Retests
+5. Packages *smaller, per-feature* components that you can **stack** together on an *as-needed basis.*
+
+You can also find ready-made **stacks** of features for common use case scenarios.
 
 > [!IMPORTANT]
 > This repository is a **Work in progress!**
@@ -12,6 +22,21 @@ At mishmash.io, we use a lot of open source - in our [distributed database](http
 > documented fully yet.
 >
 > Use the `watch` button above to get updates on progress.
+
+In this README you will find:
+- **The motivation:** [why do we patch and rebuild?](#why-do-we-rebuild-other-open-source-projects)
+- **The goals and principles:** [what are we changing?](#summary-of-whats-modified)
+- **The rules we follow:**
+  - [When patching](#patching-process-outline)
+  - [When publishing](#publishing-patches)
+- **The stacks:**
+  - [Listed, with links for details](#the-stacks)
+  - [How to stay current with updates](#versionsing)
+  - [Various ways of using a stack](#using-the-stacks)
+- **The repository:**
+  - [How to build your own stack](#modifying-the-stacks)
+- **The background:**
+  - [About mishmash.io](#about-mishmashio)
 
 ## Why do we rebuild other open source projects?
 
