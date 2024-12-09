@@ -1260,6 +1260,14 @@
                   <directory>${project.build.directory}/hdfs-webapps</directory>
                 </resource>
                 <resource>
+                  <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-kms/src/main/resources</directory>
+                  <includes>
+                    <include>**/kms-default.xml</include>
+                    <!-- drop webapps/static -->
+                    <include>**/webapps/kms/**</include>
+                  </includes>
+                </resource>
+                <resource>
                   <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/main/resources</directory>
                   <includes>
                     <include>**/hdfs-default.xml</include>
