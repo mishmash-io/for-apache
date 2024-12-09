@@ -81,7 +81,7 @@
   </developers>
 
   <properties>
-    <httpcomponents.core.version>5.3</httpcomponents.core.version>
+    <httpcomponents.core.version>5.3.1</httpcomponents.core.version>
     <httpcomponents.client.version>5.4</httpcomponents.client.version>
     <curator.version>5.7.1</curator.version>
     <wildfly-openssl.version>2.2.5.Final</wildfly-openssl.version>
