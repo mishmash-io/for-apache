@@ -81,8 +81,8 @@
   </developers>
 
   <properties>
-    <httpcomponents.core.version>5.3</httpcomponents.core.version>
-    <httpcomponents.client.version>5.4</httpcomponents.client.version>
+    <httpcomponents.core.version>5.3.1</httpcomponents.core.version>
+    <httpcomponents.client.version>5.4.1</httpcomponents.client.version>
     <curator.version>5.7.1</curator.version>
     <wildfly-openssl.version>2.2.5.Final</wildfly-openssl.version>
     <jsp-api.version>4.0.0</jsp-api.version>
@@ -350,7 +350,7 @@
       <dependency>
         <groupId>com.fasterxml.woodstox</groupId>
         <artifactId>woodstox-core</artifactId>
-        <version>7.0.0</version>
+        <version>7.1.0</version>
       </dependency>
       <dependency>
         <groupId>dnsjava</groupId>
