@@ -243,12 +243,6 @@
         <artifactId>jakarta.xml.bind-api</artifactId>
         <version>4.0.0</version>
       </dependency>
-      <dependency>
-        <groupId>com.sun.xml.bind</groupId>
-        <artifactId>jaxb-impl</artifactId>
-        <version>4.0.5</version>
-        <scope>runtime</scope>
-      </dependency>
 
       <!-- Updated to minimal ZooKeeper -->
       <dependency>
@@ -725,8 +719,9 @@
       <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-impl</artifactId>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>4.0.5</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -836,6 +831,12 @@
     <dependency>
       <groupId>org.fusesource.leveldbjni</groupId>
       <artifactId>leveldbjni-all</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.lmax</groupId>
+      <artifactId>disruptor</artifactId>
+      <version>4.0.0</version>
+      <scope>runtime</scope>
     </dependency>
 
     <!-- test dependencies -->
@@ -1290,7 +1291,10 @@
                 <resource>
                   <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-common-project/hadoop-common/src/test/resources</directory>
                   <excludes>
-                    <exclude>**/META-INF/services/**</exclude>
+                    **/META-INF/services/**,
+                    **/log4j2.properties,
+                    **/krb5.conf,
+                    **/hadoop-policy.xml
                   </excludes>
                 </resource>
                 <resource>
@@ -1309,7 +1313,8 @@
                 <resource>
                   <directory>${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}/hadoop-hdfs-project/hadoop-hdfs/src/test/resources</directory>
                   <excludes>
-                    <exclude>**/META-INF/services/**</exclude>
+                    **/META-INF/services/**,
+                    **/log4j*.properties
                   </excludes>
                 </resource>
               </resources>
@@ -1440,7 +1445,7 @@
         <configuration>
           <forkCount>1</forkCount>
           <reuseForks>false</reuseForks>
-          <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Dorg.apache.avro.SERIALIZABLE_PACKAGES=org.apache.hadoop.io,org.apache.hadoop.fs ${test.instrumentation.opts}</argLine>
+          <argLine>-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Dorg.apache.avro.SERIALIZABLE_PACKAGES=org.apache.hadoop.io,org.apache.hadoop.fs --add-opens=java.base/java.lang.reflect=ALL-UNNAMED ${test.instrumentation.opts}</argLine>
           <environmentVariables>
             <HADOOP_COMMON_HOME>${hadoop.common.build.dir}</HADOOP_COMMON_HOME>
             <!-- HADOOP_HOME required for tests on Windows to find winutils -->
