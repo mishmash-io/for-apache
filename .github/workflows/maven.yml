@@ -19,6 +19,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    timeout-minutes: 520
+
     # allow 'Update dependency graph' step below to submit the generated graph
     permissions:
       contents: write
