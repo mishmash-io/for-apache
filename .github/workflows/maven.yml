@@ -37,7 +37,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '~/.m2/repository/.cache/**/mishmash_io.patch*') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}-${{ hashFiles('~/.m2/repository/.cache/**/mishmash_io.patch*') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Update dependency graph
