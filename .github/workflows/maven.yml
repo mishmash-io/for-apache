@@ -15,16 +15,42 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  compile:
+    name: Compile everything
     runs-on: ubuntu-latest
-
-    timeout-minutes: 520
 
     # allow 'Update dependency graph' step below to submit the generated graph
     permissions:
       contents: write
       pull-requests: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Build with Maven
+      run: mvn -DskipTests install --file pom.xml
+    - name: Cache build artifacts
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '~/.m2/repository/.cache/**/mishmash_io.patch*') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    - name: Update dependency graph
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+      continue-on-error: true
+
+  test:
+    needs: compile
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-set: ['coordination/base/', 'storage/block/base']
+    name: Testing ${{ test-set }}
 
     services:
       otel-to-parquet:
@@ -33,7 +59,8 @@ jobs:
           - 4317:4317
           - 4318:4318
         volumes:
-          - /tmp/tests-parquet:/parquet
+          - /tmp/tests-parquet/${{ test-set }}:/parquet
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -41,40 +68,43 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: maven
     - name: Download latest OpenTelemetry java agent
       run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
-    - name: Build with Maven
+    - name: Cache build artifacts
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '~/.m2/repository/.cache/**/mishmash_io.patch*') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    - name: Run test set ${{ test-set }}
       env:
         OTEL_SERVICE_NAME: maven-test-service
         OTEL_EXPORTER_OTLP_PROTOCOL: grpc
         OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:4317
-      run: mvn -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar --fail-at-end -B package --file pom.xml
+      run: cd tests/${{ tests-set }} && mvn -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar --fail-at-end test --file pom.xml
     - name: Upload telemetry logs
       uses: actions/upload-artifact@v4
       if: always()
       continue-on-error: true
       with:
         name: build-telemetry-logs
-        path: /tmp/tests-parquet/logs-*.parquet
+        path: /tmp/tests-parquet/${{ test-set }}/logs-*.parquet
     - name: Upload telemetry metrics
       uses: actions/upload-artifact@v4
       if: always()
       continue-on-error: true
       with:
         name: build-telemetry-metrics
-        path: /tmp/tests-parquet/metrics-*.parquet
+        path: /tmp/tests-parquet/${{ test-set }}/metrics-*.parquet
     - name: Upload telemetry traces
       uses: actions/upload-artifact@v4
       if: always()
       continue-on-error: true
       with:
         name: build-telemetry-traces
-        path: /tmp/tests-parquet/traces-*.parquet
+        path: /tmp/tests-parquet/${{ test-set }}/traces-*.parquet
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
-      continue-on-error: true
 
 #    - name: Publish Test Report
 #      if: success() || failure()
