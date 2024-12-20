@@ -87,6 +87,7 @@ jobs:
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        fail-on-cache-miss: true
     - name: Run test set ${{ matrix.testset }}
       env:
         OTEL_SERVICE_NAME: maven-test-service
