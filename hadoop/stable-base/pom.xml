@@ -356,7 +356,12 @@
                     **/hadoop/util/hash/*.java,
                   </includes>
                   <excludes>
-
+                    **/hadoop/fs/CacheFlag.java,
+                    **/hadoop/fs/Hdfs.java,
+                    **/hadoop/fs/HdfsBlockLocation.java,
+                    **/hadoop/fs/SWebHdfs.java,
+                    **/hadoop/fs/WebHdfs.java,
+                    **/hadoop/fs/package.html
                   </excludes>
                 </artifactItem>
               </artifactItems>

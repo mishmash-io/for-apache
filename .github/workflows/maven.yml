@@ -44,7 +44,7 @@ jobs:
       continue-on-error: true
 
   test:
-#    needs: compile
+    needs: compile
     runs-on: ubuntu-latest
     strategy:
       matrix:
