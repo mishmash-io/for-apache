@@ -64,13 +64,13 @@ jobs:
             testset: 'storage/block/base'
     name: Testing, ${{ join(matrix.*, ' - ') }}
 
-    services:
-      otel-to-parquet:
-        image: mishmashio/opentelemetry-parquet-server
-        ports:
-          - ${{ matrix.telemetryport }}:4317
-        volumes:
-          - /tmp/tests-parquet/${{ matrix.telemetryoutput }}:/parquet
+#    services:
+#      otel-to-parquet:
+#        image: mishmashio/opentelemetry-parquet-server
+#        ports:
+#          - ${{ matrix.telemetryport }}:4317
+#        volumes:
+#          - /tmp/tests-parquet/${{ matrix.telemetryoutput }}:/parquet
 
     steps:
     - uses: actions/checkout@v4
