@@ -31,6 +31,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+        cache: 'maven'
     - name: Build with Maven
       run: mvn -DskipTests install --file pom.xml
     - name: Cache build artifacts
@@ -38,7 +39,7 @@ jobs:
       id: buildcache
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_RUN_ATTEMPT }}
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
       continue-on-error: true
@@ -86,7 +87,7 @@ jobs:
       id: buildcache
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_RUN_ATTEMPT }}
         fail-on-cache-miss: true
     - name: Run test set ${{ matrix.testset }}
       env:
