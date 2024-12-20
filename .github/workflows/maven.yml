@@ -44,12 +44,12 @@ jobs:
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
       continue-on-error: true
 
-#  test:
-#    needs: compile
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        testset: ['coordination/base/', 'storage/block/base']
+  test:
+    needs: compile
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        testset: ['coordination/base/', 'storage/block/base']
 #    name: Testing ${{ testset }}
 #
 #    services:
@@ -61,13 +61,13 @@ jobs:
 #        volumes:
 #          - /tmp/tests-parquet/${{ testset }}:/parquet
 #
-#    steps:
-#    - uses: actions/checkout@v4
-#    - name: Set up JDK 17
-#      uses: actions/setup-java@v3
-#      with:
-#        java-version: '17'
-#        distribution: 'temurin'
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 #    - name: Download latest OpenTelemetry java agent
 #      run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
 #    - name: Cache build artifacts
