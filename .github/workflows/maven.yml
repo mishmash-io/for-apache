@@ -48,18 +48,30 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        testset: ['coordination/base/', 'storage/block/base']
-    name: Testing ${{ join(matrix.*, ' - ') }}
-#
-#    services:
-#      otel-to-parquet:
-#        image: mishmashio/opentelemetry-parquet-server
-#        ports:
-#          - 4317:4317
-#          - 4318:4318
-#        volumes:
-#          - /tmp/tests-parquet/${{ testset }}:/parquet
-#
+        testset: ['coordination/base', 'storage/block/base']
+        include:
+          - telemetryport: 4317
+            testset: 'coordination/base'
+          - telemetryport: 4319
+            testset: 'storage/block/base'
+          - telemetryoutput: 'coordination-base'
+            testset: 'coordination/base'
+          - telemetryoutput: 'storage-block-base'
+            testset: 'storage/block/base'
+          - testname: 'Base distributed coordination tests'
+            testset: 'coordination/base'
+          - testname: 'Base distributed block storage tests'
+            testset: 'storage/block/base'
+    name: Testing, ${{ join(matrix.*, ' - ') }}
+
+    services:
+      otel-to-parquet:
+        image: mishmashio/opentelemetry-parquet-server
+        ports:
+          - ${{ matrix.telemetryport }}:4317
+        volumes:
+          - /tmp/tests-parquet/${{ matrix.telemetryoutput }}:/parquet
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -75,37 +87,33 @@ jobs:
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-    - name: Run ${{ matrix.testset }}
-      run: echo ${{ matrix.testset }}
-#        restore-keys: |
-#          ${{ runner.os }}-maven-
-#    - name: Run test set ${{ testset }}
-#      env:
-#        OTEL_SERVICE_NAME: maven-test-service
-#        OTEL_EXPORTER_OTLP_PROTOCOL: grpc
-#        OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:4317
-#      run: cd tests/${{ testset }} && mvn -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar --fail-at-end test --file pom.xml
-#    - name: Upload telemetry logs
-#      uses: actions/upload-artifact@v4
-#      if: always()
-#      continue-on-error: true
-#      with:
-#        name: build-telemetry-logs
-#        path: /tmp/tests-parquet/${{ testset }}/logs-*.parquet
-#    - name: Upload telemetry metrics
-#      uses: actions/upload-artifact@v4
-#      if: always()
-#      continue-on-error: true
-#      with:
-#        name: build-telemetry-metrics
-#        path: /tmp/tests-parquet/${{ testset }}/metrics-*.parquet
-#    - name: Upload telemetry traces
-#      uses: actions/upload-artifact@v4
-#      if: always()
-#      continue-on-error: true
-#      with:
-#        name: build-telemetry-traces
-#        path: /tmp/tests-parquet/${{ testset }}/traces-*.parquet
+    - name: Run test set ${{ matrix.testset }}
+      env:
+        OTEL_SERVICE_NAME: maven-test-service
+        OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+        OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:${{ matrix.telemetryport }}
+      run: cd tests/${{ matrix.testset }} && mvn -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar test --file pom.xml
+    - name: Upload telemetry logs
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: build-telemetry-logs-${{ matrix.telemetryoutput }}
+        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
+    - name: Upload telemetry metrics
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: build-telemetry-metrics-${{ matrix.telemetryoutput }}
+        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/metrics-*.parquet
+    - name: Upload telemetry traces
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: build-telemetry-traces-${{ matrix.telemetryoutput }}
+        path: /tmp/tests-parquet/${{ testset }}/traces-*.parquet
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 
 #    - name: Publish Test Report
