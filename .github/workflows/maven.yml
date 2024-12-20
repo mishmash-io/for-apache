@@ -48,6 +48,7 @@ jobs:
     needs: compile
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         testset: ['coordination/base', 'storage/block/base']
         include:
