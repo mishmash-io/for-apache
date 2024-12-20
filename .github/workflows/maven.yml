@@ -101,20 +101,20 @@ jobs:
       with:
         name: build-telemetry-logs-${{ matrix.telemetryoutput }}
         path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
-#    - name: Upload telemetry metrics
-#      uses: actions/upload-artifact@v4
-#      if: always()
-#      continue-on-error: true
-#      with:
-#        name: build-telemetry-metrics-${{ matrix.telemetryoutput }}
-#        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/metrics-*.parquet
-#    - name: Upload telemetry traces
-#      uses: actions/upload-artifact@v4
-#      if: always()
-#      continue-on-error: true
-#      with:
-#        name: build-telemetry-traces-${{ matrix.telemetryoutput }}
-#        path: /tmp/tests-parquet/${{ testset }}/traces-*.parquet
+    - name: Upload telemetry metrics
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: build-telemetry-metrics-${{ matrix.telemetryoutput }}
+        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/metrics-*.parquet
+    - name: Upload telemetry traces
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: build-telemetry-traces-${{ matrix.telemetryoutput }}
+        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/traces-*.parquet
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 
 #    - name: Publish Test Report
