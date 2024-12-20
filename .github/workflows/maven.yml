@@ -94,13 +94,13 @@ jobs:
         OTEL_EXPORTER_OTLP_PROTOCOL: grpc
         OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:${{ matrix.telemetryport }}
       run: cd tests/${{ matrix.testset }} && mvn -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar test --file pom.xml
-#    - name: Upload telemetry logs
-#      uses: actions/upload-artifact@v4
-#      if: always()
-#      continue-on-error: true
-#      with:
-#        name: build-telemetry-logs-${{ matrix.telemetryoutput }}
-#        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
+    - name: Upload telemetry logs
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: build-telemetry-logs-${{ matrix.telemetryoutput }}
+        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
 #    - name: Upload telemetry metrics
 #      uses: actions/upload-artifact@v4
 #      if: always()
