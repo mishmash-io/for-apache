@@ -35,6 +35,7 @@ jobs:
       run: mvn -DskipTests install --file pom.xml
     - name: Cache build artifacts
       uses: actions/cache/save@v4
+      id: buildcache
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -43,12 +44,12 @@ jobs:
       continue-on-error: true
 
   test:
-#    needs: compile
+    needs: compile
     runs-on: ubuntu-latest
     strategy:
       matrix:
         testset: ['coordination/base/', 'storage/block/base']
-    name: Testing ${{ testset }}
+    name: Testing ${{ join(matrix.*, ' - ') }}
 #
 #    services:
 #      otel-to-parquet:
@@ -66,13 +67,16 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-#    - name: Download latest OpenTelemetry java agent
-#      run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
-#    - name: Cache build artifacts
-#      uses: actions/cache@v3
-#      with:
-#        path: ~/.m2/repository
-#        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '~/.m2/repository/.cache/**/mishmash_io.patch*') }}
+    - name: Download latest OpenTelemetry java agent
+      run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+    - name: Restore cached build artifacts
+      uses: actions/cache/restore@v4
+      id: buildcache
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+    - name: Run ${{ matrix.testset }}
+      run: echo ${{ matrix.testset }}
 #        restore-keys: |
 #          ${{ runner.os }}-maven-
 #    - name: Run test set ${{ testset }}
