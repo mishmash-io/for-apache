@@ -34,23 +34,21 @@ jobs:
     - name: Build with Maven
       run: mvn -DskipTests install --file pom.xml
     - name: Cache build artifacts
-      uses: actions/cache@v3
+      uses: actions/cache/save@v4
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}-${{ hashFiles('~/.m2/repository/.cache/**/mishmash_io.patch*') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
       continue-on-error: true
 
   test:
-    needs: compile
+#    needs: compile
     runs-on: ubuntu-latest
     strategy:
       matrix:
         testset: ['coordination/base/', 'storage/block/base']
-#    name: Testing ${{ testset }}
+    name: Testing ${{ testset }}
 #
 #    services:
 #      otel-to-parquet:
