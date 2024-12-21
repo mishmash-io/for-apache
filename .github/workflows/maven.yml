@@ -49,21 +49,66 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 3
       matrix:
-        testset: ['coordination/base', 'storage/block/base']
+        testset:
+          - 'coordination/base'
+          - 'storage/block/base'
+          - 'storage/block/balancer'
+          - 'storage/block/blockmanagement'
+          - 'storage/block/datanode'
+          - 'storage/block/dfs-base'
+          - 'storage/block/fs-base'
+          - 'storage/block/misc'
         include:
           - telemetryport: 4317
             testset: 'coordination/base'
           - telemetryport: 4319
             testset: 'storage/block/base'
+          - telemetryport: 4321
+            testset: 'storage/block/balancer'
+          - telemetryport: 4323
+            testset: 'storage/block/blockmanagement'
+          - telemetryport: 4325
+            testset: 'storage/block/datanode'
+          - telemetryport: 4327
+            testset: 'storage/block/dfs-base'
+          - telemetryport: 4329
+            testset: 'storage/block/fs-base'
+          - telemetryport: 4331
+            testset: 'storage/block/misc'
           - telemetryoutput: 'coordination-base'
             testset: 'coordination/base'
           - telemetryoutput: 'storage-block-base'
             testset: 'storage/block/base'
+          - telemetryoutput: 'storage-block-balancer'
+            testset: 'storage/block/balancer'
+          - telemetryoutput: 'storage-block-blockmanagement'
+            testset: 'storage/block/blockmanagement'
+          - telemetryoutput: 'storage-block-datanode'
+            testset: 'storage/block/datanode'
+          - telemetryoutput: 'storage-block-dfs-base'
+            testset: 'storage/block/dfs-base'
+          - telemetryoutput: 'storage-block-fs-base'
+            testset: 'storage/block/fs-base'
+          - telemetryoutput: 'storage-block-misc'
+            testset: 'storage/block/misc'
           - testname: 'Base distributed coordination tests'
             testset: 'coordination/base'
           - testname: 'Base distributed block storage tests'
             testset: 'storage/block/base'
+          - testname: 'Distributed block storage balancer tests'
+            testset: 'storage/block/balancer'
+          - testname: 'Distributed block storage management tests'
+            testset: 'storage/block/blockmanagement'
+          - testname: 'Distributed block storage datanode tests'
+            testset: 'storage/block/datanode'
+          - testname: 'Base distributed block dfs storage tests'
+            testset: 'storage/block/dfs-base'
+          - testname: 'Base distributed block fs storage tests'
+            testset: 'storage/block/fs-base'
+          - testname: 'Misc distributed block storage tests'
+            testset: 'storage/block/misc'
     name: Testing, ${{ join(matrix.*, ' - ') }}
 
     services:

@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.mishmash.test.stacks</groupId>
-  <artifactId>test-storage-blocks-base</artifactId>
+  <artifactId>test-storage-blocks-balancer</artifactId>
   <version>1.0.0</version>
 
   <name>Modifications and extensions of Apache Hadoop, by mishmash io</name>
@@ -456,10 +456,9 @@
             </configurationParameters>
           </properties>
           <workingDirectory>${project.build.directory}/workdir/hadoop-common-project/hadoop-common</workingDirectory>
-          <excludes>
-            **/hadoop/fs/**,
-            **/hadoop/hdfs/**
-          </excludes>
+          <includes>
+            **/hadoop/hdfs/server/balancer/**
+          </includes>
         </configuration>
       </plugin>
     </plugins>

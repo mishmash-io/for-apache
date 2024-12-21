@@ -1163,6 +1163,22 @@
               </target>
             </configuration>
           </execution>
+          <!-- package and attach a jar of all sources with patches applied. Do it before tests are run as they run inside the same dir (and create files in it) -->
+          <execution>
+            <id>package-patched-sources</id>
+            <phase>process-test-classes</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <jar destfile="${project.build.directory}/${project.artifactId}-${project.version}-patched-sources.jar"
+                      basedir="${project.build.directory}/hadoop-rel-release-${hadoop.stable.version}"
+                      includes="**"/>
+                <attachartifact file="${project.build.directory}/${project.artifactId}-${project.version}-patched-sources.jar" classifier="patched-sources" type="jar"/>
+              </target>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <!-- Add the patched sources for compilation -->
