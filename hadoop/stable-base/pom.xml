@@ -217,18 +217,7 @@
       </extension>
     </extensions>
 
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
-
     <plugins>
-      <plugin>
-        <groupId>io.github.git-commit-id</groupId>
-        <artifactId>git-commit-id-maven-plugin</artifactId>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -367,7 +356,12 @@
                     **/hadoop/util/hash/*.java,
                   </includes>
                   <excludes>
-
+                    **/hadoop/fs/CacheFlag.java,
+                    **/hadoop/fs/Hdfs.java,
+                    **/hadoop/fs/HdfsBlockLocation.java,
+                    **/hadoop/fs/SWebHdfs.java,
+                    **/hadoop/fs/WebHdfs.java,
+                    **/hadoop/fs/package.html
                   </excludes>
                 </artifactItem>
               </artifactItems>

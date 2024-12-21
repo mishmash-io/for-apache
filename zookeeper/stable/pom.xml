@@ -82,7 +82,7 @@
   </developers>
 
   <properties>
-    <logback-version>1.5.12</logback-version>
+    <logback-version>1.5.13</logback-version>
     <audience-annotations.version>0.15.0</audience-annotations.version>
     <jmockit.version>1.49</jmockit.version>
     <jline.version>2.14.6</jline.version>
@@ -555,6 +555,28 @@
             <zookeeper.DigestAuthenticationProvider.superDigest>super:D/InIHSb7yEEbrWz8b9l71RjZJU=</zookeeper.DigestAuthenticationProvider.superDigest>
           </systemPropertyVariables>
         </configuration>
+      </plugin>
+      <!-- package and attach a jar of all sources with patches applied. Do it before tests are run as they run inside the same dir (and create files in it) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>package-patched-sources</id>
+            <phase>process-test-classes</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <jar destfile="${project.build.directory}/${project.artifactId}-${project.version}-patched-sources.jar"
+                      basedir="${project.build.directory}/zookeeper-release-${zookeeper.stable.version}"
+                      includes="**"/>
+                <attachartifact file="${project.build.directory}/${project.artifactId}-${project.version}-patched-sources.jar" classifier="patched-sources" type="jar"/>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
