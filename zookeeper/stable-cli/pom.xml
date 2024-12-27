@@ -151,7 +151,7 @@
                   </includes>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+              <outputDirectory>${project.build.directory}/sources/java</outputDirectory>
             </configuration>
           </execution>
         </executions>
@@ -168,11 +168,23 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/generated-sources/java</source>
+                <source>${project.build.directory}/sources/java</source>
               </sources>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
