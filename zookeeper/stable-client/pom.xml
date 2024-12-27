@@ -108,6 +108,16 @@
       <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-handler</artifactId>
     </dependency>
@@ -180,7 +190,7 @@
                   </excludes>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+              <outputDirectory>${project.build.directory}/sources/java</outputDirectory>
             </configuration>
           </execution>
         </executions>
@@ -212,7 +222,7 @@
                   </includes>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.build.directory}/generated-test-sources/java</outputDirectory>
+              <outputDirectory>${project.build.directory}/test-sources/java</outputDirectory>
             </configuration>
           </execution-->
         </executions>
@@ -229,7 +239,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/generated-sources/java</source>
+                <source>${project.build.directory}/sources/java</source>
               </sources>
             </configuration>
           </execution>
@@ -247,7 +257,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/generated-test-sources/java</source>
+                <source>${project.build.directory}/test-sources/java</source>
               </sources>
             </configuration>
           </execution>
