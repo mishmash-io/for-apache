@@ -18,8 +18,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.mishmash.apache</groupId>
-    <artifactId>mmio-for-apache-parent</artifactId>
+    <groupId>io.mishmash.stacks</groupId>
+    <artifactId>distributed-computing-stacks</artifactId>
     <version>0.0.1</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>

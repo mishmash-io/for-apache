@@ -18,8 +18,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.mishmash.apache</groupId>
-    <artifactId>mmio-for-apache-parent</artifactId>
+    <groupId>io.mishmash.stacks</groupId>
+    <artifactId>distributed-computing-stacks</artifactId>
     <version>0.0.1</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
@@ -213,16 +213,6 @@
         <groupId>org.apache.httpcomponents.client5</groupId>
         <artifactId>httpclient5</artifactId>
         <version>${httpcomponents.client.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.nimbusds</groupId>
-        <artifactId>nimbus-jose-jwt</artifactId>
-        <version>9.47</version>
-      </dependency>
-      <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.11.0</version>
       </dependency>
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
