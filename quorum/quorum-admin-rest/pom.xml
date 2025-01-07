@@ -29,16 +29,16 @@
   <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>mishmash io pack of Apache ZooKeeper Jetty admin server</name>
+  <name>Quorum server admin REST API</name>
   <description>
-    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+    An admin REST API for remote Quorum server ops. Deploy next to each Quorum server when 
+    remote admin access is needed.
 
-    This package contains a minimal Apache ZooKeeper Jetty admin server with modifications by 
-    mishmash io. For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and GitHub.
-
-    Use this package to extend your minimal ZooKeeper server deployment with a Jetty admin server.
+    Source code is originally developed by the Apache ZooKeeper project and then 
+    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
+    visit our website and GitHub.
   </description>
-  <url>https://mishmash.io/open_source/apache_big_data</url>
+  <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
   <licenses>
     <license>

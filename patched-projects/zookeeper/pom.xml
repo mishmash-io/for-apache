@@ -29,17 +29,15 @@
   <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>Modifications and extensions of Apache ZooKeeper, by mishmash io</name>
+  <name>mishmash io patches of Apache ZooKeeper</name>
   <description>
-    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+    This package contains Apache ZooKeeper code as modified by mishmash io. For more info 
+    on the specific modifications by mishmash io visit our website and GitHub.
 
-    This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
-    specific modifications by mishmash io visit our website and GitHub.
-
-    It is recommended that you don't use this package directly, but rather - one of the 
-    minimal client or server packages.
+    It is recommended that you don't use this package directly, but rather - one or more of the 
+    minimal quorum stacks packages.
   </description>
-  <url>https://mishmash.io/open_source/apache_big_data</url>
+  <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
   <licenses>
     <license>
