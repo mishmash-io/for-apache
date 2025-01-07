@@ -21,13 +21,15 @@
   <version>0.0.1</version>
   <packaging>pom</packaging>
 
-  <name>Modifications and extensions of ASF projects, by mishmash io</name>
+  <name>Open Source Stacks for Distributed Computing</name>
   <description>
-    Contains modifications and extensions of Apache Software Foundation projects, developed by mishmash io.
+    Build distributed systems with software stacks for high-availability clustering,
+    partitioned resource management, distributed transaction handling, data-local compute and more.
 
-    Includes security updates, reduced-dependecy packages and other. Visit our website and github for more.
+    The stacks source code originates from other open source projects and includes 
+    modifications by mishmash io. Visit our website and GitHub for more.
   </description>
-  <url>https://mishmash.io/open_source/apache_big_data</url>
+  <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
   <licenses>
     <license>
@@ -121,7 +123,7 @@
     <module>quorum/quorum-controller</module>
     <module>quorum/quorum-admin-rest</module>
     <module>quorum/quorum-cli</module>
-    
+
     <module>data/blocks-base</module>
     <module>data/blocks-high-availability</module>
     <module>data/blocks-cli</module>

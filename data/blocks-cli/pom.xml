@@ -29,16 +29,15 @@
   <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>mishmash io pack of a minimal Apache ZooKeeper client</name>
+  <name>Command-line utilities for Data Blocks servers</name>
   <description>
-    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+    Data Blocks server operations utilities. Deploy when command-line access is needed.
 
-    This package contains a minimal Apache ZooKeeper client with modifications by 
-    mishmash io. For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and GitHub.
-
-    Use this package when you only need a ZooKeeper client and minimum extra dependencies.
+    Source code is originally developed by the Apache Hadoop project and then 
+    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
+    visit our website and GitHub.
   </description>
-  <url>https://mishmash.io/open_source/apache_big_data</url>
+  <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
   <licenses>
     <license>

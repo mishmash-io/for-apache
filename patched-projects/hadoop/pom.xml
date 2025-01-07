@@ -28,17 +28,15 @@
   <artifactId>hadoop-patches</artifactId>
   <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
 
-  <name>Modifications and extensions of Apache Hadoop, by mishmash io</name>
+  <name>mishmash io patches of Apache Hadoop</name>
   <description>
-    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+    This package contains Apache Hadoop code as modified by mishmash io. For more info on 
+    the specific modifications by mishmash io visit our website and GitHub.
 
-    This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
-    specific modifications visit our website and github.
-
-    It is recommended that you don't use this package directly, but rather - one of the 
-    dependency-reduced client or server packages.
+    It is recommended that you don't use this package directly, but rather - one or more of the 
+    minimal data or compute stacks.
   </description>
-  <url>https://mishmash.io/open_source/apache_big_data</url>
+  <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
   <licenses>
     <license>

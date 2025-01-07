@@ -29,16 +29,15 @@
   <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>mishmash io pack of Apache ZooKeeper command-line tools</name>
+  <name>Command-line utilities for Quorum servers</name>
   <description>
-    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+    Quorum server operations utilities. Deploy when command-line access is needed.
 
-    This package contains the Apache ZooKeeper command-line tools with modifications by 
-    mishmash io. For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and GitHub.
-
-    Use it when you need the ZooKeeper command-line client or server tools.
+    Source code is originally developed by the Apache ZooKeeper project and then 
+    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
+    visit our website and GitHub.
   </description>
-  <url>https://mishmash.io/open_source/apache_big_data</url>
+  <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
   <licenses>
     <license>
