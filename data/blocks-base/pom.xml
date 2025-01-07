@@ -24,8 +24,8 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <groupId>io.mishmash.apache.hadoop</groupId>
-  <artifactId>stable-base</artifactId>
+  <groupId>io.mishmash.stacks.data</groupId>
+  <artifactId>blocks-base</artifactId>
   <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
@@ -83,8 +83,8 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.mishmash.apache.hadoop</groupId>
-        <artifactId>stable</artifactId>
+        <groupId>io.mishmash.stacks.patches</groupId>
+        <artifactId>hadoop-patches</artifactId>
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -231,8 +231,8 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>io.mishmash.apache.hadoop</groupId>
-                  <artifactId>stable</artifactId>
+                  <groupId>io.mishmash.stacks.patches</groupId>
+                  <artifactId>hadoop-patches</artifactId>
                   <version>${project.version}</version>
                   <type>jar</type>
                   <classifier>sources</classifier>

@@ -24,19 +24,19 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <groupId>io.mishmash.apache.hadoop</groupId>
-  <artifactId>stable-base-ha</artifactId>
-  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
+  <groupId>io.mishmash.stacks.quorum</groupId>
+  <artifactId>quorum-admin-rest</artifactId>
+  <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
-  <name>mishmash io pack of a minimal Apache ZooKeeper client</name>
+  <name>mishmash io pack of Apache ZooKeeper Jetty admin server</name>
   <description>
     Apache ZooKeeper is a service for coordinating processes of distributed applications.
 
-    This package contains a minimal Apache ZooKeeper client with modifications by 
+    This package contains a minimal Apache ZooKeeper Jetty admin server with modifications by 
     mishmash io. For more info on the specific modifications to Apache ZooKeeper done by mishmash io - visit our website and GitHub.
 
-    Use this package when you only need a ZooKeeper client and minimum extra dependencies.
+    Use this package to extend your minimal ZooKeeper server deployment with a Jetty admin server.
   </description>
   <url>https://mishmash.io/open_source/apache_big_data</url>
 
@@ -83,8 +83,8 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.mishmash.apache.hadoop</groupId>
-        <artifactId>stable</artifactId>
+        <groupId>io.mishmash.stacks.patches</groupId>
+        <artifactId>zookeeper-patches</artifactId>
         <version>${project.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -94,25 +94,27 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.mishmash.apache.hadoop</groupId>
-      <artifactId>stable-base</artifactId>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.quorum</groupId>
+      <artifactId>quorum-server</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-client</artifactId>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.curator</groupId>
-      <artifactId>curator-framework</artifactId>
+      <groupId>org.eclipse.jetty.ee10</groupId>
+      <artifactId>jetty-ee10-servlet</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.curator</groupId>
-      <artifactId>curator-recipes</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.github.mwiede</groupId>
-      <artifactId>jsch</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
     </dependency>
   </dependencies>
 
@@ -131,22 +133,18 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>io.mishmash.apache.hadoop</groupId>
-                  <artifactId>stable</artifactId>
+                  <groupId>io.mishmash.stacks.patches</groupId>
+                  <artifactId>zookeeper-patches</artifactId>
                   <version>${project.version}</version>
                   <type>jar</type>
                   <classifier>sources</classifier>
                   <overWrite>false</overWrite>
                   <includes>
-                    **/hadoop/ha/**,
-                    **/hadoop/util/curator/*.java,
+                    **/zookeeper/server/admin/jetty/**
                   </includes>
-                  <excludes>
-                    **/hadoop/ha/HAAdmin.java,
-                  </excludes>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+              <outputDirectory>${project.build.directory}/sources/java</outputDirectory>
             </configuration>
           </execution>
         </executions>
@@ -156,32 +154,14 @@
         <artifactId>build-helper-maven-plugin</artifactId>
         <executions>
           <execution>
-            <id>add-hadoop-sources</id>
+            <id>add-zookeeper-sources</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>add-source</goal>
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/generated-sources/java</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>add-hadoop-test-sources</id>
-            <phase>generate-test-sources</phase>
-            <goals>
-              <goal>add-test-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.build.directory}/generated-test-sources/java</source>
+                <source>${project.build.directory}/sources/java</source>
               </sources>
             </configuration>
           </execution>

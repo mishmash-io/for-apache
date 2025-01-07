@@ -24,8 +24,8 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <groupId>io.mishmash.apache.zookeeper</groupId>
-  <artifactId>mmio-zookeeper-stable</artifactId>
+  <groupId>io.mishmash.stacks.patches</groupId>
+  <artifactId>zookeeper-patches</artifactId>
   <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>jar</packaging>
 
@@ -157,8 +157,7 @@
         <groupId>org.burningwave</groupId>
         <artifactId>tools</artifactId>
         <version>${burningwave.mockdns.version}</version>
-      </dependency>
-      
+      </dependency>      
     </dependencies>
   </dependencyManagement>
   

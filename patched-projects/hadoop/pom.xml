@@ -24,8 +24,8 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <groupId>io.mishmash.apache.hadoop</groupId>
-  <artifactId>stable</artifactId>
+  <groupId>io.mishmash.stacks.patches</groupId>
+  <artifactId>hadoop-patches</artifactId>
   <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
 
   <name>Modifications and extensions of Apache Hadoop, by mishmash io</name>
@@ -222,8 +222,8 @@
 
       <!-- Updated to minimal ZooKeeper -->
       <dependency>
-        <groupId>io.mishmash.apache.zookeeper</groupId>
-        <artifactId>mmio-zookeeper-stable-client</artifactId>
+        <groupId>io.mishmash.stacks.quorum</groupId>
+        <artifactId>quorum-client</artifactId>
         <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
       </dependency>
       <dependency>
@@ -364,8 +364,8 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>io.mishmash.apache.zookeeper</groupId>
-        <artifactId>mmio-zookeeper-stable</artifactId>
+        <groupId>io.mishmash.stacks.patches</groupId>
+        <artifactId>zookeeper-patches</artifactId>
         <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
         <scope>test</scope>
         <exclusions>
@@ -380,11 +380,11 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>io.mishmash.apache.zookeeper</groupId>
-        <artifactId>mmio-zookeeper-stable</artifactId>
+        <groupId>io.mishmash.stacks.patches</groupId>
+        <artifactId>zookeeper-patches</artifactId>
         <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
-        <classifier>tests</classifier>
         <scope>test</scope>
+        <classifier>tests</classifier>
         <exclusions>
           <exclusion>
             <groupId>ch.qos.logback</groupId>
@@ -747,8 +747,8 @@
 
     <!-- Updated to mishmash io minimal ZooKeeper -->
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-client</artifactId>
+      <groupId>io.mishmash.stacks.quorum</groupId>
+      <artifactId>quorum-client</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.curator</groupId>
@@ -876,13 +876,13 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable</artifactId>
+      <groupId>io.mishmash.stacks.patches</groupId>
+      <artifactId>zookeeper-patches</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable</artifactId>
+      <groupId>io.mishmash.stacks.patches</groupId>
+      <artifactId>zookeeper-patches</artifactId>
       <classifier>tests</classifier>
       <scope>test</scope>
     </dependency>

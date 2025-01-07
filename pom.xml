@@ -112,18 +112,22 @@
 
   <modules>
     <module>misc/openid</module>
-    <module>zookeeper/stable</module>
-    <module>zookeeper/stable-client</module>
-    <module>zookeeper/stable-server</module>
-    <module>zookeeper/stable-controller</module>
-    <module>zookeeper/stable-admin-jetty</module>
-    <module>zookeeper/stable-cli</module>
-    <module>hadoop/stable</module>
-    <module>hadoop/stable-base</module>
-    <module>hadoop/stable-base-ha</module>
-    <module>hadoop/stable-base-cli</module>
-    <module>hadoop/stable-base-http</module>
-    <module>hadoop/stable-fs-sftp</module>
+
+    <module>patched-projects/zookeeper</module>
+    <module>patched-projects/hadoop</module>
+
+    <module>quorum/quorum-client</module>
+    <module>quorum/quorum-server</module>
+    <module>quorum/quorum-controller</module>
+    <module>quorum/quorum-admin-rest</module>
+    <module>quorum/quorum-cli</module>
+    
+    <module>data/blocks-base</module>
+    <module>data/blocks-high-availability</module>
+    <module>data/blocks-cli</module>
+    <module>data/blocks-http</module>
+
+    <module>fs/fs-sftp</module>
   </modules>
 
   <dependencyManagement>

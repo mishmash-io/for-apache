@@ -92,15 +92,15 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.mishmash.apache</groupId>
-        <artifactId>mmio-for-apache-parent</artifactId>
+        <groupId>io.mishmash.stacks</groupId>
+        <artifactId>distributed-computing-stacks</artifactId>
         <version>${top.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>io.mishmash.apache.hadoop</groupId>
-        <artifactId>stable</artifactId>
+        <groupId>io.mishmash.stacks.patches</groupId>
+        <artifactId>hadoop-patches</artifactId>
         <version>${hadoop.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -133,8 +133,8 @@
 
     <!-- Updated to mishmash io minimal ZooKeeper -->
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable-client</artifactId>
+      <groupId>io.mishmash.stacks.quorum</groupId>
+      <artifactId>quorum-client</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.curator</groupId>
@@ -194,13 +194,13 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable</artifactId>
+      <groupId>io.mishmash.stacks.patches</groupId>
+      <artifactId>zookeeper-patches</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.apache.zookeeper</groupId>
-      <artifactId>mmio-zookeeper-stable</artifactId>
+      <groupId>io.mishmash.stacks.patches</groupId>
+      <artifactId>zookeeper-patches</artifactId>
       <classifier>tests</classifier>
       <scope>test</scope>
     </dependency>
@@ -327,8 +327,8 @@
     </dependency>
 
     <dependency>
-      <groupId>io.mishmash.apache.hadoop</groupId>
-      <artifactId>stable</artifactId>
+      <groupId>io.mishmash.stacks.patches</groupId>
+      <artifactId>hadoop-patches</artifactId>
       <version>${hadoop.version}</version>
       <scope>test</scope>    
     </dependency>
@@ -350,8 +350,8 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>io.mishmash.apache.hadoop</groupId>
-                  <artifactId>stable</artifactId>
+                  <groupId>io.mishmash.stacks.patches</groupId>
+                  <artifactId>hadoop-patches</artifactId>
                   <version>${hadoop.version}</version>
                   <classifier>patched-sources</classifier>
                   <overWrite>true</overWrite>
@@ -369,8 +369,8 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>io.mishmash.apache.hadoop</groupId>
-                  <artifactId>stable</artifactId>
+                  <groupId>io.mishmash.stacks.patches</groupId>
+                  <artifactId>hadoop-patches</artifactId>
                   <version>${hadoop.version}</version>
                   <classifier>tests</classifier>
                   <overWrite>true</overWrite>
