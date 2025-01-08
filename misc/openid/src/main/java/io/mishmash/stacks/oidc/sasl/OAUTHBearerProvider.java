@@ -35,5 +35,11 @@ public class OAUTHBearerProvider extends Provider {
                 OAUTHBearerClientFactory.class.getName());
         put(SaslServerFactory.class.getSimpleName() + "." + MECHANISM,
                 OAUTHBearerServerFactory.class.getName());        
+        put(SaslClientFactory.class.getSimpleName()
+                + "." + MECHANISM + "-DH4096",
+                OAUTHBearerClientFactory.class.getName());
+        put(SaslServerFactory.class.getSimpleName()
+                + "." + MECHANISM + "-DH4096",
+                OAUTHBearerServerFactory.class.getName());        
     }
 }
