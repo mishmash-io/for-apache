@@ -1,29 +1,28 @@
-# Open Source Stacks for Distributed Computing, rebuilt by mishmash.io
+# Open Source Stacks for Distributed Computing
 
-**This repository contains mishmash.io builds of open source projects and frameworks that are popular in distributed computing.**
+#### In this repository you'll find ***derivative works*** of other open source projects that are popular for building distributed apps and clusters.
 
-Projects and frameworks are originally developed by other parties (find the list below) and then customized by [mishmash.io](https://mishmash.io).
+The code contained here is originally developed by other parties (find the list below) and then customized by [mishmash.io](https://mishmash.io).
 
 At mishmash.io, we use a lot of open source - in our [distributed database](https://mishmash.io/docs/database) or other software that we publish (such as our [open source analytics for OpenTelemetry](https://github.com/mishmash-io/opentelemetry-server-embedded)). Sometimes we customize the original project's code to better suit our needs and we're publishing our patches here.
 
 In more technical terms - this repository contains a build process that:
 1. Fetches the original code of a number of open source projects
-2. Applies our changes
+2. Applies our patches
 3. Rebuilds
 4. Retests
-5. Packages *smaller, per-feature* components that you can **stack** together on an *as-needed basis.*
+5. Packages ***smaller, per-feature*** components that you can ***stack*** together on an ***as-needed basis.***
 
 You can also find ready-made **stacks** for common use case scenarios.
 
 > [!IMPORTANT]
 > This repository is a **Work in progress!**
 >
-> A number of **stacks** we've accumulated internally are not published or not
-> documented fully yet.
+> A number of **stacks** we've accumulated internally are not published or not documented fully yet.
 >
 > Use the `watch` button above to get updates on progress.
 
-In this README you will find:
+#### In this README you will find:
 - **The motivation:** [why do we patch and rebuild?](#why-do-we-rebuild-other-open-source-projects)
 - **The goals and principles:** [what are we changing?](#summary-of-whats-modified)
 - **The rules we follow:**
