@@ -17,7 +17,6 @@
 
 package io.mishmash.stacks.oidc.sasl;
 
-import java.security.AccessController;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,8 +48,7 @@ public class OAUTHBearerServerFactory implements SaslServerFactory {
                     + " server name: " + serverName
                     + " props: " + props);
 
-        // FIXME: update for Java 21
-        Subject subject = Subject.getSubject(AccessController.getContext());
+        Subject subject = Subject.current();
 
         if (subject == null) {
             throw new SaslException(
@@ -67,11 +65,30 @@ public class OAUTHBearerServerFactory implements SaslServerFactory {
                     "Could not find an OIDC client");
         }
 
-        return new OAUTHBearerServer(client, serverName);
+        if (OAUTHBearerProvider.MECHANISM.equals(mechanism)) {
+            return new OAUTHBearerServer(client, serverName);
+        } else if (mechanism.startsWith(
+                OAUTHBearerProvider.MECHANISM + "-DH")) {
+            int keyLen = Integer.valueOf(
+                    mechanism.substring(
+                            (OAUTHBearerProvider.MECHANISM + "-DH")
+                                .length()));
+
+            switch (keyLen) {
+            case 4096:
+                return new OAUTHBearerServerDH(client, serverName, keyLen);
+            default:
+                throw new SaslException("Unsupported key length: " + keyLen);
+            }
+        } else {
+            throw new SaslException("Unsupported mechanism " + mechanism);
+        }
     }
 
     @Override
     public String[] getMechanismNames(final Map<String, ?> props) {
-        return new String[] {OAUTHBearerProvider.MECHANISM};
+        return new String[] {
+                OAUTHBearerProvider.MECHANISM,
+                OAUTHBearerProvider.MECHANISM + "-DH4096"};
     }
 }

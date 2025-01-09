@@ -37,6 +37,7 @@ import io.mishmash.stacks.oidc.util.URIUtils;
 public class OAUTHBearerServer implements SaslServer {
 
     private boolean isComplete = false;
+    private boolean checksFailed = false;
     private OIDCClientPrincipal oidc;
     private String name;
     private SignedJWT jwt;
@@ -56,34 +57,50 @@ public class OAUTHBearerServer implements SaslServer {
     @Override
     public byte[] evaluateResponse(final byte[] response)
             throws SaslException {
-        try {
-            HdrsIterator it = new HdrsIterator(response);
+        if (checksFailed || response.length == 1 && response[0] == 0x01) {
+            throw new SaslException(
+                    getMechanismName() + " SASL authentication failed");
+        }
 
-            while (it.hasNext()) {
-                ByteBuffer hdr = it.next();
-                String hdrStr = StandardCharsets.UTF_8.decode(hdr).toString();
+        HdrsIterator it = new HdrsIterator(response);
+        String jwtStr = null;
 
-                if (hdrStr.startsWith("auth=Bearer ")) {
-                    SignedJWT receivedJWT = SignedJWT.parse(
-                            hdrStr.substring("auth=Bearer ".length()));
+        while (it.hasNext()) {
+            ByteBuffer hdr = it.next();
+            String hdrStr = StandardCharsets.UTF_8.decode(hdr).toString();
 
-                    if (!oidc.verify(receivedJWT)) {
-                        throw new SaslException(
-                                "Received an unauthorized JWT token");
-                    } else {
-                        isComplete = true;
-                        jwt = receivedJWT;
-                    }
-                } else if (hdrStr.startsWith("host=")) {
-                    // ignore, will deduce from jwt token
-                } else {
-                    // ignore, will deduce from jwt token
-                }
+            if (hdrStr.startsWith("auth=Bearer ")) {
+                jwtStr = hdrStr.substring("auth=Bearer ".length());
+            } else if (hdrStr.startsWith("host=")) {
+                // ignore, will deduce from jwt token
+            } else {
+                // ignore, will deduce from jwt token
             }
+        }
+
+        if (jwtStr == null || jwtStr.isBlank()) {
+            checksFailed = true;
+        }
+
+        SignedJWT receivedJWT = null;
+
+        try {
+            receivedJWT = checksFailed
+                    ? null
+                    : SignedJWT.parse(jwtStr);
+        } catch (ParseException e) {
+            checksFailed = true;
+        }
+
+        checksFailed = checksFailed || !oidc.verify(receivedJWT);
+        if (checksFailed) {
+            return "{\"status\":\"invalid_token\"}"
+                    .getBytes(StandardCharsets.UTF_8);
+        } else {
+            isComplete = true;
+            jwt = receivedJWT;
 
             return null;
-        } catch (ParseException p) {
-            throw new SaslException("Received invalid JWT from client");
         }
     }
 
@@ -117,7 +134,9 @@ public class OAUTHBearerServer implements SaslServer {
             final byte[] incoming,
             final int offset,
             final int len) throws SaslException {
-        throw new IllegalStateException("Sasl integrity and privacy are not supported");
+        throw new SaslException(
+                getMechanismName()
+                    + " SASL integrity and privacy are not supported");
     }
 
     @Override
@@ -125,7 +144,9 @@ public class OAUTHBearerServer implements SaslServer {
             final byte[] outgoing,
             final int offset,
             final int len) throws SaslException {
-        throw new IllegalStateException("Sasl integrity and privacy are not supported");
+        throw new SaslException(
+                getMechanismName()
+                    + " SASL integrity and privacy are not supported");
     }
 
     @Override

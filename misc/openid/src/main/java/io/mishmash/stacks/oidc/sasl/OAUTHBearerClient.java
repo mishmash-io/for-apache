@@ -34,6 +34,7 @@ import io.mishmash.stacks.oidc.login.OIDCClientPrincipal;
 public class OAUTHBearerClient implements SaslClient {
 
     private boolean isComplete = false;
+    private boolean checksFailed = false;
     private OIDCClientPrincipal oidc;
     private String authz;
     private String server;
@@ -60,6 +61,11 @@ public class OAUTHBearerClient implements SaslClient {
     @Override
     public byte[] evaluateChallenge(final byte[] challenge)
             throws SaslException {
+        if (checksFailed || challenge == null) {
+            throw new SaslException(
+                    getMechanismName() + " authentication failed");
+        }
+
         if (challenge.length == 0) {
             // initial response, send ticket
             try {
@@ -74,16 +80,17 @@ public class OAUTHBearerClient implements SaslClient {
                 // write a final delimiter
                 baos.write(0x01);
 
-                // FIXME:
                 isComplete = true;
                 return baos.toByteArray();
             } catch (Exception e) {
                 throw new SaslException(
-                        "Could not send auth info to server", e);
+                        getMechanismName()
+                        + " SASL client failed to send auth info to server", e);
             }
+        } else {
+            // got an error response, should not be reached, but - confirm it
+            return new byte[] {0x01};
         }
-
-        return null;
     }
 
     @Override
@@ -96,7 +103,9 @@ public class OAUTHBearerClient implements SaslClient {
             final byte[] incoming,
             final int offset,
             final int len) throws SaslException {
-        throw new IllegalStateException("Sasl integrity and privacy are not supported");
+        throw new SaslException(
+                getMechanismName()
+                    + " SASL integrity and privacy are not supported");
     }
 
     @Override
@@ -104,7 +113,9 @@ public class OAUTHBearerClient implements SaslClient {
             final byte[] outgoing,
             final int offset,
             final int len) throws SaslException {
-        throw new IllegalStateException("Sasl integrity and privacy are not supported");
+        throw new SaslException(
+                getMechanismName()
+                    + " SASL integrity and privacy are not supported");
     }
 
     @Override
