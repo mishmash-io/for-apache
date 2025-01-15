@@ -19,9 +19,11 @@ package io.mishmash.stacks.oidc.sasl;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.security.AlgorithmParameters;
 import java.security.GeneralSecurityException;
+import java.security.SecureRandom;
+
 import javax.crypto.Cipher;
+import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class DHUtils {
@@ -30,15 +32,17 @@ public class DHUtils {
             final SecretKeySpec key,
             final byte[] response)
                     throws GeneralSecurityException, IOException {
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, key);
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        byte[] iv = new byte[16];
+        SecureRandom r = new SecureRandom();
+        r.nextBytes(iv);
+        GCMParameterSpec pSpec = new GCMParameterSpec(128, iv);
+        cipher.init(Cipher.ENCRYPT_MODE, key, pSpec);
         byte[] encrypted = cipher.doFinal(response);
-        AlgorithmParameters p = cipher.getParameters();
-        byte[] params = cipher.getParameters().getEncoded();
         ByteBuffer resp = ByteBuffer.allocate(
-                Integer.BYTES + params.length + encrypted.length);
-        resp.putInt(params.length);
-        resp.put(params);
+                Integer.BYTES + iv.length + encrypted.length);
+        resp.putInt(iv.length);
+        resp.put(iv);
         resp.put(encrypted);
 
         return resp;
@@ -61,10 +65,9 @@ public class DHUtils {
         byte[] encrypted = new byte[challenge.remaining()];
         challenge.get(encrypted);
 
-        AlgorithmParameters algP = AlgorithmParameters.getInstance("AES");
-        algP.init(params);
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE, key, algP);
+        GCMParameterSpec pSpec = new GCMParameterSpec(128, params);
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        cipher.init(Cipher.DECRYPT_MODE, key, pSpec);
 
         return cipher.doFinal(encrypted);
     }
