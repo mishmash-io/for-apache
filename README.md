@@ -35,8 +35,8 @@ You can also find ready-made **stacks** for common use case scenarios.
   - [As a list, with details on what's modified](#the-patched-projects)
 - **The stacks:**
   - [Listed, with links for details](#the-stacks)
-  - [How to stay current with updates](#versionsing)
   - [Various ways of using a stack](#using-the-stacks)
+  - [How to stay current with updates](#getting-updates)
 - ***The mishmash.io extras:***
   - [Get more out of the stacks](#plugins-extensions-and-extras)
 - **The repository:**
@@ -53,18 +53,18 @@ You can also find ready-made **stacks** for common use case scenarios.
 >   We update code and dependencies to latest versions, especially when new
 >   vulnerabilities are reported and **fixes are published.**
 >   
->   As our products have a number of open source dependencies it is crucial for us to have a ***secure software supply chain.**
+>   As our products have a number of open source dependencies it is crucial for us to have a **secure software supply chain.**
 > - Unfied set of dependencies
 >   
 >   We modify open source projects to use the same set of dependencies (and their versions).
 >   
->   ***Shorter BOMs*** are better.
+>   **Shorter BOMs** are better.
 > - Minimal software packages
 >   
 >   We break down larger open source projects with multiple features into
 >   smaller, 'per-feature' modules that can be used **on an as-needed basis.**
 >   
->   Independent services ***scale better.*** 
+>   Independent services **scale better.** 
 
 For example, our distributed database **mishmash io** uses some core functionalities from [Apache HDFS](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), namely, to manage cold- or hot-storage disks; to replicate large data blocks across zones and clusters; and to provide **zero-copy** data access. Apache HDFS is part of [Apache Hadoop](https://hadoop.apache.org/) and comes with many more features (such as REST-based management APIs or Web GUI apps) and these extra features come with their additional code and dependencies.
 
@@ -163,7 +163,7 @@ The following are original open source projects whose code is not modified, but 
 - ***Data*** management
   
   Conquering the load and performance of data-intensive algorithms needs dividing the input. Store, distribute and process data with these stacks:
-  - ***Load-balance disks*** for scalable IOPS
+  - ***Load-balance disks*** for scalable IOPS, ***tier*** your disks to optimize cost
   - Break large and growing data sets into ***blocks of optimal size*** so that you can evenly split the work across multiple ***compute slots***
   - Process blocks with ***data locality ('zero-copy')***
   - ***Replicate*** blocks throughout your cluster nodes for higher data locality ratio
@@ -171,16 +171,41 @@ The following are original open source projects whose code is not modified, but 
   - Combine with ***columnar file formats*** (such as [Apache ORC](https://orc.apache.org/) and [Apache Arrow](https://arrow.apache.org/))  for even better performance. ***Note:*** some of these file formats feature additional performance gains - like ***bloom filters,*** for example
   
 - Distributed ***transactions***
-
-## Versionsing
-
-(Coming soon)
+  
+  (Coming soon)
 
 ## Using the stacks
+
+For a quick test or playground experiments you can launch individual services or small clusters using our pre-built images and deployment scripts. (Coming soon)
+
+In production environments we recoomend either:
+- Using the stacks programmatically (embed inside your app)
+  
+  Choose the functionality you need and add its dependencies to your project. Then, inside your code, initialize and use the functionality through the provided interfaces. (Docs coming soon)
+
+- Combine functionalities into custom images using our ***builders***
+  
+  Pack stacks that you need to run side-by-side, but independently of your app, into your own images. Then launch tailored clusters. (Docs coming soon)
+
+Depending on your architecture both approaches have their pros and cons.
+
+## Getting updates
 
 (Coming soon)
 
 ## Plugins, extensions and extras
+
+> [!NOTE]
+> These packages are not part of the original open source projects - they're developed by **mishmash.io** to complement and extend the functionality.
+> 
+> Their source code is published in this repository.
+
+- Login modules and SASL mechanisms for popular IAMs.
+  
+  SASL (Simple Authentication and Security Layer) is a framework that allows 
+  networking protocols (such as RPC implementations) to offer configurable authentication and security. That is - you provide a security ***mechanism*** and protocols operate with it.
+  
+  It is often used with Kerberos as a mechanism, but with this package you can plug in OpenID Connect, UMA or the IAMs of major public clouds as ***SASL mechanisms.*** [Go to the IAM SASL provider.](misc/openid/)
 
 ## Modifying the stacks
 
