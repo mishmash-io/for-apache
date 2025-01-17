@@ -68,13 +68,13 @@ You can also find ready-made **stacks** for common use case scenarios.
 
 For example, our distributed database **mishmash io** uses some core functionalities from [Apache HDFS](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), namely, to manage cold- or hot-storage disks; to replicate large data blocks across zones and clusters; and to provide **zero-copy** data access. Apache HDFS is part of [Apache Hadoop](https://hadoop.apache.org/) and comes with many more features (such as REST-based management APIs or Web GUI apps) and these extra features come with their additional code and dependencies.
 
-By splitting HDFS into smaller, feature-based modules we **minimize image sizes** of software we publish and simultaneously **reduce the attack surface.**
+By splitting HDFS into smaller, feature-based modules we **minimize image sizes** of software we publish, limiting dependencies to only those that are actually used. Simultaneously, we also **reduce the attack surface.**
 
-Also, as we officially support all software that we deliver, including its dependencies - we would like to make our lives easier by supporting as little code as possible. Therefore, we modify open source projects to use a single dependency for logging; another single dependency for networking; and so on.
+Furthermore, as we officially support all software that we deliver, including its dependencies - we would like to make our lives easier by supporting as little code as possible. Therefore, we modify open source projects to use a single dependency for logging; another single dependency for networking; and so on.
 
 ## Summary of what's modified
 
-Details about changes we've done to each individual open source package are documented separately, but in general, our modifications fall into a few categories:
+Details about changes we've done to each individual open source package are documented separately (see a list below), but in general, our modifications fall into a few categories:
 
 - Upgrading a dependency to its currently maintained version
   
@@ -86,7 +86,7 @@ Details about changes we've done to each individual open source package are docu
   
   Breaking code apart usually requires ***refactoring*** - moving classes to new `packages` and potentially also changing a method's accessibility (making it `public` for example). For such changes to work we also refactor related test code.
   
-  For example, we split [Apache Zookeeper](https://zookeeper.apache.org/) into `minimal client`, `minimal server`, `cli` and a few other packages. This requires some classes to be moved to different `java packages` to make sure that the `minimal client` bundle does not use code from `minimal server.`
+  For example, we split [Apache ZooKeeper](https://zookeeper.apache.org/) into `minimal client`, `minimal server`, `cli` and a few other packages. This requires some classes to be moved to different `java packages` to make sure that the `minimal client` bundle does not use code from `minimal server.`
 
 For more details keep reading this document and follow the links to each artifact's docs.
 
@@ -179,11 +179,11 @@ The following are original open source projects whose code is not modified, but 
 For a quick test or playground experiments you can launch individual services or small clusters using our pre-built images and deployment scripts. (Coming soon)
 
 In production environments we recoomend either:
-- Using the stacks programmatically (embed inside your app)
+- Using the stacks ***programmatically*** (embed inside your app)
   
   Choose the functionality you need and add its dependencies to your project. Then, inside your code, initialize and use the functionality through the provided interfaces. (Docs coming soon)
 
-- Combine functionalities into custom images using our ***builders***
+- Combine functionalities into ***custom images*** using our ***builders***
   
   Pack stacks that you need to run side-by-side, but independently of your app, into your own images. Then launch tailored clusters. (Docs coming soon)
 
