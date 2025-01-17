@@ -144,20 +144,32 @@ The following are original open source projects whose code is not modified, but 
 
 ***Stacks*** built here typically provide one specific functionality that you might need when developing your distributed and clustered system. Here's a quick overview, with functionalities by category:
 
+- ***Cloud integration*** blocks
+  
+  Together, these blocks form a base layer of commonly used functionality and allow you to integrate your clustered software with ***major public clouds*** (like Azure, AWS and GCP) or ***upgrade to next-generation technologies:***
+  - ***Configure*** (and reconfigure) your system with modern automation tools
+  - Discover the ***topology*** of a running cluster across regions and availability zones and then optimize ***data and task placement.***
+  - Add ***backward-compatible, fail-over RPC*** calls with established libraries (such as Protocol Buffers) or the newer, memory-efficient [Apache Arrow.](https://arrow.apache.org/)
+  - ***Integrate the security*** of your cluster ***with the IAM of choice*** - OpenID Connect/UMA (like [Keycloak](https://www.keycloak.org/)) or the IAMs of major public clouds.
+
 - ***Quorum*** services
   
   Use the ***quorum stacks*** when you need to coordinate a number of cluster nodes:
   - Ensure nodes have a ***consistent view of a shared state***
   - Synchronize processes running on separate nodes with ***distributed locks, barriers, and more***
   - Develop algorithms where ***nodes have to agree***
-  - Distribute and manage ***partitioned resources***
+  - Distribute and manage ***partitioned resources,*** execute ***massively-parallel tasks*** on them
 
-- ***Data*** services
+- ***Data*** management
   
-  - Large ***Blocks***
-
-  - ***Buckets***
-
+  Conquering the load and performance of data-intensive algorithms needs dividing the input. Store, distribute and process data with these stacks:
+  - ***Load-balance disks*** for scalable IOPS
+  - Break large and growing data sets into ***blocks of optimal size*** so that you can evenly split the work across multiple ***compute slots***
+  - Process blocks with ***data locality ('zero-copy')***
+  - ***Replicate*** blocks throughout your cluster nodes for higher data locality ratio
+  - Dynamically ***rebalance*** the placement of data block replicas
+  - Combine with ***columnar file formats*** (such as [Apache ORC](https://orc.apache.org/) and [Apache Arrow](https://arrow.apache.org/))  for even better performance. ***Note:*** some of these file formats feature additional performance gains - like ***bloom filters,*** for example
+  
 - Distributed ***transactions***
 
 ## Versionsing
