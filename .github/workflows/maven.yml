@@ -138,6 +138,7 @@ jobs:
     - name: Run test set ${{ matrix.testset }}
       env:
         OTEL_SERVICE_NAME: maven-test-service
+        OTEL_RESOURCE_ATTRIBUTES: git.ref=${{ github.ref }},git.sha=${{ github.sha }}
         OTEL_EXPORTER_OTLP_PROTOCOL: grpc
         OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:${{ matrix.telemetryport }}
       run: cd tests/${{ matrix.testset }} && mvn -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar test --file pom.xml
