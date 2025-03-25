@@ -106,7 +106,7 @@
 
     <junit.version>5.11.4</junit.version>
     <junit-platform.version>1.12.1</junit-platform.version>
-    <mockito.version>5.15.2</mockito.version>
+    <mockito.version>5.16.1</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
 
     <test.instrumentation.opts></test.instrumentation.opts>
