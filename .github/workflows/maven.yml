@@ -47,6 +47,8 @@ jobs:
   test:
     needs: compile
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       max-parallel: 2
