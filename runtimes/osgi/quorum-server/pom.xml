@@ -92,6 +92,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>io.mishmash.stacks.quorum</groupId>
+      <artifactId>quorum-client-secure-osgi</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-handler</artifactId>
       <optional>true</optional>
@@ -143,6 +148,11 @@
                     **/zookeeper/server/admin/AdminServerFactory.java,
                     **/zookeeper/server/auth/ProviderRegistry.java,
                     **/zookeeper/server/watch/WatchManagerFactory.java,
+
+                    **/zookeeper/server/ZooKeeperServerMain.java,
+                    **/zookeeper/server/quorum/QuorumPeerMain.java,
+                    **/zookeeper/server/embedded/ZooKeeperServerEmbeddedImpl.java,
+                    **/zookeeper/server/embedded/ZooKeeperServerEmbedded.java,
                   </excludes>
                 </artifactItem>
               </artifactItems>

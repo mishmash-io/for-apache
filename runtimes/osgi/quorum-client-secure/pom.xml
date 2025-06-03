@@ -25,13 +25,13 @@
   </parent>
 
   <groupId>io.mishmash.stacks.quorum</groupId>
-  <artifactId>quorum-client-osgi</artifactId>
+  <artifactId>quorum-client-secure-osgi</artifactId>
   <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
   <packaging>bundle</packaging>
 
-  <name>Quorum coordination client OSGi bundle</name>
+  <name>Secure quorum coordination client OSGi fragment</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
+    An extension for secure quorum coordination clients.
 
     Source code is originally developed by the Apache ZooKeeper project and then 
     modified by mishmash io. For more info on the specific modifications done by mishmash io - 
@@ -93,28 +93,17 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.github.spotbugs</groupId>
-      <artifactId>spotbugs-annotations</artifactId>
-      <scope>provided</scope>
-      <optional>true</optional>
+      <groupId>io.mishmash.stacks.quorum</groupId>
+      <artifactId>quorum-client-osgi</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.yetus</groupId>
-      <artifactId>audience-annotations</artifactId>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-handler</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-slf4j2-impl</artifactId>
-      <scope>provided</scope>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport-native-epoll</artifactId>
     </dependency>
   </dependencies>
 
@@ -140,15 +129,6 @@
                   <classifier>sources</classifier>
                   <overWrite>false</overWrite>
                   <includes>
-                  </includes>
-                  <excludes>
-                    **/zookeeper/client/FourLetterWordMain.java,
-
-                    **/zookeeper/metrics/provider/MetricsProviderBootstrap.java,
-
-                    **/zookeeper/ZooKeeper.java,
-                    **/zookeeper/common/ZKConfig.java,
-
                     **/zookeeper/ClientCnxnSocketNetty.java,
                     **/zookeeper/common/NettyUtils.java,
                     **/zookeeper/common/SSLContextAndOptions.java,
@@ -156,6 +136,8 @@
                     **/zookeeper/common/X509Util.java,
                     **/zookeeper/common/ClientX509Util.java,
                     **/zookeeper/common/QuorumX509Util.java,
+                  </includes>
+                  <excludes>
                   </excludes>
                 </artifactItem>
               </artifactItems>
@@ -187,8 +169,7 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <configuration>
           <instructions>
-            <Export-Package>org.apache.jute.*,org.apache.zookeeper.*</Export-Package>
-            <Import-Package>!org.apache.jute.*,!org.apache.zookeeper.*,*</Import-Package>
+            <Fragment-Host>io.mishmash.stacks.quorum.client-osgi;bundle-version="[3.8,3.9)"</Fragment-Host>
           </instructions>
         </configuration>
       </plugin>

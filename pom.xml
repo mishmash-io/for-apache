@@ -132,6 +132,7 @@
     <module>fs/fs-sftp</module>
 
     <module>runtimes/osgi/quorum-client</module>
+    <module>runtimes/osgi/quorum-client-secure</module>
     <module>runtimes/osgi/quorum-server</module>
   </modules>
 
