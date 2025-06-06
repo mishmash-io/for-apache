@@ -94,7 +94,6 @@
     <gson.version>2.13.1</gson.version>
     <jackson.version>2.19.0</jackson.version>
     <jetty.version>12.0.21</jetty.version>
-    <jakarta-servlet.version>6.0.0</jakarta-servlet.version>
     <netty.version>4.2.1.Final</netty.version>
     <nimbus-jwt.version>10.3</nimbus-jwt.version>
     <kerby.version>2.1.0</kerby.version>
@@ -114,6 +113,7 @@
 
   <modules>
     <module>misc/openid</module>
+    <module>misc/azure-utils</module>
 
     <module>patched-projects/zookeeper</module>
     <module>patched-projects/hadoop</module>
@@ -131,6 +131,8 @@
 
     <module>fs/fs-sftp</module>
 
+    <module>runtimes/osgi/protobuf-wrapper</module>
+    <module>runtimes/osgi/vertx-wrapper</module>
     <module>runtimes/osgi/quorum-client</module>
     <module>runtimes/osgi/quorum-client-secure</module>
     <module>runtimes/osgi/quorum-server</module>
@@ -173,6 +175,11 @@
         <groupId>org.eclipse.jetty.ee10</groupId>
         <artifactId>jetty-ee10-servlet</artifactId>
         <version>${jetty.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.annotation</groupId>
+        <artifactId>jakarta.annotation-api</artifactId>
+        <version>2.1.1</version>
       </dependency>
       <dependency>
         <groupId>commons-cli</groupId>
@@ -312,6 +319,36 @@
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-annotations</artifactId>
         <version>${spotbugsannotations.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>failureaccess</artifactId>
+        <version>1.0.3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>listenablefuture</artifactId>
+        <version>9999.0-empty-to-avoid-conflict-with-guava</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.errorprone</groupId>
+        <artifactId>error_prone_annotations</artifactId>
+        <version>2.38.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.j2objc</groupId>
+        <artifactId>j2objc-annotations</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jspecify</groupId>
+        <artifactId>jspecify</artifactId>
+        <version>1.0.0</version>
       </dependency>
 
       <dependency>
