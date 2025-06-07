@@ -29,7 +29,7 @@
   <version>${vertx.version}</version>
   <packaging>bundle</packaging>
 
-  <name>Base gRPC server OSGi bundle</name>
+  <name>Wrapper OSGi bundle for Vert.x</name>
   <description>
     A minimal Quorum coordination client for high-availability clustering.
 
@@ -78,11 +78,6 @@
       </roles>
     </developer>
   </developers>
-
-  <properties>
-    <vertx.version>5.0.0</vertx.version>
-    <protobuf4.version>4.31.1</protobuf4.version>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -175,13 +170,13 @@
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
-      <version>${protobuf4.version}</version>
+      <version>${protobuf.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java-util</artifactId>
-      <version>${protobuf4.version}</version>
+      <version>${protobuf.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

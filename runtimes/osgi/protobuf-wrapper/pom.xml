@@ -26,10 +26,10 @@
 
   <groupId>io.mishmash.stacks.util</groupId>
   <artifactId>protobuf-wrapper</artifactId>
-  <version>${protobuf4.version}</version>
+  <version>${protobuf.version}</version>
   <packaging>bundle</packaging>
 
-  <name>Wrapper OSGi bundle for protobuf</name>
+  <name>Wrapper OSGi bundle for Protocol Buffers</name>
   <description>
     A minimal Quorum coordination client for high-availability clustering.
 
@@ -79,10 +79,6 @@
     </developer>
   </developers>
 
-  <properties>
-    <protobuf4.version>4.31.1</protobuf4.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
@@ -107,7 +103,7 @@
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
-      <version>${protobuf4.version}</version>
+      <version>${protobuf.version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.annotation</groupId>
@@ -132,7 +128,7 @@
                 <artifactItem>
                   <groupId>com.google.protobuf</groupId>
                   <artifactId>protobuf-java-util</artifactId>
-                  <version>${protobuf4.version}</version>
+                  <version>${protobuf.version}</version>
                   <type>jar</type>
                   <classifier>sources</classifier>
                   <overWrite>false</overWrite>

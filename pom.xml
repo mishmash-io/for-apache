@@ -94,14 +94,23 @@
     <gson.version>2.13.1</gson.version>
     <jackson.version>2.19.0</jackson.version>
     <jetty.version>12.0.21</jetty.version>
-    <netty.version>4.2.1.Final</netty.version>
+    <netty.version>4.2.2.Final</netty.version>
     <nimbus-jwt.version>10.3</nimbus-jwt.version>
     <kerby.version>2.1.0</kerby.version>
     <protobuf.version>4.31.1</protobuf.version>
     <slf4j.version>2.0.17</slf4j.version>
     <snappy.version>1.1.10.7</snappy.version>
     <spotbugsannotations.version>4.9.3</spotbugsannotations.version>
+    <error_prone_annotations.version>2.38.0</error_prone_annotations.version>
+    <failureaccess.version>1.0.3</failureaccess.version>
+    <listenablefuture.version>9999.0-empty-to-avoid-conflict-with-guava</listenablefuture.version>
+    <j2objc.version>3.0.0</j2objc.version>
+    <jspecify.version>1.0.0</jspecify.version>
     <log4j2.version>2.24.3</log4j2.version>
+    <karaf.version>4.4.7</karaf.version>
+    <yetus.version>0.15.1</yetus.version>
+    <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
+    <vertx.version>5.0.0</vertx.version>
 
     <junit.version>5.13.0</junit.version>
     <junit-platform.version>1.13.0</junit-platform.version>
@@ -136,6 +145,8 @@
     <module>runtimes/osgi/quorum-client</module>
     <module>runtimes/osgi/quorum-client-secure</module>
     <module>runtimes/osgi/quorum-server</module>
+
+    <module>runtimes/karaf/features</module>
   </modules>
 
   <dependencyManagement>
@@ -179,7 +190,7 @@
       <dependency>
         <groupId>jakarta.annotation</groupId>
         <artifactId>jakarta.annotation-api</artifactId>
-        <version>2.1.1</version>
+        <version>${jakarta-annotation.version}</version>
       </dependency>
       <dependency>
         <groupId>commons-cli</groupId>
@@ -328,27 +339,27 @@
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>failureaccess</artifactId>
-        <version>1.0.3</version>
+        <version>${failureaccess.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>listenablefuture</artifactId>
-        <version>9999.0-empty-to-avoid-conflict-with-guava</version>
+        <version>${listenablefuture.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.errorprone</groupId>
         <artifactId>error_prone_annotations</artifactId>
-        <version>2.38.0</version>
+        <version>${error_prone_annotations.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.j2objc</groupId>
         <artifactId>j2objc-annotations</artifactId>
-        <version>3.0.0</version>
+        <version>${j2objc.version}</version>
       </dependency>
       <dependency>
         <groupId>org.jspecify</groupId>
         <artifactId>jspecify</artifactId>
-        <version>1.0.0</version>
+        <version>${jspecify.version}</version>
       </dependency>
 
       <dependency>
@@ -503,6 +514,12 @@
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
           <version>6.0.0</version>
+          <extensions>true</extensions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.karaf.tooling</groupId>
+          <artifactId>karaf-maven-plugin</artifactId>
+          <version>${karaf.version}</version>
           <extensions>true</extensions>
         </plugin>
       </plugins>

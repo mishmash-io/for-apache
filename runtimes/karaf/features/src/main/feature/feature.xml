@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="mishmash io distributed computing stacks" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0">
+<!--
+    Copyright 2025 Mishmash IO UK Ltd.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+  <feature
+      name="quorum-client"
+      description="Quorum coordination client"
+      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}">
+    <details>
+      Details on 
+      
+      Quorum coordination client
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">scr</feature>
+    <bundle dependency="true">wrap:mvn:org.apache.yetus/audience-annotations/${yetus.version}$Bundle-SymbolicName=Apache Yetus Audience Annotations&amp;Bundle-Version=${yetus.version}</bundle>
+    <bundle dependency="true">mvn:org.slf4j/slf4j-api/${slf4j.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.quorum/quorum-client-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</bundle>
+  </feature>
+  <feature
+      name="quorum-client-secure"
+      description="Quorum coordination secure client"
+      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}">
+    <details>
+      Details on 
+      
+      Quorum coordination secure client
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">scr</feature>
+    <bundle dependency="true">wrap:mvn:org.apache.yetus/audience-annotations/${yetus.version}$Bundle-SymbolicName=Apache Yetus Audience Annotations&amp;Bundle-Version=${yetus.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-handler/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-resolver/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-buffer/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-unix-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-base/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.quorum/quorum-client-secure-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</bundle>
+  </feature>
+  <feature
+      name="quorum-server"
+      description="Quorum coordination server"
+      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">scr</feature>
+    <feature>quorum-client</feature>
+    <feature>quorum-client-secure</feature>
+    <bundle dependency="true">mvn:com.github.spotbugs/spotbugs-annotations/${spotbugsannotations.version}</bundle>
+    <bundle dependency="true">mvn:commons-io/commons-io/${commons-io.version}</bundle>
+    <bundle dependency="true">mvn:org.xerial.snappy/snappy-java/${snappy.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-handler/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-resolver/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-buffer/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-unix-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-base/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.quorum/quorum-server-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</bundle>
+  </feature>
+
+  <feature
+      name="vertx-integration"
+      description="Services for Vert.x integration"
+      version="${vertx.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">scr</feature>
+    <bundle dependency="true">mvn:com.github.spotbugs/spotbugs-annotations/${spotbugsannotations.version}</bundle>
+    <bundle dependency="true">mvn:com.google.code.gson/gson/${gson.version}</bundle>
+    <bundle dependency="true">mvn:com.google.errorprone/error_prone_annotations/${error_prone_annotations.version}</bundle>
+    <bundle dependency="true">mvn:com.google.guava/guava/${guava.version}</bundle>
+    <bundle dependency="true">mvn:com.google.guava/failureaccess/${failureaccess.version}</bundle>
+    <bundle dependency="true">wrap:mvn:com.google.guava/listenablefuture/${listenablefuture.version}$Bundle-SymbolicName=Empty Guava ListenableFuture to avoid conflict&amp;Bundle-Version=${listenablefuture.version}&amp;Fragment-Host=com.google.guava</bundle>
+    <bundle dependency="true">wrap:mvn:com.google.j2objc/j2objc-annotations/${j2objc.version}$Bundle-SymbolicName=J2ObjC Annotations&amp;Bundle-Version=${j2objc.version}</bundle>
+    <bundle dependency="true">mvn:org.jspecify/jspecify/${jspecify.version}</bundle>
+    <bundle dependency="true">mvn:jakarta.annotation/jakarta.annotation-api/${jakarta-annotation.version}</bundle>
+    <bundle dependency="true">mvn:io.mishmash.stacks.util/protobuf-wrapper/${protobuf.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-handler/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-handler-proxy/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-resolver/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-resolver-dns/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-buffer/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-unix-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-base/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-compression/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-dns/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-haproxy/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-http/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-http2/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-socks/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.util/vertx-wrapper/${vertx.version}</bundle>
+  </feature>
+</features>
