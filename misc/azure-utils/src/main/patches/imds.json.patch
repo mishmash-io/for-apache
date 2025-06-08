@@ -1,0 +1,266 @@
+262a263,368
+>     },
+>     "/loadbalancer": {
+>       "get": {
+>         "operationId": "LoadBalancer_GetMetadata",
+>         "description": "Get Load Balancer Metadata for the Virtual Machine.",
+>         "parameters": [
+>           {
+>             "$ref": "#/parameters/ApiVersionParameter"
+>           },
+>           {
+>             "$ref": "#/parameters/MetadataParameter"
+>           }
+>         ],
+>         "responses": {
+>           "200": {
+>             "description": "OK",
+>             "schema": {
+>               "$ref": "#/definitions/LoadBalancer"
+>             }
+>           },
+>           "default": {
+>             "description": "Error response describing why the operation failed.",
+>             "schema": {
+>               "$ref": "#/definitions/ErrorResponse"
+>             }
+>           }
+>         }
+>       }
+>     },
+>     "/scheduledevents": {
+>       "get": {
+>         "operationId": "ScheduledEvents_GetEvents",
+>         "description": "Scheduled Events give your application time to prepare for virtual machine (VM) maintenance. They provide information about upcoming maintenance events (for example, reboot).",
+>         "parameters": [
+>           {
+>             "$ref": "#/parameters/ApiVersionParameter"
+>           },
+>           {
+>             "$ref": "#/parameters/MetadataParameter"
+>           }
+>         ],
+>         "responses": {
+>           "200": {
+>             "description": "OK",
+>             "schema": {
+>               "$ref": "#/definitions/ScheduledEventsDocument"
+>             }
+>           },
+>           "default": {
+>             "description": "Error response describing why the operation failed.",
+>             "schema": {
+>               "$ref": "#/definitions/ErrorResponse"
+>             }
+>           }
+>         }
+>       },
+>       "post": {
+>         "operationId": "ScheduledEvents_StartEvents",
+>         "description": "",
+>         "parameters": [
+>           {
+>             "$ref": "#/parameters/ApiVersionParameter"
+>           },
+>           {
+>             "$ref": "#/parameters/MetadataParameter"
+>           },
+>           {
+>             "in": "body",
+>             "name": "body",
+>             "description": "A list of outstanding events to approve.",
+>             "required": true,
+>             "schema": {
+>               "type": "object",
+>               "properties": {
+>                 "StartRequests": {
+>                   "type": "array",
+>                   "description": "The list of event ids to approve.",
+>                   "items": {
+>                     "type": "object",
+>                     "properties": {
+>                       "EventId": {
+>                         "type": "string",
+>                         "description": "An event id to expedite."
+>                       }
+>                     }
+>                   }
+>                 }
+>               }
+>             }
+>           }
+>         ],
+>         "responses": {
+>           "200": {
+>             "description": "OK",
+>             "schema": {
+>               "$ref": "#/definitions/ScheduledEventsDocument"
+>             }
+>           },
+>           "default": {
+>             "description": "Error response describing why the operation failed.",
+>             "schema": {
+>               "$ref": "#/definitions/ErrorResponse"
+>             }
+>           }
+>         }
+>       }
+1093a1200,1357
+>           }
+>         }
+>       }
+>     },
+>     "LoadBalancerAddressMapping": {
+>       "type": "object",
+>       "properties": {
+>         "frontendIpAddress": {
+>           "type": "string"
+>         },
+>         "privateIpAddress": {
+>           "type": "string"
+>         }
+>       }
+>     },
+>     "LoadBalancerAddressPortMapping": {
+>       "allOf": [
+>         {
+>           "$ref": "#/definitions/LoadBalancerAddressMapping"
+>         },
+>         {
+>           "type": "object",
+>           "properties": {
+>             "protocol": {
+>               "type": "string"
+>             },
+>             "frontendPort": {
+>               "type": "integer"
+>             },
+>             "backendPort": {
+>               "type": "integer"
+>             }
+>           }
+>         }
+>       ]
+>     },
+>     "LoadBalancer": {
+>       "type": "object",
+>       "description": "This is the response from LoadBalancer_GetMetadata operation.",
+>       "properties": {
+>         "loadbalancer": {
+>           "type": "object",
+>           "properties": {
+>             "publicIpAddresses": {
+>               "type": "array",
+>               "description": "The instance level Public or Private IP of the specific Virtual Machine instance.",
+>               "items": {
+>                 "$ref": "#/definitions/LoadBalancerAddressMapping"
+>               }
+>             },
+>             "inboundRules": {
+>               "type": "array",
+>               "description": "List of load balancing rules or inbound NAT rules using which the Load Balancer directs traffic to the specific Virtual Machine instance. Frontend IP addresses and the Private IP addresses listed here belong to the Load Balancer.",
+>               "items": {
+>                 "$ref": "#/definitions/LoadBalancerAddressPortMapping"
+>               }
+>             },
+>             "outboundRules": {
+>               "type": "array",
+>               "description": "List of outbound rules by which the Virtual Machine behind Load Balancer sends outbound traffic. Frontend IP addresses and the Private IP addresses listed here belong to the Load Balancer.",
+>               "items": {
+>                 "$ref": "#/definitions/LoadBalancerAddressMapping"
+>               }
+>             }
+>           }
+>         }
+>       }
+>     },
+>     "ScheduledEvent": {
+>       "type": "object",
+>       "properties": {
+>         "EventId": {
+>           "type": "string",
+>           "description": "Globally unique identifier for this event."
+>         },
+>         "EventType": {
+>           "type": "string",
+>           "description": "Expected impact this event will cause.",
+>           "enum": [
+>             "Freeze",
+>             "Reboot",
+>             "Redeploy",
+>             "Preempt",
+>             "Terminate"
+>           ],
+>           "x-enum-descriptions": [
+>             "Freeze: The Virtual Machine is scheduled to pause for a few seconds. CPU and network connectivity may be suspended, but there's no impact on memory or open files.",
+>             "Reboot: The Virtual Machine is scheduled for reboot (non-persistent memory is lost).",
+>             "Redeploy: The Virtual Machine is scheduled to move to another node (ephemeral disks are lost).",
+>             "Preempt: The Spot Virtual Machine is being deleted (ephemeral disks are lost). This event is made available on a best effort basis.",
+>             "Terminate: The virtual machine is scheduled to be deleted."
+>           ]
+>         },
+>         "ResourceType": {
+>           "type": "string",
+>           "description": "Type of resource this event affects.",
+>           "enum": [
+>             "VirtualMachine"
+>           ]
+>         },
+>         "Resources": {
+>           "type": "array",
+>           "description": "List of resources this event affects.",
+>           "items": {
+>             "type": "string"
+>           }
+>         },
+>         "EventStatus": {
+>           "type": "string",
+>           "description": "Status of this event.",
+>           "enum": [
+>             "Scheduled",
+>             "Started"
+>           ],
+>           "x-enum-descriptions": [
+>             "Scheduled: This event is scheduled to start after the time specified in the NotBefore property.",
+>             "Started: This event has started."
+>           ]
+>         },
+>         "NotBefore": {
+>           "type": "string",
+>           "description": "Time after which this event can start. The event is guaranteed to not start before this time. Will be blank if the event after the event starts.",
+>           "format": "date-time"
+>         },
+>         "Description": {
+>           "type": "string",
+>           "description": "Description of this event."
+>         },
+>         "EventSource": {
+>           "type": "string",
+>           "description": "Initiator of the event.",
+>           "enum": [
+>             "Platform",
+>             "User"
+>           ],
+>           "x-enum-descriptions": [
+>             "Platform: Platform initiated this event.",
+>             "User: The user initiated this event."
+>           ]
+>         },
+>         "DurationInSeconds": {
+>           "type": "integer",
+>           "description": "The expected duration of the interruption caused by the event. There may be secondary impacts of a shorter duration during the impact window."
+>         }
+>       }
+>     },
+>     "ScheduledEventsDocument": {
+>       "type": "object",
+>       "properties": {
+>         "DocumentIncarnation": {
+>           "type": "integer",
+>           "description": "Integer that increases when the events array changes. Documents with the same incarnation contain the same event information, and the incarnation is incremented when an event changes."
+>         },
+>         "Events": {
+>           "type": "array",
+>           "description": "Contains an array of scheduled events. An empty array means that currently no events are scheduled.",
+>           "items": {
+>             "$ref": "#/definitions/ScheduledEvent"

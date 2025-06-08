@@ -125,6 +125,27 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-patch-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>patch-original-openapi-spec</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>apply</goal>
+            </goals>
+            <configuration>
+              <patchFile>${basedir}/src/main/patches/imds.json.patch</patchFile>
+              <originalFile>${project.build.directory}/azure-openapi/imds.json</originalFile>
+              <patchTrackingFile>${project.build.directory}/imds_changes.txt</patchTrackingFile>
+              <strip>0</strip>
+              <removeEmptyFiles>true</removeEmptyFiles>
+              <targetDirectory>${project.build.directory}/azure-openapi</targetDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
         <version>7.13.0</version>
@@ -156,7 +177,7 @@
         <executions>
           <execution>
             <id>patch-generated-sources</id>
-            <phase>generate-sources</phase>
+            <phase>process-sources</phase>
             <goals>
               <goal>run</goal>
             </goals>
