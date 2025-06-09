@@ -140,6 +140,8 @@
 
     <module>fs/fs-sftp</module>
 
+    <module>runtimes/common</module>
+
     <module>runtimes/osgi/protobuf-wrapper</module>
     <module>runtimes/osgi/vertx-wrapper</module>
     <module>runtimes/osgi/quorum-client</module>
