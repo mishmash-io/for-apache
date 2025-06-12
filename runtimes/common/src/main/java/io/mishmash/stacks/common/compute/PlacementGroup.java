@@ -15,47 +15,39 @@
  *
  */
 
-package io.mishmash.stacks.common.cloud;
+package io.mishmash.stacks.common.compute;
 
 import java.util.Comparator;
-import java.util.Optional;
 
 /**
- * Represents a geographic unit - like a continent or similar, that contains
- * {@link PlacementRegion}s.
+ * Represents a node placement group. Nodes within the same group are
+ * guaranteed by the provider to be as close to each other as possible,
+ * or in other words having the lowest possible network latency, etc.
  *
- * A geography may also be defined by a specific jurisdiction where certain
- * regulations apply - like the EU and its data protection laws.
+ * Depending on the cloud provider, this might be a single rack or a
+ * server room.
  */
-public interface PlacementGeography extends Comparator<PlacementGeography> {
+public interface PlacementGroup extends Comparator<PlacementGroup> {
 
     /**
-     * Get the id of this geography.
+     * Get the id of this group.
      *
      * @return a unique id
      */
     public String getId();
 
     /**
-     * Get an optional jurisdiction.
-     *
-     * @return a {@link PlacementJursidiction} or an empty optional if unknown.
-     */
-    public Optional<PlacementJurisdiction> getJurisdiction();
-
-    /**
-     * Compare the two geographies for order. Returns a negative int, zero,
-     * or positive integer as the first geography is the nearer to this
-     * geography, equidistant or the remoter of the two arguments.
+     * Compare the two placement groups for order. Returns a negative int,
+     * zero, or positive integer as the first is the nearer to
+     * this placement group, equidistant or the remoter of the two arguments.
      *
      * Use this method as a {@link Comparator} when sorting
-     * {@link PlacementGeography}s based on how far they are from this
-     * geography.
+     * {@link PlacementGroup}s based on how far they are from this group.
      *
      * {@inheritDoc}
      */
     @Override
-    default int compare(PlacementGeography o1, PlacementGeography o2) {
+    default int compare(PlacementGroup o1, PlacementGroup o2) {
         if (this.equals(o1)) {
             if (this.equals(o2)) {
                 return 0;

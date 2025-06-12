@@ -15,9 +15,9 @@
  *
  */
 
-package io.mishmash.stacks.common.cloud;
+package io.mishmash.stacks.common.compute;
 
-import java.nio.file.Path;
+import java.net.URI;
 import java.util.Optional;
 
 /**
@@ -60,9 +60,9 @@ public interface Storage {
     public Optional<String> getModel();
 
     /**
-     * Get a filesystem path that can be used to access this storage.
+     * Get an optional URI where the storage can be accessed.
      *
-     * @return the {@link Path} to use when accessing this storage
+     * @return the {@link URI} or empty if unavailable
      */
-    public Path getPath();
+    public Optional<URI> getURI();
 }

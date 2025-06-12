@@ -15,15 +15,15 @@
  *
  */
 
-package io.mishmash.stacks.common.cloud;
+package io.mishmash.stacks.common.compute;
 
 /**
- * A cloud - like Azure, AWS, etc.
+ * A jurisdiction where the same regulations apply.
  */
-public interface CloudProvider {
+public interface PlacementJurisdiction {
 
     /**
-     * Returns a name for this provider.
+     * Get the name of this jurisdiction.
      *
      * @return the name
      */

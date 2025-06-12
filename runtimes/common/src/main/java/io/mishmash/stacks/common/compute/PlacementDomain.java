@@ -15,39 +15,43 @@
  *
  */
 
-package io.mishmash.stacks.common.cloud;
+package io.mishmash.stacks.common.compute;
 
 import java.util.Comparator;
 
 /**
- * A {@link PlacementZone} is an individual location within a single
- * {@link PlacementRegion} where hosts can be deployed by a provider.
+ * Represents a placement domain where hosts share some common availability
+ * characteristics.
  *
- * Zones may contain one or more data centers, but will be typically
- * separated from other zones by a significant distance to avoid
- * disasters affecting both at the same time.
+ * For example, nodes within the same {@code update domain}
+ * will be upgraded/updated at the same time, while members of another update
+ * domain will wait.
+ *
+ * Similarly, machines with the same fault domain typically share the same
+ * network switch and/or power supply and will be all affected
+ * by a single outage.
  */
-public interface PlacementZone extends Comparator<PlacementZone> {
+public interface PlacementDomain extends Comparator<PlacementDomain> {
 
     /**
-     * Get the id of this zone.
+     * Get the id of this domain.
      *
      * @return a unique id
      */
     public String getId();
 
     /**
-     * Compare the two zones for order. Returns a negative int, zero,
-     * or positive integer as the first zone is the nearer to this zone,
-     * equidistant or the remoter of the two arguments.
+     * Compare the two domains for order. Returns a negative int,
+     * zero, or positive integer as the first is the nearer to
+     * this domain, equidistant or the remoter of the two arguments.
      *
      * Use this method as a {@link Comparator} when sorting
-     * {@link PlacementZone}s based on how far they are from this zone.
+     * {@link PlacementDomain}s based on how far they are from this domain.
      *
      * {@inheritDoc}
      */
     @Override
-    default int compare(PlacementZone o1, PlacementZone o2) {
+    default int compare(PlacementDomain o1, PlacementDomain o2) {
         if (this.equals(o1)) {
             if (this.equals(o2)) {
                 return 0;

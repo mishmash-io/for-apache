@@ -15,39 +15,39 @@
  *
  */
 
-package io.mishmash.stacks.common.cloud;
+package io.mishmash.stacks.common.compute;
 
 import java.util.Comparator;
 
 /**
- * Represents a node placement group. Nodes within the same group are
- * guaranteed by the provider to be as close to each other as possible,
- * or in other words having the lowest possible network latency, etc.
+ * A {@link PlacementZone} is an individual location within a single
+ * {@link PlacementRegion} where hosts can be deployed by a provider.
  *
- * Depending on the cloud provider, this might be a single rack or a
- * server room.
+ * Zones may contain one or more data centers, but will be typically
+ * separated from other zones by a significant distance to avoid
+ * disasters affecting both at the same time.
  */
-public interface PlacementGroup extends Comparator<PlacementGroup> {
+public interface PlacementZone extends Comparator<PlacementZone> {
 
     /**
-     * Get the id of this group.
+     * Get the id of this zone.
      *
      * @return a unique id
      */
     public String getId();
 
     /**
-     * Compare the two placement groups for order. Returns a negative int,
-     * zero, or positive integer as the first is the nearer to
-     * this placement group, equidistant or the remoter of the two arguments.
+     * Compare the two zones for order. Returns a negative int, zero,
+     * or positive integer as the first zone is the nearer to this zone,
+     * equidistant or the remoter of the two arguments.
      *
      * Use this method as a {@link Comparator} when sorting
-     * {@link PlacementGroup}s based on how far they are from this group.
+     * {@link PlacementZone}s based on how far they are from this zone.
      *
      * {@inheritDoc}
      */
     @Override
-    default int compare(PlacementGroup o1, PlacementGroup o2) {
+    default int compare(PlacementZone o1, PlacementZone o2) {
         if (this.equals(o1)) {
             if (this.equals(o2)) {
                 return 0;

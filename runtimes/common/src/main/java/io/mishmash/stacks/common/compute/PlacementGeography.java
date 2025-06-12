@@ -15,43 +15,47 @@
  *
  */
 
-package io.mishmash.stacks.common.cloud;
+package io.mishmash.stacks.common.compute;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 /**
- * Represents a placement domain where hosts share some common availability
- * characteristics.
+ * Represents a geographic unit - like a continent or similar, that contains
+ * {@link PlacementRegion}s.
  *
- * For example, nodes within the same {@code update domain}
- * will be upgraded/updated at the same time, while members of another update
- * domain will wait.
- *
- * Similarly, machines with the same fault domain typically share the same
- * network switch and/or power supply and will be all affected
- * by a single outage.
+ * A geography may also be defined by a specific jurisdiction where certain
+ * regulations apply - like the EU and its data protection laws.
  */
-public interface PlacementDomain extends Comparator<PlacementDomain> {
+public interface PlacementGeography extends Comparator<PlacementGeography> {
 
     /**
-     * Get the id of this domain.
+     * Get the id of this geography.
      *
      * @return a unique id
      */
     public String getId();
 
     /**
-     * Compare the two domains for order. Returns a negative int,
-     * zero, or positive integer as the first is the nearer to
-     * this domain, equidistant or the remoter of the two arguments.
+     * Get an optional jurisdiction.
+     *
+     * @return a {@link PlacementJursidiction} or an empty optional if unknown.
+     */
+    public Optional<PlacementJurisdiction> getJurisdiction();
+
+    /**
+     * Compare the two geographies for order. Returns a negative int, zero,
+     * or positive integer as the first geography is the nearer to this
+     * geography, equidistant or the remoter of the two arguments.
      *
      * Use this method as a {@link Comparator} when sorting
-     * {@link PlacementDomain}s based on how far they are from this domain.
+     * {@link PlacementGeography}s based on how far they are from this
+     * geography.
      *
      * {@inheritDoc}
      */
     @Override
-    default int compare(PlacementDomain o1, PlacementDomain o2) {
+    default int compare(PlacementGeography o1, PlacementGeography o2) {
         if (this.equals(o1)) {
             if (this.equals(o2)) {
                 return 0;

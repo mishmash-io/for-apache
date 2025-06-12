@@ -15,7 +15,7 @@
  *
  */
 
-package io.mishmash.stacks.common.cloud;
+package io.mishmash.stacks.common.compute;
 
 import java.util.Optional;
 
