@@ -78,7 +78,74 @@
     </developer>
   </developers>
 
+  <properties>
+    <azure.version>1.55.4</azure.version>
+    <azure-json.version>1.5.0</azure-json.version>
+    <azure-xml.version>1.2.0</azure-xml.version>
+    <azure-netty.version>1.15.12</azure-netty.version>
+    <netty-quic.version>0.0.72.Final</netty-quic.version>
+    <nimbus-oidc.version>11.25</nimbus-oidc.version>
+    <nimbus-lang-tag.version>1.7</nimbus-lang-tag.version>
+    <nimbus-content-type.version>2.3</nimbus-content-type.version>
+    <asm.version>9.8</asm.version>
+    <jna.version>5.17.0</jna.version>
+    <reactor-core.version>3.7.6</reactor-core.version>
+    <reactor-netty.version>1.2.6</reactor-netty.version>
+    <reactive-streams.version>1.0.4</reactive-streams.version>
+  </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>stax2-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.woodstox</groupId>
+      <artifactId>woodstox-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-core</artifactId>
+      <version>${reactor-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor.netty</groupId>
+      <artifactId>reactor-netty-core</artifactId>
+      <version>${reactor-netty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor.netty</groupId>
+      <artifactId>reactor-netty-http</artifactId>
+      <version>${reactor-netty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty.incubator</groupId>
+      <artifactId>netty-incubator-codec-native-quic</artifactId>
+      <version>${netty-quic.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.netty.incubator</groupId>
+      <artifactId>netty-incubator-codec-classes-quic</artifactId>
+      <version>${netty-quic.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.reactivestreams</groupId>
+      <artifactId>reactive-streams</artifactId>
+      <version>${reactive-streams.version}</version>
+    </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.quorum</groupId>
       <artifactId>quorum-client-osgi</artifactId>
@@ -98,6 +165,69 @@
       <groupId>io.mishmash.stacks.util</groupId>
       <artifactId>protobuf-wrapper</artifactId>
       <version>${protobuf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-json</artifactId>
+      <version>${azure-json.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-xml</artifactId>
+      <version>${azure-xml.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core</artifactId>
+      <version>${azure.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core-http-netty</artifactId>
+      <version>${azure-netty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>nimbus-jose-jwt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>oauth2-oidc-sdk</artifactId>
+      <version>${nimbus-oidc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>lang-tag</artifactId>
+      <version>${nimbus-lang-tag.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>content-type</artifactId>
+      <version>${nimbus-content-type.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>json-smart</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>accessors-smart</artifactId>
+      <version>${minidev-smart.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>${asm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>${jna.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna-platform</artifactId>
+      <version>${jna.version}</version>
     </dependency>
   </dependencies>
 

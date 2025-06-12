@@ -127,4 +127,80 @@
     <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
     <bundle>mvn:io.mishmash.stacks.util/vertx-wrapper/${vertx.version}</bundle>
   </feature>
+
+  <feature
+      name="msal4j"
+      description="Microsoft Authentication Library and dependencies"
+      version="${vertx.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.model;version=${azure-json.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.nimbusds/oauth2-oidc-sdk/${nimbus-oidc.version}</bundle>
+    <bundle dependency="true">mvn:com.nimbusds/nimbus-jose-jwt/${nimbus-jwt.version}</bundle>
+    <bundle dependency="true">mvn:com.nimbusds/lang-tag/${nimbus-lang-tag.version}</bundle>
+    <bundle dependency="true">mvn:com.nimbusds/content-type/${nimbus-content-type.version}</bundle>
+    <bundle dependency="true">mvn:net.minidev/json-smart/${minidev-smart.version}</bundle>
+    <bundle dependency="true">mvn:net.minidev/accessors-smart/${minidev-smart.version}</bundle>
+    <bundle dependency="true">mvn:org.ow2.asm/asm/${asm.version}</bundle>
+    <bundle dependency="true">mvn:net.java.dev.jna/jna/${jna.version}</bundle>
+    <bundle dependency="true">mvn:net.java.dev.jna/jna-platform/${jna.version}</bundle>
+
+  </feature>
+
+  <feature
+      name="azure-core"
+      description="Core types for Azure clients"
+      version="${vertx.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.model;version=${azure-json.version}</bundle>
+    <bundle dependency="true">wrap:mvn:com.azure/azure-xml/${azure-xml.version}$Bundle-SymbolicName=azure-xml&amp;Bundle-Version=${azure-xml.version}&amp;Export-Package=com.azure.xml;version=${azure-xml.version}&amp;Import-Package=javax.xml.*</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-xml/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.woodstox/woodstox-core/${woodstox.version}</bundle>
+    <bundle dependency="true">mvn:org.codehaus.woodstox/stax2-api/${stax2-api.version}</bundle>
+    <bundle dependency="true">mvn:io.projectreactor/reactor-core/${reactor-core.version}</bundle>
+    <bundle dependency="true">mvn:io.projectreactor.netty/reactor-netty-core/${reactor-netty.version}</bundle>
+    <bundle dependency="true">mvn:io.projectreactor.netty/reactor-netty-http/${reactor-netty.version}</bundle>
+    <bundle dependency="true">mvn:org.reactivestreams/reactive-streams/${reactive-streams.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-handler/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-handler-proxy/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-resolver/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-resolver-dns/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-buffer/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-unix-common/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-base/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-compression/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-dns/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-http/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-http2/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-codec-socks/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
+    <bundle dependency="true">mvn:io.netty.incubator/netty-incubator-codec-native-quic/${netty-quic.version}</bundle>
+    <bundle dependency="true">mvn:io.netty.incubator/netty-incubator-codec-classes-quic/${netty-quic.version}</bundle>
+    <!-- needed by netty-incubator-codec-classes-quic: -->
+    <bundle dependency="true">mvn:com.google.code.findbugs/jsr305/3.0.2</bundle>
+
+    <bundle>wrap:mvn:com.azure/azure-core/${azure.version}$Bundle-SymbolicName=azure-core&amp;Bundle-Version=${azure.version}&amp;Export-Package=com.azure.core.annotation;version=${azure.version},com.azure.core.client.traits;version=${azure.version},com.azure.core.credential;version=${azure.version},com.azure.core.cryptography;version=${azure.version},com.azure.core.exception;version=${azure.version},com.azure.core.http;version=${azure.version},com.azure.core.http.policy;version=${azure.version},com.azure.core.http.rest;version=${azure.version},com.azure.core.models;version=${azure.version},com.azure.core.util;version=${azure.version},com.azure.core.util.builder;version=${azure.version},com.azure.core.util.io;version=${azure.version},com.azure.core.util.logging;version=${azure.version},com.azure.core.util.metrics;version=${azure.version},com.azure.core.util.paging;version=${azure.version},com.azure.core.util.polling;version=${azure.version},com.azure.core.util.serializer;version=${azure.version},com.azure.core.util.tracing;version=${azure.version}&amp;Import-Package=javax.xml.*,com.azure.json;version="[1,2)",com.azure.xml;version="[1,2)",com.fasterxml.jackson.*;version="[2,3)",org.reactivestreams;version="[1,2)",org.slf4j.*;version="[1,2)",reactor.core.*;version="[3,4)",reactor.util.*;version="[3,4)"</bundle>
+    <bundle>wrap:mvn:com.azure/azure-core-http-netty/${azure-netty.version}$Bundle-SymbolicName=azure-core-http-netty&amp;Bundle-Version=${azure-netty.version}&amp;Export-Package=com.azure.core.http.netty;version=${azure-netty.version}&amp;Import-Package=io.netty.*;version="[4,5)",javax.net.ssl.*,org.reactivestreams;version="[1,2)",reactor.core.*;version="[3,4)",reactor.util.*;version="[3,4)",reactor.netty.*;version="[1,2)"&amp;Fragment-Host=azure-core</bundle>
+  </feature>
+
 </features>
