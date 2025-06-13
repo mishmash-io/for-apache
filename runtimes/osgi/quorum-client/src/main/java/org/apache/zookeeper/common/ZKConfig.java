@@ -84,7 +84,8 @@ public class ZKConfig {
         LOG.info("ZK Config {}", this.properties);
     }
 
-    private void init() {
+    protected void init() {
+        properties.clear();
         /**
          * backward compatibility for all currently available client properties
          */
