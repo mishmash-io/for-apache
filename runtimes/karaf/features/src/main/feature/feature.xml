@@ -131,14 +131,14 @@
   <feature
       name="msal4j"
       description="Microsoft Authentication Library and dependencies"
-      version="${vertx.version}">
+      version="${msal4j.version}">
     <details>
       Details on 
       
       Quorum coordination server
     </details>
     <feature prerequisite="true" dependency="false">wrap</feature>
-    <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.model;version=${azure-json.version}</bundle>
+    <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.models;version=${azure-json.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
@@ -151,20 +151,21 @@
     <bundle dependency="true">mvn:org.ow2.asm/asm/${asm.version}</bundle>
     <bundle dependency="true">mvn:net.java.dev.jna/jna/${jna.version}</bundle>
     <bundle dependency="true">mvn:net.java.dev.jna/jna-platform/${jna.version}</bundle>
-
+    <bundle dependency="true">wrap:mvn:net.jcip/jcip-annotations/${jcip-annotations.version}$Bundle-SymbolicName=jcip-annotations&amp;Bundle-Version=${jcip-annotations.version}&amp;Export-Package=net.jcip.annotations;version=${jcip-annotations.version}</bundle>
+    <bundle>mvn:com.microsoft.azure/msal4j/${msal4j.version}</bundle>
   </feature>
 
   <feature
       name="azure-core"
       description="Core types for Azure clients"
-      version="${vertx.version}">
+      version="${azure.version}">
     <details>
       Details on 
       
       Quorum coordination server
     </details>
     <feature prerequisite="true" dependency="false">wrap</feature>
-    <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.model;version=${azure-json.version}</bundle>
+    <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.models;version=${azure-json.version}</bundle>
     <bundle dependency="true">wrap:mvn:com.azure/azure-xml/${azure-xml.version}$Bundle-SymbolicName=azure-xml&amp;Bundle-Version=${azure-xml.version}&amp;Export-Package=com.azure.xml;version=${azure-xml.version}&amp;Import-Package=javax.xml.*</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
@@ -201,6 +202,86 @@
 
     <bundle>wrap:mvn:com.azure/azure-core/${azure.version}$Bundle-SymbolicName=azure-core&amp;Bundle-Version=${azure.version}&amp;Export-Package=com.azure.core.annotation;version=${azure.version},com.azure.core.client.traits;version=${azure.version},com.azure.core.credential;version=${azure.version},com.azure.core.cryptography;version=${azure.version},com.azure.core.exception;version=${azure.version},com.azure.core.http;version=${azure.version},com.azure.core.http.policy;version=${azure.version},com.azure.core.http.rest;version=${azure.version},com.azure.core.models;version=${azure.version},com.azure.core.util;version=${azure.version},com.azure.core.util.builder;version=${azure.version},com.azure.core.util.io;version=${azure.version},com.azure.core.util.logging;version=${azure.version},com.azure.core.util.metrics;version=${azure.version},com.azure.core.util.paging;version=${azure.version},com.azure.core.util.polling;version=${azure.version},com.azure.core.util.serializer;version=${azure.version},com.azure.core.util.tracing;version=${azure.version}&amp;Import-Package=javax.xml.*,com.azure.json;version="[1,2)",com.azure.xml;version="[1,2)",com.fasterxml.jackson.*;version="[2,3)",org.reactivestreams;version="[1,2)",org.slf4j.*;version="[1,2)",reactor.core.*;version="[3,4)",reactor.util.*;version="[3,4)"</bundle>
     <bundle>wrap:mvn:com.azure/azure-core-http-netty/${azure-netty.version}$Bundle-SymbolicName=azure-core-http-netty&amp;Bundle-Version=${azure-netty.version}&amp;Export-Package=com.azure.core.http.netty;version=${azure-netty.version}&amp;Import-Package=io.netty.*;version="[4,5)",javax.net.ssl.*,org.reactivestreams;version="[1,2)",reactor.core.*;version="[3,4)",reactor.util.*;version="[3,4)",reactor.netty.*;version="[1,2)"&amp;Fragment-Host=azure-core</bundle>
+  </feature>
+
+  <feature
+      name="azure-identity"
+      description="Client library for Microsoft Azure Identity"
+      version="${azure-identity.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">azure-core</feature>
+    <feature prerequisite="true" dependency="false">msal4j</feature>
+    <bundle>wrap:mvn:com.microsoft.azure/javamsalruntime/${msal4j-runtime.version}$Bundle-SymbolicName=javamsalruntime&amp;Bundle-Version=${msal4j-runtime.version}&amp;Export-Package=com.microsoft.azure.javamsalruntime;version=${msal4j-runtime.version}&amp;Import-Package=com.sun.jna.*;version="[5,6)",org.slf4j.*;version="[1,2)"</bundle>
+    <bundle>wrap:mvn:com.microsoft.azure/msal4j-brokers/${msal4j-brokers.version}$Bundle-SymbolicName=msal4j-brokers&amp;Bundle-Version=${msal4j-brokers.version}&amp;Export-Package=com.microsoft.aad.msal4jbrokers;version=${msal4j-brokers.version}&amp;Import-Package=com.microsoft.azure.javamsalruntime;version="[0,1)",org.slf4j.*;version="[1,2)"&amp;Fragment-Host=msal4j</bundle>
+    <bundle>wrap:mvn:com.microsoft.azure/msal4j-persistence-extension/${msal4j-persistence.version}$Bundle-SymbolicName=msal4j-persistence-extension&amp;Bundle-Version=${msal4j-persistence.version}&amp;Export-Package=com.microsoft.aad.msal4jextensions.*;version=${msal4j-persistence.version}&amp;Import-Package=com.microsoft.aad.msal4j;version="[1,2)",com.nimbusds.jose.util;version="[10,11)",com.sun.jna.*;version="[5,6)",org.slf4j.*;version="[1,2)"&amp;Fragment-Host=msal4j</bundle>
+    <bundle>wrap:mvn:com.azure/azure-identity-broker/${azure-identity-broker.version}$Bundle-SymbolicName=azure-identity-broker&amp;Bundle-Version=${azure-identity-broker.version}&amp;Export-Package=com.azure.identity.broker;version=${azure-identity-broker.version}&amp;Import-Package=com.azure.core.*;version="[1,2)",com.microsoft.aad.msal4j;version="[1,2)",com.microsoft.aad.msal4jbrokers;version="[1,2)"&amp;Fragment-Host=azure-identity</bundle>
+    <bundle>wrap:mvn:com.azure/azure-identity/${azure-identity.version}$Bundle-SymbolicName=azure-identity&amp;Bundle-Version=${azure-identity.version}&amp;Export-Package=com.azure.identity;version=${azure-identity.version}&amp;Import-Package=com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",com.microsoft.aad.msal4j.*;version="[1,2)",com.microsoft.aad.msal4jextensions.*;version="[1,2)",com.sun.jna.*;version="[5,6)",javax.net.ssl,org.reactivestreams;version="[1,2)",reactor.*;version="[3,4)"</bundle>
+  </feature>
+
+  <feature
+      name="azure-resource-management"
+      description="Microsoft Azure Resource Management SDK (base feature)"
+      version="${azure-resourcemanager.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">azure-core</feature>
+    <bundle>wrap:mvn:com.azure/azure-core-management/${azure-management.version}$Bundle-SymbolicName=azure-core-management&amp;Bundle-Version=${azure-management.version}&amp;Export-Package=com.azure.core.management;version=${azure-management.version},com.azure.core.management.exception;version=${azure-management.version},com.azure.core.management.http.policy;version=${azure-management.version},com.azure.core.management.polling;version=${azure-management.version},com.azure.core.management.profile;version=${azure-management.version},com.azure.core.management.provider;version=${azure-management.version},com.azure.core.management.serializer;version=${azure-management.version}&amp;Import-Package=com.azure.core.credential;version="[1,2)",com.azure.core.exception;version="[1,2)",com.azure.core.http.*;version="[1,2)",com.azure.core.models;version="[1,2)",com.azure.core.util.*;version="[1,2)",com.azure.json;version="[1,2)",com.fasterxml.*;version="[2,3)",reactor.core.*;version="[3,4)"</bundle>
+    <bundle>wrap:mvn:com.azure.resourcemanager/azure-resourcemanager-resources/${azure-resourcemanager.version}$Bundle-SymbolicName=azure-resourcemanager&amp;Bundle-Version=${azure-resourcemanager.version}&amp;Export-Package=com.azure.resourcemanager.resources;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluent;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluent.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.arm;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.arm.collection;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.arm.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.collection;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.dag;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.exception;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.model;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.policy;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.rest;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.fluentcore.utils;version=${azure-resourcemanager.version},com.azure.resourcemanager.resources.models;version=${azure-resourcemanager.version}&amp;Import-Package=com.azure.core.management.*;version="[1,2)",com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",org.reactivestreams;version="[1,2)",reactor.*;version="[3,4)"</bundle>
+    <bundle>wrap:mvn:com.azure.resourcemanager/azure-resourcemanager-authorization/${azure-resourcemanager.version}$Bundle-SymbolicName=azure-resourcemanager-authorization&amp;Bundle-Version=${azure-resourcemanager.version}&amp;Export-Package=com.azure.resourcemanager.authorization;version=${azure-resourcemanager.version},com.azure.resourcemanager.authorization.fluent;version=${azure-resourcemanager.version},com.azure.resourcemanager.authorization.fluent.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.authorization.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.authorization.utils;version=${azure-resourcemanager.version}&amp;Import-Package=com.azure.core.management.*;version="[1,2)",com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",org.reactivestreams;version="[1,2)",reactor.*;version="[3,4)"&amp;Fragment-Host=azure-resourcemanager</bundle>
+    <bundle>wrap:mvn:com.azure.resourcemanager/azure-resourcemanager-msi/${azure-resourcemanager.version}$Bundle-SymbolicName=azure-resourcemanager-msi&amp;Bundle-Version=${azure-resourcemanager.version}&amp;Export-Package=com.azure.resourcemanager.msi;version=${azure-resourcemanager.version},com.azure.resourcemanager.msi.fluent;version=${azure-resourcemanager.version},com.azure.resourcemanager.msi.fluent.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.msi.models;version=${azure-resourcemanager.version}&amp;Import-Package=com.azure.core.management.*;version="[1,2)",com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",reactor.*;version="[3,4)"&amp;Fragment-Host=azure-resourcemanager</bundle>
+  </feature>
+
+  <feature
+      name="azure-storage-management"
+      description="Microsoft Azure Storage Management SDK"
+      version="${azure-resourcemanager.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">azure-resource-management</feature>
+    <bundle>wrap:mvn:com.azure.resourcemanager/azure-resourcemanager-storage/${azure-resourcemanager.version}$Bundle-SymbolicName=azure-resourcemanager-storage&amp;Bundle-Version=${azure-resourcemanager.version}&amp;Export-Package=com.azure.resourcemanager.storage;version=${azure-resourcemanager.version},com.azure.resourcemanager.storage.fluent;version=${azure-resourcemanager.version},com.azure.resourcemanager.storage.fluent.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.storage.models;version=${azure-resourcemanager.version}&amp;Import-Package=com.azure.core.management.*;version="[1,2)",com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",reactor.*;version="[3,4)"&amp;Fragment-Host=azure-resourcemanager</bundle>
+  </feature>
+
+  <feature
+      name="azure-network-management"
+      description="Microsoft Azure Storage Management SDK"
+      version="${azure-resourcemanager.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">azure-resource-management</feature>
+    <bundle>wrap:mvn:com.azure.resourcemanager/azure-resourcemanager-network/${azure-resourcemanager.version}$Bundle-SymbolicName=azure-resourcemanager-network&amp;Bundle-Version=${azure-resourcemanager.version}&amp;Export-Package=com.azure.resourcemanager.network;version=${azure-resourcemanager.version},com.azure.resourcemanager.network.fluent;version=${azure-resourcemanager.version},com.azure.resourcemanager.network.fluent.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.network.models;version=${azure-resourcemanager.version}&amp;Import-Package=com.azure.core.management.*;version="[1,2)",com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",org.reactivestreams.*;version="[1,2)",reactor.*;version="[3,4)"&amp;Fragment-Host=azure-resourcemanager</bundle>
+  </feature>
+
+  <feature
+      name="azure-compute-management"
+      description="Microsoft Azure Compute Management SDK"
+      version="${azure-resourcemanager.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">azure-resource-management</feature>
+    <feature prerequisite="true" dependency="false">azure-storage-management</feature>
+    <feature prerequisite="true" dependency="false">azure-network-management</feature>
+    <bundle>wrap:mvn:com.azure.resourcemanager/azure-resourcemanager-compute/${azure-resourcemanager.version}$Bundle-SymbolicName=azure-resourcemanager-compute&amp;Bundle-Version=${azure-resourcemanager.version}&amp;Export-Package=com.azure.resourcemanager.compute;version=${azure-resourcemanager.version},com.azure.resourcemanager.compute.fluent;version=${azure-resourcemanager.version},com.azure.resourcemanager.compute.fluent.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.compute.models;version=${azure-resourcemanager.version}&amp;Import-Package=com.azure.core.management.*;version="[1,2)",com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",org.reactivestreams.*;version="[1,2)",reactor.*;version="[3,4)"&amp;Fragment-Host=azure-resourcemanager</bundle>
   </feature>
 
 </features>
