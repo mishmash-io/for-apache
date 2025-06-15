@@ -33,9 +33,9 @@ public interface CloudHost {
     /**
      * Get RAM size.
      *
-     * @return memory size, in GB, or empty if unknown
+     * @return memory size, in MB, or empty if unknown
      */
-    public Optional<Integer> getMemoryGB();
+    public Optional<Integer> getMemoryMB();
 
     /**
      * Get the number of available CPU cores.
