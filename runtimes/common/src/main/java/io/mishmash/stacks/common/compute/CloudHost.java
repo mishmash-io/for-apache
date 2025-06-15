@@ -19,6 +19,8 @@ package io.mishmash.stacks.common.compute;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.arch.Processor;
+
 /**
  * Represents the resources available on a given compute host.
  */
@@ -43,6 +45,14 @@ public interface CloudHost {
      * @return number of CPU cores or empty if unknown
      */
     public Optional<Integer> getNumCPUCores();
+
+    /**
+     * Get the CPU Architecture and type.
+     *
+     * @return a {@link Processor} instance describing the CPU or empty
+     * when unknown
+     */
+    public Optional<Processor> getCPUArchitecture();
 
     /**
      * Check if this host is virtual or physical.

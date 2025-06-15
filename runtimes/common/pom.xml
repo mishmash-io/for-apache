@@ -21,7 +21,7 @@
     <groupId>io.mishmash.stacks</groupId>
     <artifactId>distributed-computing-stacks</artifactId>
     <version>0.0.1</version>
-    <relativePath>../../../pom.xml</relativePath>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <groupId>io.mishmash.stacks</groupId>
@@ -78,6 +78,13 @@
       </roles>
     </developer>
   </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
