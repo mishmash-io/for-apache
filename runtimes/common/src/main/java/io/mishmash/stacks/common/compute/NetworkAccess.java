@@ -48,12 +48,12 @@ public interface NetworkAccess {
 
     /**
      * If a physical address (like a MAC address) is known the
-     * returned {@link Optional} will contain its string representation.
+     * returned {@link Optional} will contain its bytes.
      *
      * @return an {@link Optional} containing the physical-layer address
      * or an empty {@link Optional} if unknown.
      */
-    public Optional<String> getPhysicalAddress();
+    public Optional<byte[]> getHardwareAddress();
 
     /**
      * If the local address is additionally mapped to an external
