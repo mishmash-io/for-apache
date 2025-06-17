@@ -24,7 +24,7 @@
     <relativePath>../../../pom.xml</relativePath>
   </parent>
 
-  <groupId>io.mishmash.stacks.util</groupId>
+  <groupId>io.mishmash.stacks.osgi</groupId>
   <artifactId>vertx-wrapper</artifactId>
   <version>${vertx.version}</version>
   <packaging>bundle</packaging>

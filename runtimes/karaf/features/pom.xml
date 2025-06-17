@@ -82,11 +82,9 @@
     <azure.version>1.55.4</azure.version>
     <azure-json.version>1.5.0</azure-json.version>
     <azure-xml.version>1.2.0</azure-xml.version>
-    <azure-identity.version>1.16.2</azure-identity.version>
     <azure-identity-broker.version>1.1.15</azure-identity-broker.version>
     <azure-netty.version>1.15.12</azure-netty.version>
     <azure-management.version>1.18.0</azure-management.version>
-    <azure-resourcemanager.version>2.51.0</azure-resourcemanager.version>
     <netty-quic.version>0.0.72.Final</netty-quic.version>
     <nimbus-oidc.version>11.25</nimbus-oidc.version>
     <nimbus-lang-tag.version>1.7</nimbus-lang-tag.version>
@@ -171,10 +169,21 @@
       <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.stacks.util</groupId>
+      <groupId>io.mishmash.stacks.osgi</groupId>
+      <artifactId>vertx-wrapper</artifactId>
+      <version>${vertx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.osgi</groupId>
       <artifactId>protobuf-wrapper</artifactId>
       <version>${protobuf.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.osgi</groupId>
+      <artifactId>stacks-azure-osgi</artifactId>
+      <version>${azure-osgi.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-json</artifactId>

@@ -119,13 +119,13 @@
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.service.component.annotations</artifactId>
-      <version>1.5.1</version>
+      <version>${osgi-ds.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.framework</artifactId>
-      <version>1.10.0</version>
+      <version>${osgi-framework.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

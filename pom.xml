@@ -122,6 +122,17 @@
     <hamcrest.version>3.0</hamcrest.version>
 
     <test.instrumentation.opts></test.instrumentation.opts>
+
+    <osgi-framework.version>1.10.0</osgi-framework.version>
+    <osgi-ds.version>1.5.1</osgi-ds.version>
+
+    <azure-identity.version>1.16.2</azure-identity.version>
+    <azure-resourcemanager.version>2.51.0</azure-resourcemanager.version>
+    <openapi-nullable.version>0.2.6</openapi-nullable.version>
+
+    <azure-utils.version>1.0.0</azure-utils.version>
+    <azure-osgi.version>1.0.0</azure-osgi.version>
+    <stacks-common.version>1.0.0</stacks-common.version>
   </properties>
 
   <modules>
@@ -151,6 +162,7 @@
     <module>runtimes/osgi/quorum-client</module>
     <module>runtimes/osgi/quorum-client-secure</module>
     <module>runtimes/osgi/quorum-server</module>
+    <module>runtimes/osgi/azure</module>
 
     <module>runtimes/karaf/features</module>
   </modules>
@@ -422,6 +434,17 @@
         <artifactId>hamcrest</artifactId>
         <version>${hamcrest.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>io.mishmash.stacks.misc</groupId>
+        <artifactId>azure-utils</artifactId>
+        <version>${azure-utils.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks</groupId>
+        <artifactId>stacks-common</artifactId>
+        <version>${stacks-common.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

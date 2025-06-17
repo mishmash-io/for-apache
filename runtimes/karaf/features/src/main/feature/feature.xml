@@ -103,7 +103,7 @@
     <bundle dependency="true">wrap:mvn:com.google.j2objc/j2objc-annotations/${j2objc.version}$Bundle-SymbolicName=J2ObjC Annotations&amp;Bundle-Version=${j2objc.version}</bundle>
     <bundle dependency="true">mvn:org.jspecify/jspecify/${jspecify.version}</bundle>
     <bundle dependency="true">mvn:jakarta.annotation/jakarta.annotation-api/${jakarta-annotation.version}</bundle>
-    <bundle dependency="true">mvn:io.mishmash.stacks.util/protobuf-wrapper/${protobuf.version}</bundle>
+    <bundle dependency="true">mvn:io.mishmash.stacks.osgi/protobuf-wrapper/${protobuf.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
@@ -125,7 +125,7 @@
     <bundle dependency="true">mvn:io.netty/netty-codec-socks/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.util/vertx-wrapper/${vertx.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.osgi/vertx-wrapper/${vertx.version}</bundle>
   </feature>
 
   <feature
@@ -284,4 +284,27 @@
     <bundle>wrap:mvn:com.azure.resourcemanager/azure-resourcemanager-compute/${azure-resourcemanager.version}$Bundle-SymbolicName=azure-resourcemanager-compute&amp;Bundle-Version=${azure-resourcemanager.version}&amp;Export-Package=com.azure.resourcemanager.compute;version=${azure-resourcemanager.version},com.azure.resourcemanager.compute.fluent;version=${azure-resourcemanager.version},com.azure.resourcemanager.compute.fluent.models;version=${azure-resourcemanager.version},com.azure.resourcemanager.compute.models;version=${azure-resourcemanager.version}&amp;Import-Package=com.azure.core.management.*;version="[1,2)",com.azure.core.*;version="[1,2)",com.azure.json;version="[1,2)",org.reactivestreams.*;version="[1,2)",reactor.*;version="[3,4)"&amp;Fragment-Host=azure-resourcemanager</bundle>
   </feature>
 
+  <feature
+      name="azure-osgi"
+      description="Base Microsoft Azure OSGi Services"
+      version="${azure-osgi.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">wrap</feature>
+    <feature prerequisite="true" dependency="false">scr</feature>
+    <feature prerequisite="true" dependency="false">azure-identity</feature>
+    <feature prerequisite="true" dependency="false">azure-compute-management</feature>
+    <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
+    <bundle dependency="true">mvn:jakarta.annotation/jakarta.annotation-api/${jakarta-annotation.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jackson.version}</bundle>
+    <bundle>wrap:mvn:org.openapitools/jackson-databind-nullable/${openapi-nullable.version}$Bundle-SymbolicName=openapi-jackson-databind-nullable&amp;Bundle-Version=${openapi-nullable.version}&amp;Export-Package=org.openapitools.jackson.nullable;version=${openapi-nullable.version}&amp;Import-Package=com.fasterxml.jackson.*;version="[2,3)",javax.validation.*;resolution:="optional",jakarta.validation.*;resolution:="optional"</bundle>
+    <bundle>mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.osgi/stacks-azure-osgi/${azure-osgi.version}</bundle>
+  </feature>
 </features>
