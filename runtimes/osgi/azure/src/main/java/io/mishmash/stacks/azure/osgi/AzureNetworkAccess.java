@@ -108,7 +108,7 @@ public class AzureNetworkAccess implements NetworkAccess {
             }
         };
 
-    protected AzureNetworkAccess(
+    public AzureNetworkAccess(
             final String addr,
             final MemoizedIMDSInstance metadataService,
             final MemoizedIMDSLoadBalancer loadBalancerService) {

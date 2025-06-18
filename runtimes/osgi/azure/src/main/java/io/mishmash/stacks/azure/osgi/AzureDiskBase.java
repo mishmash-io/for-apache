@@ -151,7 +151,8 @@ public abstract class AzureDiskBase implements Storage {
                 modelMemo.uncheckedGet());
     }
 
-    protected String getId() {
+    @Override
+    public String getId() {
         return idMemo.uncheckedGet();
     }
 

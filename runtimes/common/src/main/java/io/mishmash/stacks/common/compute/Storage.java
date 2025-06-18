@@ -30,6 +30,13 @@ import java.util.Optional;
  */
 public interface Storage {
     /**
+     * Get an id for the disk.
+     *
+     * @return an String id for the disk
+     */
+    public String getId();
+
+    /**
      * Get the storage tier, if available.
      *
      * @return the tier name or empty if unavailable
