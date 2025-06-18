@@ -183,6 +183,11 @@
       <artifactId>stacks-azure-osgi</artifactId>
       <version>${azure-osgi.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.osgi</groupId>
+      <artifactId>stacks-simplecloud-osgi</artifactId>
+      <version>${simplecloud.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
