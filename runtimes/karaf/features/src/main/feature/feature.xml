@@ -103,7 +103,7 @@
     <bundle dependency="true">wrap:mvn:com.google.j2objc/j2objc-annotations/${j2objc.version}$Bundle-SymbolicName=J2ObjC Annotations&amp;Bundle-Version=${j2objc.version}</bundle>
     <bundle dependency="true">mvn:org.jspecify/jspecify/${jspecify.version}</bundle>
     <bundle dependency="true">mvn:jakarta.annotation/jakarta.annotation-api/${jakarta-annotation.version}</bundle>
-    <bundle dependency="true">mvn:io.mishmash.stacks.osgi/protobuf-wrapper/${protobuf.version}</bundle>
+    <bundle dependency="true">mvn:io.mishmash.stacks.osgi/wrapper-protobuf/${protobuf.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
@@ -125,7 +125,7 @@
     <bundle dependency="true">mvn:io.netty/netty-codec-socks/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.osgi/vertx-wrapper/${vertx.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.osgi/wrapper-vertx/${vertx.version}</bundle>
   </feature>
 
   <feature
@@ -285,9 +285,9 @@
   </feature>
 
   <feature
-      name="azure-osgi"
+      name="compute-azure"
       description="Base Microsoft Azure OSGi Services"
-      version="${azure-osgi.version}">
+      version="${compute-azure.version}">
     <details>
       Details on 
       
@@ -305,13 +305,13 @@
     <bundle dependency="true">mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jackson.version}</bundle>
     <bundle dependency="true">wrap:mvn:org.openapitools/jackson-databind-nullable/${openapi-nullable.version}$Bundle-SymbolicName=openapi-jackson-databind-nullable&amp;Bundle-Version=${openapi-nullable.version}&amp;Export-Package=org.openapitools.jackson.nullable;version=${openapi-nullable.version}&amp;Import-Package=com.fasterxml.jackson.*;version="[2,3)",javax.validation.*;resolution:="optional",jakarta.validation.*;resolution:="optional"</bundle>
     <bundle dependency="true">mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.osgi/stacks-azure-osgi/${azure-osgi.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.compute/compute-azure-osgi/${compute-azure.version}</bundle>
   </feature>
 
   <feature
-      name="simplecompute"
+      name="compute-simple"
       description="Simple, configuration-based compute OSGi Services"
-      version="${simplecloud.version}">
+      version="${compute-simple.version}">
     <details>
       Details on 
       
@@ -320,6 +320,6 @@
     <feature prerequisite="true" dependency="false">scr</feature>
     <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
     <bundle dependency="true">mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.osgi/stacks-simplecompute-osgi/${simplecloud.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.osgi/stacks-simplecompute-osgi/${compute-simple.version}</bundle>
   </feature>
 </features>

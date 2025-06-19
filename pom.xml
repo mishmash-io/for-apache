@@ -131,9 +131,9 @@
     <openapi-nullable.version>0.2.6</openapi-nullable.version>
 
     <azure-utils.version>1.0.0</azure-utils.version>
-    <azure-osgi.version>1.0.0</azure-osgi.version>
+    <compute-azure.version>1.0.0</compute-azure.version>
     <stacks-common.version>1.0.0</stacks-common.version>
-    <simplecloud.version>1.0.0</simplecloud.version>
+    <compute-simple.version>1.0.0</compute-simple.version>
   </properties>
 
   <modules>
@@ -158,13 +158,13 @@
 
     <module>runtimes/common</module>
 
-    <module>runtimes/osgi/protobuf-wrapper</module>
-    <module>runtimes/osgi/vertx-wrapper</module>
+    <module>runtimes/osgi/wrapper-protobuf</module>
+    <module>runtimes/osgi/wrapper-vertx</module>
     <module>runtimes/osgi/quorum-client</module>
     <module>runtimes/osgi/quorum-client-secure</module>
     <module>runtimes/osgi/quorum-server</module>
-    <module>runtimes/osgi/azure</module>
-    <module>runtimes/osgi/simple-compute</module>
+    <module>runtimes/osgi/compute-azure</module>
+    <module>runtimes/osgi/compute-simple</module>
 
     <module>runtimes/karaf/features</module>
   </modules>

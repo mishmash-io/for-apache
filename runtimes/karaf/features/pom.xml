@@ -170,23 +170,23 @@
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.osgi</groupId>
-      <artifactId>vertx-wrapper</artifactId>
+      <artifactId>wrapper-vertx</artifactId>
       <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.osgi</groupId>
-      <artifactId>protobuf-wrapper</artifactId>
+      <artifactId>wrapper-protobuf</artifactId>
       <version>${protobuf.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.stacks.osgi</groupId>
-      <artifactId>stacks-azure-osgi</artifactId>
-      <version>${azure-osgi.version}</version>
+      <groupId>io.mishmash.stacks.compute</groupId>
+      <artifactId>compute-azure-osgi</artifactId>
+      <version>${compute-azure.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.mishmash.stacks.osgi</groupId>
-      <artifactId>stacks-simplecompute-osgi</artifactId>
-      <version>${simplecloud.version}</version>
+      <groupId>io.mishmash.stacks.compute</groupId>
+      <artifactId>compute-simple-osgi</artifactId>
+      <version>${compute-simple.version}</version>
     </dependency>
 
     <dependency>
