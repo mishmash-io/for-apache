@@ -320,7 +320,7 @@
     <feature prerequisite="true" dependency="false">scr</feature>
     <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
     <bundle dependency="true">mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.osgi/stacks-simplecompute-osgi/${compute-simple.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.compute/compute-simple-osgi/${compute-simple.version}</bundle>
   </feature>
 
   <feature
