@@ -188,6 +188,12 @@
       <artifactId>compute-simple-osgi</artifactId>
       <version>${compute-simple.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.compute</groupId>
+      <artifactId>compute-shell-karaf</artifactId>
+      <version>${stacks-common.version}</version>
+    </dependency>
+
 
     <dependency>
       <groupId>com.azure</groupId>

@@ -168,6 +168,7 @@
     <module>runtimes/osgi/compute-simple</module>
 
     <module>runtimes/karaf/features</module>
+    <module>runtimes/karaf/compute-shell</module>
   </modules>
 
   <dependencyManagement>

@@ -322,4 +322,20 @@
     <bundle dependency="true">mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
     <bundle>mvn:io.mishmash.stacks.osgi/stacks-simplecompute-osgi/${compute-simple.version}</bundle>
   </feature>
+
+  <feature
+      name="compute-shell"
+      description="Apache Karaf shell integration for Stacks compute"
+      version="${stacks-common.version}">
+    <details>
+      Details on 
+      
+      Quorum coordination server
+    </details>
+    <feature prerequisite="true" dependency="false">scr</feature>
+    <feature prerequisite="true" dependency="false">shell</feature>
+    <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
+    <bundle dependency="true">mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.compute/compute-shell-karaf/${stacks-common.version}</bundle>
+  </feature>
 </features>
