@@ -15,7 +15,7 @@
  *
  */
 
-package io.mishmash.stacks.simplecloud.osgi;
+package io.mishmash.stacks.simplecompute.osgi;
 
 import java.util.Map;
 import java.util.Optional;
@@ -25,20 +25,20 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.component.annotations.Modified;
 
-import io.mishmash.stacks.common.compute.CloudProvider;
+import io.mishmash.stacks.common.compute.ComputeProvider;
 
 @Component(
-        service={CloudProvider.class, ConfigCloudProvider.class},
+        service={ComputeProvider.class, ConfigComputeProvider.class},
         immediate=true,
         configurationPolicy=ConfigurationPolicy.OPTIONAL,
-        configurationPid={ConfigCloudProvider.CONFIG_PROVIDER_PID},
+        configurationPid={ConfigComputeProvider.CONFIG_PROVIDER_PID},
         property={
-                ConfigCloudProvider.CONFIG_PROVIDER_PROP_NAME
+                ConfigComputeProvider.CONFIG_PROVIDER_PROP_NAME
                     + "="
-                    + ConfigCloudProvider.STACKS_PROVIDER_CONFIG})
-public class ConfigCloudProvider implements CloudProvider {
+                    + ConfigComputeProvider.STACKS_PROVIDER_CONFIG})
+public class ConfigComputeProvider implements ComputeProvider {
 
-    public static final String CONFIG_PROVIDER_PID = "stacksProvider";
+    public static final String CONFIG_PROVIDER_PID = "computeProvider";
 
     public static final String CONFIG_PROVIDER_PROP_NAME = "name";
 

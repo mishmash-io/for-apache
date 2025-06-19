@@ -15,7 +15,7 @@
  *
  */
 
-package io.mishmash.stacks.simplecloud.osgi;
+package io.mishmash.stacks.simplecompute.osgi;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -32,20 +32,20 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
-import io.mishmash.stacks.common.compute.CloudHost;
-import io.mishmash.stacks.common.compute.CloudProvider;
+import io.mishmash.stacks.common.compute.ComputeHost;
+import io.mishmash.stacks.common.compute.ComputeProvider;
 
 @Component(
-        service={CloudHost.class},
+        service={ComputeHost.class},
         immediate=true,
         configurationPolicy=ConfigurationPolicy.REQUIRE,
-        configurationPid={ConfigCloudHost.CONFIG_HOST_PID})
-public class ConfigCloudHost implements CloudHost {
+        configurationPid={ConfigComputeHost.CONFIG_HOST_PID})
+public class ConfigComputeHost implements ComputeHost {
 
     private static final Logger LOG = Logger.getLogger(
-            ConfigCloudHost.class.getName());
+            ConfigComputeHost.class.getName());
 
-    public static final String CONFIG_HOST_PID = "stacksHost";
+    public static final String CONFIG_HOST_PID = "computeHost";
 
     public static final String CONFIG_HOST_PROP_ID = "id";
     public static final String CONFIG_HOST_PROP_MEM = "memoryMB";
@@ -56,7 +56,7 @@ public class ConfigCloudHost implements CloudHost {
     public static final String CONFIG_HOST_PROP_MODEL = "model";
 
     @Reference
-    private ConfigCloudProvider provider;
+    private ConfigComputeProvider provider;
 
     private String servicePid;
     private String id;
@@ -88,7 +88,7 @@ public class ConfigCloudHost implements CloudHost {
             return Optional.of((int)
                     (Runtime
                             .getRuntime()
-                            .totalMemory() / 1024));
+                            .totalMemory() / 1024 / 1024));
         }
 
         try {
@@ -188,7 +188,7 @@ public class ConfigCloudHost implements CloudHost {
     }
 
     @Override
-    public CloudProvider getProvider() {
+    public ComputeProvider getProvider() {
         return provider;
     }
 

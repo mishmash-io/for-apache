@@ -15,7 +15,7 @@
  *
  */
 
-package io.mishmash.stacks.simplecloud.osgi;
+package io.mishmash.stacks.simplecompute.osgi;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -44,7 +44,7 @@ public class ConfigNetworkAccess implements NetworkAccess {
     private static final Logger LOG = Logger.getLogger(
             ConfigNetworkAccess.class.getName());
 
-    public static final String CONFIG_NETWORK_PID = "stacksNetwork";
+    public static final String CONFIG_NETWORK_PID = "computeNetwork";
 
     public static final String CONFIG_NETWORK_PROP_INTERNAL_ADDR =
             "internalAddress";

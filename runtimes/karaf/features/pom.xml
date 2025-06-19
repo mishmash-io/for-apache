@@ -185,7 +185,7 @@
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.osgi</groupId>
-      <artifactId>stacks-simplecloud-osgi</artifactId>
+      <artifactId>stacks-simplecompute-osgi</artifactId>
       <version>${simplecloud.version}</version>
     </dependency>
 

@@ -15,4 +15,4 @@
  *
  */
 
-package io.mishmash.stacks.simplecloud.osgi;
+package io.mishmash.stacks.simplecompute.osgi;

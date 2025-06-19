@@ -53,12 +53,12 @@ import io.mishmash.gen.openapi.azure.imds.client.model.Network;
 import io.mishmash.gen.openapi.azure.imds.client.model.NetworkInterface;
 import io.mishmash.gen.openapi.azure.imds.client.model.StorageProfile;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
-import io.mishmash.stacks.common.compute.CloudProvider;
+import io.mishmash.stacks.common.compute.ComputeProvider;
 import io.mishmash.stacks.common.compute.NetworkAccess;
 import io.mishmash.stacks.common.compute.Storage;
 
-@Component(service={CloudProvider.class, AzureProvider.class}, immediate=true)
-public class AzureProvider implements CloudProvider {
+@Component(service={ComputeProvider.class, AzureProvider.class}, immediate=true)
+public class AzureProvider implements ComputeProvider {
 
     private static final Logger LOG = Logger.getLogger(
             AzureProvider.class.getName());

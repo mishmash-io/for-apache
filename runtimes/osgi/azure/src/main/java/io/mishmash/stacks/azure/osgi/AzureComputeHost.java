@@ -36,11 +36,11 @@ import io.mishmash.gen.openapi.azure.imds.client.model.Instance;
 import io.mishmash.gen.openapi.azure.imds.client.model.TagsProperties;
 import io.mishmash.stacks.azure.utils.AzureConstants;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
-import io.mishmash.stacks.common.compute.CloudHost;
-import io.mishmash.stacks.common.compute.CloudProvider;
+import io.mishmash.stacks.common.compute.ComputeHost;
+import io.mishmash.stacks.common.compute.ComputeProvider;
 
-@Component(service={CloudHost.class}, immediate=true)
-public class AzureCloudHost implements CloudHost {
+@Component(service={ComputeHost.class}, immediate=true)
+public class AzureComputeHost implements ComputeHost {
 
     protected static final String VM_SKU_CAPABILITY_CPUS = "vCPUs";
     protected static final String VM_SKU_CAPABILITY_MEM_SIZE = "MemoryGB";
@@ -104,7 +104,7 @@ public class AzureCloudHost implements CloudHost {
         };
 
     @Activate
-    public AzureCloudHost(
+    public AzureComputeHost(
             @Reference final MemoizedIMDSInstance metadataService,
             @Reference final AzureCompute computeService,
             @Reference final AzureProvider azureProvider) {
@@ -185,7 +185,7 @@ public class AzureCloudHost implements CloudHost {
     }
 
     @Override
-    public CloudProvider getProvider() {
+    public ComputeProvider getProvider() {
         return azure;
     }
 }

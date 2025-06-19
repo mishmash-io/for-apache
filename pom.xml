@@ -164,7 +164,7 @@
     <module>runtimes/osgi/quorum-client-secure</module>
     <module>runtimes/osgi/quorum-server</module>
     <module>runtimes/osgi/azure</module>
-    <module>runtimes/osgi/simple-cloud</module>
+    <module>runtimes/osgi/simple-compute</module>
 
     <module>runtimes/karaf/features</module>
   </modules>

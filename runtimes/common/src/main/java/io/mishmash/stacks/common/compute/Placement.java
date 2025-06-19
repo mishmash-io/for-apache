@@ -20,7 +20,7 @@ package io.mishmash.stacks.common.compute;
 import java.util.Optional;
 
 /**
- * A placement of a host within a {@link CloudProvider}.
+ * A placement of a host within a {@link ComputeProvider}.
  *
  * Placement instances are used to calculate the topology of a
  * running cluster which in turn allows to better distribute data
@@ -34,7 +34,7 @@ import java.util.Optional;
  * hosts with low network delays for optimal performance, or hosts that
  * are highly unlikely to fail at the same time (for highest availability).
  *
- * {@link CloudProvider}s may differ in how they organize their networks
+ * {@link ComputeProvider}s may differ in how they organize their networks
  * and data centers, but typically physical proximity will be represented
  * by a {@link PlacementRegion} -> {@link PlacementZone} ->
  * {@link PlacementGroup} hierarchy.
@@ -104,8 +104,8 @@ public interface Placement {
     /**
      * Get the cloud provider for this placement.
      *
-     * @return a {@link CloudProvider} instance
+     * @return a {@link ComputeProvider} instance
      */
-    public CloudProvider getProvider();
+    public ComputeProvider getProvider();
 
 }

@@ -24,7 +24,7 @@ import org.apache.commons.lang3.arch.Processor;
 /**
  * Represents the resources available on a given compute host.
  */
-public interface CloudHost {
+public interface ComputeHost {
     /**
      * Get an id of this host.
      *
@@ -78,9 +78,9 @@ public interface CloudHost {
     public Optional<String> getModel();
 
     /**
-     * Get the {@link CloudProvider}.
+     * Get the {@link ComputeProvider}.
      *
      * @return the cloud provider
      */
-    public CloudProvider getProvider();
+    public ComputeProvider getProvider();
 }

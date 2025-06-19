@@ -15,7 +15,7 @@
  *
  */
 
-package io.mishmash.stacks.simplecloud.osgi;
+package io.mishmash.stacks.simplecompute.osgi;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -41,7 +41,7 @@ public class ConfigStorage implements Storage {
     private static final Logger LOG = Logger.getLogger(
             ConfigStorage.class.getName());
 
-    public static final String CONFIG_STORAGE_PID = "stacksStorage";
+    public static final String CONFIG_STORAGE_PID = "computeStorage";
 
     public static final String CONFIG_STORAGE_PROP_ID = "id";
     public static final String CONFIG_STORAGE_PROP_TIER = "tier";

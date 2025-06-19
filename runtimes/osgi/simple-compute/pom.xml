@@ -25,11 +25,11 @@
   </parent>
 
   <groupId>io.mishmash.stacks.osgi</groupId>
-  <artifactId>stacks-simplecloud-osgi</artifactId>
+  <artifactId>stacks-simplecompute-osgi</artifactId>
   <version>${simplecloud.version}</version>
   <packaging>bundle</packaging>
 
-  <name>Simple, configuration-based OSGi runtime package for running stacks</name>
+  <name>Simple, configuration-based OSGi compute package for running stacks</name>
   <description>
     A minimal Quorum coordination client for high-availability clustering.
 
@@ -121,8 +121,8 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <configuration>
           <instructions>
-            <Export-Package>io.mishmash.stacks.simplecloud.*</Export-Package>
-            <Import-Package>!io.mishmash.stacks.simplecloud.*,*</Import-Package>
+            <Export-Package>io.mishmash.stacks.simplecompute.*</Export-Package>
+            <Import-Package>!io.mishmash.stacks.simplecompute.*,*</Import-Package>
           </instructions>
         </configuration>
       </plugin>

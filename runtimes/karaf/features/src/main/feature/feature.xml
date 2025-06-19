@@ -309,8 +309,8 @@
   </feature>
 
   <feature
-      name="simplecloud"
-      description="Simple, configuration-based cloud OSGi Services"
+      name="simplecompute"
+      description="Simple, configuration-based compute OSGi Services"
       version="${simplecloud.version}">
     <details>
       Details on 
@@ -320,6 +320,6 @@
     <feature prerequisite="true" dependency="false">scr</feature>
     <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
     <bundle dependency="true">mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.osgi/stacks-simplecloud-osgi/${simplecloud.version}</bundle>
+    <bundle>mvn:io.mishmash.stacks.osgi/stacks-simplecompute-osgi/${simplecloud.version}</bundle>
   </feature>
 </features>

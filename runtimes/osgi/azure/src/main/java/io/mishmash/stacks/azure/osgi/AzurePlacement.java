@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Reference;
 import io.mishmash.gen.openapi.azure.imds.client.model.Compute;
 import io.mishmash.gen.openapi.azure.imds.client.model.Instance;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
-import io.mishmash.stacks.common.compute.CloudProvider;
+import io.mishmash.stacks.common.compute.ComputeProvider;
 import io.mishmash.stacks.common.compute.Placement;
 import io.mishmash.stacks.common.compute.PlacementDomain;
 import io.mishmash.stacks.common.compute.PlacementGeography;
@@ -143,7 +143,7 @@ public class AzurePlacement implements Placement {
     }
 
     @Override
-    public CloudProvider getProvider() {
+    public ComputeProvider getProvider() {
         return azure;
     }
 }

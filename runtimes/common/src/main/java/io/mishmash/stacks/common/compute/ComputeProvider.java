@@ -20,7 +20,7 @@ package io.mishmash.stacks.common.compute;
 /**
  * A cloud - like Azure, AWS, etc.
  */
-public interface CloudProvider {
+public interface ComputeProvider {
 
     /**
      * Returns a name for this provider.

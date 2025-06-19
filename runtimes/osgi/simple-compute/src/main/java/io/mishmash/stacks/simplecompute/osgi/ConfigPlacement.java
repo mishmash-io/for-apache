@@ -15,7 +15,7 @@
  *
  */
 
-package io.mishmash.stacks.simplecloud.osgi;
+package io.mishmash.stacks.simplecompute.osgi;
 
 import java.util.Map;
 import java.util.Optional;
@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.ConfigurationPolicy;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
-import io.mishmash.stacks.common.compute.CloudProvider;
+import io.mishmash.stacks.common.compute.ComputeProvider;
 import io.mishmash.stacks.common.compute.Placement;
 import io.mishmash.stacks.common.compute.PlacementDomain;
 import io.mishmash.stacks.common.compute.PlacementGeography;
@@ -42,7 +42,7 @@ import io.mishmash.stacks.common.compute.PlacementZone;
         configurationPid={ConfigPlacement.CONFIG_PLACEMENT_PID})
 public class ConfigPlacement implements Placement {
 
-    public static final String CONFIG_PLACEMENT_PID = "stacksPlacement";
+    public static final String CONFIG_PLACEMENT_PID = "computePlacement";
 
     public static final String CONFIG_PLACEMENT_PROP_GEO = "geography";
     public static final String CONFIG_PLACEMENT_PROP_JURISDICTION =
@@ -56,7 +56,7 @@ public class ConfigPlacement implements Placement {
             "faultDomain";
 
     @Reference
-    private ConfigCloudProvider provider;
+    private ConfigComputeProvider provider;
 
     //private String servicePid;
     private String geography;
@@ -156,7 +156,7 @@ public class ConfigPlacement implements Placement {
     }
 
     @Override
-    public CloudProvider getProvider() {
+    public ComputeProvider getProvider() {
         return provider;
     }
 
