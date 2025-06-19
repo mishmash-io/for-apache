@@ -85,7 +85,7 @@ public class AzureDataDisk extends AzureDiskBase {
 
     @Override
     public Optional<URI> getURI() {
-        // TODO Auto-generated method stub
-        return null;
+        // TODO Use the LUN to find the mount point
+        return Optional.empty();
     }
 }

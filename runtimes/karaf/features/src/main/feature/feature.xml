@@ -297,6 +297,10 @@
     <feature prerequisite="true" dependency="false">scr</feature>
     <feature prerequisite="true" dependency="false">azure-identity</feature>
     <feature prerequisite="true" dependency="false">azure-compute-management</feature>
+    <conditional>
+      <condition>shell</condition>
+      <bundle>mvn:io.mishmash.stacks.compute/compute-shell-karaf/${stacks-common.version}</bundle>
+    </conditional>
     <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
     <bundle dependency="true">mvn:jakarta.annotation/jakarta.annotation-api/${jakarta-annotation.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
@@ -318,6 +322,10 @@
       Quorum coordination server
     </details>
     <feature prerequisite="true" dependency="false">scr</feature>
+    <conditional>
+      <condition>shell</condition>
+      <bundle>mvn:io.mishmash.stacks.compute/compute-shell-karaf/${stacks-common.version}</bundle>
+    </conditional>
     <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
     <bundle dependency="true">mvn:io.mishmash.stacks/stacks-common/${stacks-common.version}</bundle>
     <bundle>mvn:io.mishmash.stacks.compute/compute-simple-osgi/${compute-simple.version}</bundle>
