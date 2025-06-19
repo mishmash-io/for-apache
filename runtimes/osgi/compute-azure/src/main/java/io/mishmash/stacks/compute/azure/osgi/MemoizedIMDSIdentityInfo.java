@@ -26,10 +26,10 @@ import java.util.logging.Logger;
 
 import org.osgi.service.component.annotations.Component;
 
-import io.mishmash.gen.openapi.azure.imds.ApiException;
-import io.mishmash.gen.openapi.azure.imds.client.api.GetMetadataInformationApi;
-import io.mishmash.gen.openapi.azure.imds.client.model.IdentityInfoResponse;
-import io.mishmash.stacks.azure.utils.AzureConstants;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.ApiException;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.api.GetMetadataInformationApi;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.IdentityInfoResponse;
+import io.mishmash.stacks.compute.azure.utils.AzureConstants;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
 
 @Component(service={MemoizedIMDSIdentityInfo.class}, immediate=true)

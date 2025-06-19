@@ -130,15 +130,16 @@
     <azure-resourcemanager.version>2.51.0</azure-resourcemanager.version>
     <openapi-nullable.version>0.2.6</openapi-nullable.version>
 
-    <azure-utils.version>1.0.0</azure-utils.version>
     <compute-azure.version>1.0.0</compute-azure.version>
+    <compute-azure-utils.version>1.0.0</compute-azure-utils.version>
     <stacks-common.version>1.0.0</stacks-common.version>
     <compute-simple.version>1.0.0</compute-simple.version>
   </properties>
 
   <modules>
     <module>misc/openid</module>
-    <module>misc/azure-utils</module>
+
+    <module>compute/compute-azure-utils</module>
 
     <module>patched-projects/zookeeper</module>
     <module>patched-projects/hadoop</module>
@@ -439,9 +440,9 @@
       </dependency>
 
       <dependency>
-        <groupId>io.mishmash.stacks.misc</groupId>
-        <artifactId>azure-utils</artifactId>
-        <version>${azure-utils.version}</version>
+        <groupId>io.mishmash.stacks.compute</groupId>
+        <artifactId>compute-azure-utils</artifactId>
+        <version>${compute-azure-utils.version}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks</groupId>

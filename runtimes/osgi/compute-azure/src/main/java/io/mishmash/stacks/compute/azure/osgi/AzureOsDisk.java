@@ -24,11 +24,11 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import io.mishmash.gen.openapi.azure.imds.client.model.Compute;
-import io.mishmash.gen.openapi.azure.imds.client.model.DiffDiskSettings;
-import io.mishmash.gen.openapi.azure.imds.client.model.ManagedDisk;
-import io.mishmash.gen.openapi.azure.imds.client.model.OsDisk;
-import io.mishmash.gen.openapi.azure.imds.client.model.StorageProfile;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Compute;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.DiffDiskSettings;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.ManagedDisk;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.OsDisk;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.StorageProfile;
 import io.mishmash.stacks.compute.common.Storage;
 
 @Component(service={Storage.class}, immediate=true)

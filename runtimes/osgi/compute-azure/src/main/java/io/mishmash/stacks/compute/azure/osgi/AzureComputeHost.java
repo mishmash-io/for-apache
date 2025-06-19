@@ -31,10 +31,10 @@ import org.osgi.service.component.annotations.Reference;
 import com.azure.resourcemanager.compute.models.ComputeSku;
 import com.azure.resourcemanager.compute.models.ResourceSkuCapabilities;
 
-import io.mishmash.gen.openapi.azure.imds.client.model.Compute;
-import io.mishmash.gen.openapi.azure.imds.client.model.Instance;
-import io.mishmash.gen.openapi.azure.imds.client.model.TagsProperties;
-import io.mishmash.stacks.azure.utils.AzureConstants;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Compute;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Instance;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.TagsProperties;
+import io.mishmash.stacks.compute.azure.utils.AzureConstants;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
 import io.mishmash.stacks.compute.common.ComputeHost;
 import io.mishmash.stacks.compute.common.ComputeProvider;

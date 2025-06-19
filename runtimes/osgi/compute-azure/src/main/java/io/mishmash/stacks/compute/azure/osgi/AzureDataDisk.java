@@ -20,10 +20,10 @@ package io.mishmash.stacks.compute.azure.osgi;
 import java.net.URI;
 import java.util.Optional;
 
-import io.mishmash.gen.openapi.azure.imds.client.model.Compute;
-import io.mishmash.gen.openapi.azure.imds.client.model.DataDisk;
-import io.mishmash.gen.openapi.azure.imds.client.model.ManagedDisk;
-import io.mishmash.gen.openapi.azure.imds.client.model.StorageProfile;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Compute;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.DataDisk;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.ManagedDisk;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.StorageProfile;
 
 public class AzureDataDisk extends AzureDiskBase {
 

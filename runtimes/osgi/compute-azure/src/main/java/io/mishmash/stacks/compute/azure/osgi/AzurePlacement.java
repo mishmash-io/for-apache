@@ -25,8 +25,8 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import io.mishmash.gen.openapi.azure.imds.client.model.Compute;
-import io.mishmash.gen.openapi.azure.imds.client.model.Instance;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Compute;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Instance;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
 import io.mishmash.stacks.compute.common.ComputeProvider;
 import io.mishmash.stacks.compute.common.Placement;

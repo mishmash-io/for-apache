@@ -31,9 +31,9 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.models.AzureCloud;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 
-import io.mishmash.gen.openapi.azure.imds.client.model.Compute;
-import io.mishmash.gen.openapi.azure.imds.client.model.IdentityInfoResponse;
-import io.mishmash.gen.openapi.azure.imds.client.model.Instance;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Compute;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.IdentityInfoResponse;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Instance;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
 
 public abstract class AzureAPIBase {

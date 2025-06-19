@@ -15,7 +15,7 @@
  *
  */
 
-package io.mishmash.stacks.azure.utils;
+package io.mishmash.stacks.compute.azure.utils;
 
 public class AzureConstants {
 

@@ -81,8 +81,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.mishmash.stacks.misc</groupId>
-      <artifactId>azure-utils</artifactId>
+      <groupId>io.mishmash.stacks.compute</groupId>
+      <artifactId>compute-azure-utils</artifactId>
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks</groupId>
@@ -135,8 +135,8 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <configuration>
           <instructions>
-            <Export-Package>io.mishmash.stacks.compute.azure.*,io.mishmash.gen.openapi.*</Export-Package>
-            <Import-Package>!io.mishmash.stacks.compute.azure.*,!io.mishmash.gen.openapi.*,*</Import-Package>
+            <Export-Package>io.mishmash.stacks.compute.azure.*</Export-Package>
+            <Import-Package>!io.mishmash.stacks.compute.azure.*,*</Import-Package>
           </instructions>
         </configuration>
       </plugin>

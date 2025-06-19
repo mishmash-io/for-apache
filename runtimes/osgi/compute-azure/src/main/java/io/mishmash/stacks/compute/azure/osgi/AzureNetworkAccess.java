@@ -30,16 +30,16 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
-import io.mishmash.gen.openapi.azure.imds.client.model.Instance;
-import io.mishmash.gen.openapi.azure.imds.client.model.Ipv4Properties;
-import io.mishmash.gen.openapi.azure.imds.client.model.Ipv6Properties;
-import io.mishmash.gen.openapi.azure.imds.client.model.LoadBalancerAddressMapping;
-import io.mishmash.gen.openapi.azure.imds.client.model.LoadBalancerLoadbalancer;
-import io.mishmash.gen.openapi.azure.imds.client.model.Network;
-import io.mishmash.gen.openapi.azure.imds.client.model.NetworkInterface;
-import io.mishmash.gen.openapi.azure.imds.client.model.NetworkInterfaceIpv4;
-import io.mishmash.gen.openapi.azure.imds.client.model.NetworkInterfaceIpv6;
-import io.mishmash.gen.openapi.azure.imds.client.model.SubnetProperties;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Instance;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Ipv4Properties;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Ipv6Properties;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.LoadBalancerAddressMapping;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.LoadBalancerLoadbalancer;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Network;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.NetworkInterface;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.NetworkInterfaceIpv4;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.NetworkInterfaceIpv6;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.SubnetProperties;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
 import io.mishmash.stacks.compute.common.NetworkAccess;
 

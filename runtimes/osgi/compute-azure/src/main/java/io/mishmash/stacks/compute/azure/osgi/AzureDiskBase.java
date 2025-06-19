@@ -25,9 +25,9 @@ import java.util.concurrent.CompletableFuture;
 import com.azure.resourcemanager.compute.models.ComputeSku;
 import com.azure.resourcemanager.compute.models.Disk;
 
-import io.mishmash.gen.openapi.azure.imds.client.model.Compute;
-import io.mishmash.gen.openapi.azure.imds.client.model.Instance;
-import io.mishmash.stacks.azure.utils.AzureConstants;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Compute;
+import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Instance;
+import io.mishmash.stacks.compute.azure.utils.AzureConstants;
 import io.mishmash.stacks.common.SoftRefMemoizableAction;
 import io.mishmash.stacks.compute.common.Storage;
 
