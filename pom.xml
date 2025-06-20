@@ -96,7 +96,8 @@
     <jackson.version>2.19.0</jackson.version>
     <stax2-api.version>4.2.2</stax2-api.version>
     <woodstox.version>7.1.1</woodstox.version>
-    <jetty.version>12.0.21</jetty.version>
+    <jetty.version>12.0.22</jetty.version>
+    <jakarta-servlet.version>6.0.0</jakarta-servlet.version>
     <netty.version>4.2.2.Final</netty.version>
     <nimbus-jwt.version>10.3</nimbus-jwt.version>
     <minidev-smart.version>2.5.2</minidev-smart.version>
@@ -116,7 +117,7 @@
     <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
     <vertx.version>5.0.0</vertx.version>
 
-    <junit.version>5.13.0</junit.version>
+    <junit.version>5.13.1</junit.version>
     <junit-platform.version>1.13.1</junit-platform.version>
     <mockito.version>5.18.0</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
