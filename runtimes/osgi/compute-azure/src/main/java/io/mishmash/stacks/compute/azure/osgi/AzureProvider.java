@@ -78,6 +78,7 @@ public class AzureProvider implements ComputeProvider {
     private static final Duration MAX_AGE_RES =
             Duration.of(10, ChronoUnit.SECONDS);
 
+    private MemoizedLSBLK lsblk;
     private MemoizedIMDSInstance instance;
     private MemoizedIMDSLoadBalancer lb;
     private AzureCompute compute;
@@ -125,9 +126,11 @@ public class AzureProvider implements ComputeProvider {
             final BundleContext ctx,
             @Reference final MemoizedIMDSInstance imdsInstance,
             @Reference final MemoizedIMDSLoadBalancer loadBalancer,
+            @Reference final MemoizedLSBLK lsblkAction,
             @Reference final AzureCompute azureCompute) {
         bundleCtx = ctx;
         instance = imdsInstance;
+        lsblk = lsblkAction;
         lb = loadBalancer;
         compute = azureCompute;
 
@@ -325,7 +328,7 @@ public class AzureProvider implements ComputeProvider {
     protected ServiceRegistration<Storage> registerDataDisk(
             final String lun) {
         try {
-            AzureDataDisk d = new AzureDataDisk(lun, instance, compute);
+            AzureDataDisk d = new AzureDataDisk(lun, instance, lsblk, compute);
             ServiceRegistration<Storage> reg = bundleCtx
                     .registerService(
                             Storage.class,

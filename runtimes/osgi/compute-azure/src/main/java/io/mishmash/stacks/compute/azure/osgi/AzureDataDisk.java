@@ -18,7 +18,11 @@
 package io.mishmash.stacks.compute.azure.osgi;
 
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.Compute;
 import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.DataDisk;
@@ -27,14 +31,20 @@ import io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model.StoragePro
 
 public class AzureDataDisk extends AzureDiskBase {
 
+    private static final Logger LOG = Logger.getLogger(
+            AzureDataDisk.class.getName());
+
     private String lun;
+    private MemoizedLSBLK lsblk;
 
     public AzureDataDisk(
             final String diskLUN,
             final MemoizedIMDSInstance imds,
+            final MemoizedLSBLK lsblkAction,
             final AzureCompute compute) {
         super(imds, compute);
 
+        this.lsblk = lsblkAction;
         this.lun = diskLUN;
     }
 
@@ -85,7 +95,33 @@ public class AzureDataDisk extends AzureDiskBase {
 
     @Override
     public Optional<URI> getURI() {
-        // TODO Use the LUN to find the mount point
-        return Optional.empty();
+        Integer intLun = Integer.valueOf(lun);
+        Collection<OsDiskPartition> dps = lsblk.uncheckedGet();
+
+        if (dps == null || dps.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return dps.stream()
+            .filter(p -> p.scsiHost() == 1
+                            && p.scsiLun() == intLun
+                            && p.mountPoint() != null
+                            && !p.mountPoint().isBlank())
+            .findFirst()
+            .map(r -> r.mountPoint())
+            .flatMap(m -> {
+                try {
+                    return Optional.of(new URI("file://" + m));
+                } catch (URISyntaxException e) {
+                    LOG.log(Level.SEVERE,
+                            """
+                            Failed to parse mount point URI \
+                            for Azure Data Disk with LUN """
+                            + lun +
+                            ", disk may not be discovered.",
+                            e);
+                    return Optional.empty();
+                }
+            });
     }
 }
