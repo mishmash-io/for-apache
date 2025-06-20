@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2025 Mishmash IO UK Ltd.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.mishmash.stacks</groupId>
+    <artifactId>distributed-computing-stacks</artifactId>
+    <version>0.0.1</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <groupId>io.mishmash.stacks.compute</groupId>
+  <artifactId>compute-azure-utils</artifactId>
+  <version>${compute-azure-utils.version}</version>
+
+  <name>Utility classes for Microsoft Azure deployments</name>
+  <description>
+    Utilities for Microsoft Azure deployments.
+
+    Includes code to facilitate authentication and authorization through Entra ID;
+    to obtain the correct topology of a deployment and more.
+  </description>
+  <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>mishmash io</name>
+    <url>https://mishmash.io</url>
+  </organization>
+
+  <scm>
+    <connection>scm:git:https://github.com/mishmash-io/for-apache.git</connection>
+    <developerConnection>scm:git:https://github.com/mishmash-io/for-apache.git</developerConnection>
+    <url>https://github.com/mishmash-io/for-apache</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Ivan Kountchev</name>
+      <email>i.kountchev@mishmash.io</email>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Andrey Rusev</name>
+      <email>a.rusev@mishmash.io</email>
+      <url>www.linkedin.com/in/andrey-rusev-21894172</url>
+      <organization>mishmash io</organization>
+      <organizationUrl>https://mishmash.io</organizationUrl>
+      <roles>
+        <role>architect</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>${openapi-nullable.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-openapi-spec</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/specification/imds/data-plane/Microsoft.InstanceMetadataService/stable/2023-07-01/imds.json</url>
+              <outputFileName>imds.json</outputFileName>
+              <outputDirectory>${project.build.directory}/azure-openapi</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-patch-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>patch-original-openapi-spec</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>apply</goal>
+            </goals>
+            <configuration>
+              <patchFile>${basedir}/src/main/patches/imds.json.patch</patchFile>
+              <originalFile>${project.build.directory}/azure-openapi/imds.json</originalFile>
+              <patchTrackingFile>${project.build.directory}/imds_changes.txt</patchTrackingFile>
+              <strip>0</strip>
+              <removeEmptyFiles>true</removeEmptyFiles>
+              <targetDirectory>${project.build.directory}/azure-openapi</targetDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>7.13.0</version>
+        <executions>
+          <execution>
+            <id>generate imds client</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.build.directory}/azure-openapi/imds.json</inputSpec>
+              <generatorName>java</generatorName>
+              <configOptions>
+                <invokerPackage>io.mishmash.stacks.compute.azure.gen.openapi.imds</invokerPackage>
+                <modelPackage>io.mishmash.stacks.compute.azure.gen.openapi.imds.client.model</modelPackage>
+                <apiPackage>io.mishmash.stacks.compute.azure.gen.openapi.imds.client.api</apiPackage>
+                <asyncNative>true</asyncNative>
+                <library>native</library>
+                <!--serializationLibrary>gson</serializationLibrary-->
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>patch-generated-sources</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <replace token="javax.annotation" value="jakarta.annotation" dir="${project.build.directory}/generated-sources/openapi/src/main/java">
+                  <include name="**/*.java"/>
+                </replace>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-generated-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <!-- add the patched test soruces -->
+                <source>${project.build.directory}/generated-sources/openapi/src/test/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
