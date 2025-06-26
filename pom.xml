@@ -158,6 +158,9 @@
 
     <module>fs/fs-sftp</module>
 
+    <module>security/oidc-common</module>
+    <module>security/azure</module>
+
     <module>runtimes/common</module>
 
     <module>runtimes/osgi/wrapper-protobuf</module>
@@ -168,8 +171,10 @@
     <module>runtimes/osgi/compute-azure</module>
     <module>runtimes/osgi/compute-simple</module>
 
-    <module>runtimes/karaf/features</module>
     <module>runtimes/karaf/compute-shell</module>
+    <module>runtimes/karaf/security-common</module>
+    <module>runtimes/karaf/security-azure</module>
+    <module>runtimes/karaf/features</module>
   </modules>
 
   <dependencyManagement>
