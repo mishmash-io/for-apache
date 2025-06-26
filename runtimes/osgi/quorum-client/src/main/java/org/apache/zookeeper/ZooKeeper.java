@@ -87,6 +87,10 @@ import org.apache.zookeeper.util.DataUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.mishmash.stacks.quorum.client.osgi.impl.ClientConfigsTracker;
+import io.mishmash.stacks.quorum.client.osgi.impl.DefaultOsgiHostProvider;
+import io.mishmash.stacks.quorum.client.osgi.impl.DefaultOsgiWatcher;
+
 /**
  * This is the main class of ZooKeeper client library. To use a ZooKeeper
  * service, an application must first instantiate an object of ZooKeeper class.
@@ -634,13 +638,20 @@ public class ZooKeeper implements AutoCloseable {
         HostProvider hostProvider,
         ZKClientConfig clientConfig
     ) throws IOException {
+        watcher = new DefaultOsgiWatcher(connectString, watcher);
         LOG.info(
             "Initiating client connection, connectString={} sessionTimeout={} watcher={}",
             connectString,
             sessionTimeout,
             watcher);
 
-        this.clientConfig = clientConfig != null ? clientConfig : new ZKClientConfig();
+        ZKClientConfig autoConfig = ClientConfigsTracker
+                .configForQuorumConnectStr(connectString);
+        this.clientConfig = clientConfig != null
+                ? clientConfig
+                : autoConfig == null
+                    ? new ZKClientConfig()
+                    : autoConfig;
         this.hostProvider = hostProvider;
         ConnectStringParser connectStringParser = new ConnectStringParser(connectString);
 
@@ -1025,6 +1036,7 @@ public class ZooKeeper implements AutoCloseable {
         boolean canBeReadOnly,
         HostProvider hostProvider,
         ZKClientConfig clientConfig) throws IOException {
+        watcher = new DefaultOsgiWatcher(connectString, watcher);
         LOG.info(
             "Initiating client connection, connectString={} "
                 + "sessionTimeout={} watcher={} sessionId=0x{} sessionPasswd={}",
@@ -1034,7 +1046,13 @@ public class ZooKeeper implements AutoCloseable {
             Long.toHexString(sessionId),
             (sessionPasswd == null ? "<null>" : "<hidden>"));
 
-        this.clientConfig = clientConfig != null ? clientConfig : new ZKClientConfig();
+        ZKClientConfig autoConfig = ClientConfigsTracker
+                .configForQuorumConnectStr(connectString);
+        this.clientConfig = clientConfig != null
+                ? clientConfig
+                : autoConfig == null
+                    ? new ZKClientConfig()
+                    : autoConfig;
         ConnectStringParser connectStringParser = new ConnectStringParser(connectString);
         this.hostProvider = hostProvider;
 
@@ -1132,7 +1150,7 @@ public class ZooKeeper implements AutoCloseable {
 
     // default hostprovider
     private static HostProvider createDefaultHostProvider(String connectString) {
-        return new StaticHostProvider(new ConnectStringParser(connectString).getServerAddresses());
+        return new DefaultOsgiHostProvider(connectString);
     }
 
     // VisibleForTesting
