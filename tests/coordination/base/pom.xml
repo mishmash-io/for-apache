@@ -315,7 +315,7 @@
             <include>**/*Test.java</include>
           </includes>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
-          <forkCount>0.5C</forkCount>
+          <forkCount>1<!--0.5C--></forkCount>
           <reuseForks>false</reuseForks>
           <argLine>-Djdk.net.hosts.file=${project.build.directory}/generated-test-resources/hosts -Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar ${test.instrumentation.opts}</argLine>
           <workingDirectory>${project.build.directory}/workdir/zookeeper-server</workingDirectory>

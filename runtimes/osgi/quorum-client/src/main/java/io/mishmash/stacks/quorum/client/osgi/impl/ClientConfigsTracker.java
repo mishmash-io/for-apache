@@ -29,6 +29,7 @@ import org.apache.zookeeper.client.ZKClientConfig;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 
 @Component(immediate=true)
 public class ClientConfigsTracker {
@@ -42,7 +43,8 @@ public class ClientConfigsTracker {
 
     @Reference(
             service=ZKClientConfig.class,
-            cardinality=ReferenceCardinality.MULTIPLE)
+            cardinality=ReferenceCardinality.MULTIPLE,
+            policy=ReferencePolicy.DYNAMIC)
     protected void addClientConfig(
             final ZKClientConfig config,
             final Map<String, Object> props) {
@@ -72,7 +74,8 @@ public class ClientConfigsTracker {
 
     @Reference(
             service=Watcher.class,
-            cardinality=ReferenceCardinality.MULTIPLE)
+            cardinality=ReferenceCardinality.MULTIPLE,
+            policy=ReferencePolicy.DYNAMIC)
     protected void addWatcher(
             final Watcher watcher,
             final Map<String, Object> props) {
@@ -100,7 +103,8 @@ public class ClientConfigsTracker {
 
     @Reference(
             service=HostProvider.class,
-            cardinality=ReferenceCardinality.MULTIPLE)
+            cardinality=ReferenceCardinality.MULTIPLE,
+            policy=ReferencePolicy.DYNAMIC)
     protected void addHostProvider(
             final HostProvider hostProvider,
             final Map<String, Object> props) {
