@@ -22,10 +22,13 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 import javax.management.JMException;
+import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
 import javax.security.auth.login.LoginException;
@@ -42,6 +45,7 @@ public abstract class ServerCnxnFactory {
 
     public static final String ZOOKEEPER_SERVER_CNXN_FACTORY = "zookeeper.serverCnxnFactory";
     private static final String ZOOKEEPER_MAX_CONNECTION = "zookeeper.maxCnxns";
+    private static final String DIGEST_MD5_USER_PREFIX = "user_";
     public static final int ZOOKEEPER_MAX_CONNECTION_DEFAULT = 0;
 
     private static final Logger LOG = LoggerFactory.getLogger(ServerCnxnFactory.class);
@@ -58,7 +62,7 @@ public abstract class ServerCnxnFactory {
     protected int maxCnxns;
 
     // sessionMap is used by closeSession()
-    final ConcurrentHashMap<Long, ServerCnxn> sessionMap = new ConcurrentHashMap<Long, ServerCnxn>();
+    final ConcurrentHashMap<Long, ServerCnxn> sessionMap = new ConcurrentHashMap<>();
 
     private static String loginUser = Login.SYSTEM_USER;
 
@@ -114,7 +118,6 @@ public abstract class ServerCnxnFactory {
 
     public abstract void reconfigure(InetSocketAddress addr);
 
-    protected SaslServerCallbackHandler saslServerCallbackHandler;
     public Login login;
 
     /** Maximum number of connections allowed from particular host (ip) */
@@ -199,11 +202,11 @@ public abstract class ServerCnxnFactory {
 
     public abstract Iterable<Map<String, Object>> getAllConnectionInfo(boolean brief);
 
-    private final ConcurrentHashMap<ServerCnxn, ConnectionBean> connectionBeans = new ConcurrentHashMap<ServerCnxn, ConnectionBean>();
+    private final ConcurrentHashMap<ServerCnxn, ConnectionBean> connectionBeans = new ConcurrentHashMap<>();
 
     // Connection set is relied on heavily by four letter commands
     // Construct a ConcurrentHashSet using a ConcurrentHashMap
-    protected final Set<ServerCnxn> cnxns = Collections.newSetFromMap(new ConcurrentHashMap<ServerCnxn, Boolean>());
+    protected final Set<ServerCnxn> cnxns = Collections.newSetFromMap(new ConcurrentHashMap<>());
     public void unregisterConnection(ServerCnxn serverCnxn) {
         ConnectionBean jmxConnectionBean = connectionBeans.remove(serverCnxn);
         if (jmxConnectionBean != null) {
@@ -235,7 +238,7 @@ public abstract class ServerCnxnFactory {
      * @throws IOException if jaas.conf is missing or there's an error in it.
      */
     protected void configureSaslLogin() throws IOException {
-        String serverSection = System.getProperty(ZooKeeperSaslServer.LOGIN_CONTEXT_NAME_KEY, ZooKeeperSaslServer.DEFAULT_LOGIN_CONTEXT_NAME);
+        String serverSection = System.getProperty(Login.SERVER_LOGIN_CONTEXT_NAME_KEY, Login.DEFAULT_SERVER_LOGIN_CONTEXT_NAME);
 
         // Note that 'Configuration' here refers to javax.security.auth.login.Configuration.
         AppConfigurationEntry[] entries = null;
@@ -253,14 +256,14 @@ public abstract class ServerCnxnFactory {
         // we throw an exception otherwise we continue without authentication.
         if (entries == null) {
             String jaasFile = System.getProperty(Environment.JAAS_CONF_KEY);
-            String loginContextName = System.getProperty(ZooKeeperSaslServer.LOGIN_CONTEXT_NAME_KEY);
+            String loginContextName = System.getProperty(Login.SERVER_LOGIN_CONTEXT_NAME_KEY);
             if (securityException != null && (loginContextName != null || jaasFile != null)) {
                 String errorMessage = "No JAAS configuration section named '" + serverSection + "' was found";
                 if (jaasFile != null) {
                     errorMessage += " in '" + jaasFile + "'.";
                 }
                 if (loginContextName != null) {
-                    errorMessage += " But " + ZooKeeperSaslServer.LOGIN_CONTEXT_NAME_KEY + " was set.";
+                    errorMessage += " But " + Login.SERVER_LOGIN_CONTEXT_NAME_KEY + " was set.";
                 }
                 LOG.error(errorMessage);
                 throw new IOException(errorMessage);
@@ -270,8 +273,11 @@ public abstract class ServerCnxnFactory {
 
         // jaas.conf entry available
         try {
-            saslServerCallbackHandler = new SaslServerCallbackHandler(Configuration.getConfiguration());
-            login = new Login(ZooKeeperSaslServer.LOGIN_CONTEXT_NAME_KEY, serverSection, saslServerCallbackHandler, new ZKConfig());
+            Map<String, String> credentials = getDigestMd5Credentials(entries);
+            Supplier<CallbackHandler> callbackHandlerSupplier = () -> {
+                return new SaslServerCallbackHandler(credentials);
+            };
+            login = new Login(serverSection, callbackHandlerSupplier, new ZKConfig());
             setLoginUser(login.getUserName());
             login.startThreadIfNeeded();
         } catch (LoginException e) {
@@ -279,6 +285,28 @@ public abstract class ServerCnxnFactory {
                                   + " ZooKeeper server to authenticate itself properly: "
                                   + e);
         }
+    }
+
+    /**
+     * make server credentials map from configuration's server section.
+     * @param appConfigurationEntries AppConfigurationEntry List
+     * @return Server credentials map
+     */
+    private static Map<String, String> getDigestMd5Credentials(final  AppConfigurationEntry[] appConfigurationEntries) {
+        Map<String, String> credentials = new HashMap<>();
+        for (AppConfigurationEntry entry : appConfigurationEntries) {
+            Map<String, ?> options = entry.getOptions();
+            // Populate DIGEST-MD5 user -> password map with JAAS configuration entries from the "Server" section.
+            // Usernames are distinguished from other options by prefixing the username with a "user_" prefix.
+            for (Map.Entry<String, ?> pair : options.entrySet()) {
+                String key = pair.getKey();
+                if (key.startsWith(DIGEST_MD5_USER_PREFIX)) {
+                    String userName = key.substring(DIGEST_MD5_USER_PREFIX.length());
+                    credentials.put(userName, (String) pair.getValue());
+                }
+            }
+        }
+        return credentials;
     }
 
     private static void setLoginUser(String name) {

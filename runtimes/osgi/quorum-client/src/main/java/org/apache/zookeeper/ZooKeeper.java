@@ -289,7 +289,7 @@ public class ZooKeeper implements AutoCloseable {
                 synchronized (watches) {
                     Set<Watcher> watchers = watches.get(clientPath);
                     if (watchers == null) {
-                        watchers = new HashSet<Watcher>();
+                        watchers = new HashSet<>();
                         watches.put(clientPath, watchers);
                     }
                     watchers.add(watcher);
@@ -1683,7 +1683,7 @@ public class ZooKeeper implements AutoCloseable {
     }
 
     private List<OpResult> validatePath(Iterable<Op> ops) {
-        List<OpResult> results = new ArrayList<OpResult>();
+        List<OpResult> results = new ArrayList<>();
         boolean error = false;
         for (Op op : ops) {
             try {
@@ -1712,7 +1712,7 @@ public class ZooKeeper implements AutoCloseable {
 
     private MultiOperationRecord generateMultiTransaction(Iterable<Op> ops) {
         // reconstructing transaction with the chroot prefix
-        List<Op> transaction = new ArrayList<Op>();
+        List<Op> transaction = new ArrayList<>();
         for (Op op : ops) {
             transaction.add(withRootPrefix(op));
         }
@@ -2682,6 +2682,31 @@ public class ZooKeeper implements AutoCloseable {
      */
     public void getEphemerals(AsyncCallback.EphemeralsCallback cb, Object ctx) {
         getEphemerals("/", cb, ctx);
+    }
+
+    /**
+     * Synchronous sync. Flushes channel between process and leader.
+     *
+     * @param path the given path
+     * @throws KeeperException If the server signals an error with a non-zero error code
+     * @throws InterruptedException If the server transaction is interrupted.
+     * @throws IllegalArgumentException if an invalid path is specified
+     */
+    public void sync(final String path) throws KeeperException, InterruptedException {
+        final String clientPath = path;
+        PathUtils.validatePath(clientPath);
+
+        final String serverPath = prependChroot(clientPath);
+
+        RequestHeader h = new RequestHeader();
+        h.setType(ZooDefs.OpCode.sync);
+        SyncRequest request = new SyncRequest();
+        SyncResponse response = new SyncResponse();
+        request.setPath(serverPath);
+        ReplyHeader r = cnxn.submitRequest(h, request, response, null);
+        if (r.getErr() != 0) {
+            throw KeeperException.create(KeeperException.Code.get(r.getErr()), clientPath);
+        }
     }
 
     /**

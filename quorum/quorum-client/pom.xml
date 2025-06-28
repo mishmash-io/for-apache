@@ -170,6 +170,7 @@
                     **/zookeeper/admin/**,
                     **/zookeeper/client/**,
                     **/zookeeper/common/**,
+                    **/zookeeper/compat/**,
                     **/zookeeper/metrics/**,
                     **/zookeeper/metrics/provider/**,
                     **/zookeeper/util/**,
