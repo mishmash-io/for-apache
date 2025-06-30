@@ -115,7 +115,7 @@
     <karaf.version>4.4.7</karaf.version>
     <yetus.version>0.15.1</yetus.version>
     <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
-    <vertx.version>5.0.0</vertx.version>
+    <vertx.version>5.0.1</vertx.version>
 
     <junit.version>5.13.1</junit.version>
     <junit-platform.version>1.13.2</junit-platform.version>
