@@ -153,6 +153,28 @@
       <artifactId>reactive-streams</artifactId>
       <version>${reactive-streams.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>io.mishmash.stacks.security</groupId>
+      <artifactId>security-oidc-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.security</groupId>
+      <artifactId>security-karaf-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.security</groupId>
+      <artifactId>security-azure</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.mishmash.stacks.security</groupId>
+      <artifactId>security-karaf-azure</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>io.mishmash.stacks.quorum</groupId>
       <artifactId>quorum-client-osgi</artifactId>

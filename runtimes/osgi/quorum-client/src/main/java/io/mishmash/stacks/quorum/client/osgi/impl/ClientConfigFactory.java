@@ -18,7 +18,6 @@
 package io.mishmash.stacks.quorum.client.osgi.impl;
 
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.zookeeper.client.ZKClientConfig;
@@ -34,11 +33,13 @@ import org.osgi.service.component.annotations.Modified;
         service = {ZKClientConfig.class},
         immediate = true,
         configurationPolicy = ConfigurationPolicy.REQUIRE,
-        configurationPid = {"quorumClient"}
+        configurationPid = {"quorumClientConfig"}
 )
 public class ClientConfigFactory extends ZKClientConfig {
 
     public static final String PROP_QUORUM_ID = "quorum.id";
+    public static final String PROP_QUORUM_CONNECT = "quorum.connectString";
+    public static final String PROP_QUORUM_TIMEOUT = "quorum.sessionTimeout";
 
     private static final Logger LOG = Logger.getLogger(ClientConfigFactory.class.getName());
 

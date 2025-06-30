@@ -73,8 +73,8 @@
 
   <properties>
     <!-- Apache ZooKeeper versions -->
-    <zookeeper.stable.version>3.8.3</zookeeper.stable.version>
-    <zookeeper.stable.mishmash.io.patch>2</zookeeper.stable.mishmash.io.patch>
+    <zookeeper.stable.version>3.9.3</zookeeper.stable.version>
+    <zookeeper.stable.mishmash.io.patch>1</zookeeper.stable.mishmash.io.patch>
 
     <!-- Apache Hadoop versions -->
     <hadoop.stable.version>3.4.1</hadoop.stable.version>
@@ -158,6 +158,9 @@
 
     <module>fs/fs-sftp</module>
 
+    <module>security/oidc-common</module>
+    <module>security/azure</module>
+
     <module>runtimes/common</module>
 
     <module>runtimes/osgi/wrapper-protobuf</module>
@@ -168,8 +171,10 @@
     <module>runtimes/osgi/compute-azure</module>
     <module>runtimes/osgi/compute-simple</module>
 
-    <module>runtimes/karaf/features</module>
     <module>runtimes/karaf/compute-shell</module>
+    <module>runtimes/karaf/security-common</module>
+    <module>runtimes/karaf/security-azure</module>
+    <module>runtimes/karaf/features</module>
   </modules>
 
   <dependencyManagement>

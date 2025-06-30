@@ -87,6 +87,10 @@ import org.apache.zookeeper.util.DataUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.mishmash.stacks.quorum.client.osgi.impl.ClientConfigsTracker;
+import io.mishmash.stacks.quorum.client.osgi.impl.DefaultOsgiHostProvider;
+import io.mishmash.stacks.quorum.client.osgi.impl.DefaultOsgiWatcher;
+
 /**
  * This is the main class of ZooKeeper client library. To use a ZooKeeper
  * service, an application must first instantiate an object of ZooKeeper class.
@@ -285,7 +289,7 @@ public class ZooKeeper implements AutoCloseable {
                 synchronized (watches) {
                     Set<Watcher> watchers = watches.get(clientPath);
                     if (watchers == null) {
-                        watchers = new HashSet<Watcher>();
+                        watchers = new HashSet<>();
                         watches.put(clientPath, watchers);
                     }
                     watchers.add(watcher);
@@ -634,13 +638,20 @@ public class ZooKeeper implements AutoCloseable {
         HostProvider hostProvider,
         ZKClientConfig clientConfig
     ) throws IOException {
+        watcher = new DefaultOsgiWatcher(connectString, watcher);
         LOG.info(
             "Initiating client connection, connectString={} sessionTimeout={} watcher={}",
             connectString,
             sessionTimeout,
             watcher);
 
-        this.clientConfig = clientConfig != null ? clientConfig : new ZKClientConfig();
+        ZKClientConfig autoConfig = ClientConfigsTracker
+                .configForQuorumConnectStr(connectString);
+        this.clientConfig = clientConfig != null
+                ? clientConfig
+                : autoConfig == null
+                    ? new ZKClientConfig()
+                    : autoConfig;
         this.hostProvider = hostProvider;
         ConnectStringParser connectStringParser = new ConnectStringParser(connectString);
 
@@ -1025,6 +1036,7 @@ public class ZooKeeper implements AutoCloseable {
         boolean canBeReadOnly,
         HostProvider hostProvider,
         ZKClientConfig clientConfig) throws IOException {
+        watcher = new DefaultOsgiWatcher(connectString, watcher);
         LOG.info(
             "Initiating client connection, connectString={} "
                 + "sessionTimeout={} watcher={} sessionId=0x{} sessionPasswd={}",
@@ -1034,7 +1046,13 @@ public class ZooKeeper implements AutoCloseable {
             Long.toHexString(sessionId),
             (sessionPasswd == null ? "<null>" : "<hidden>"));
 
-        this.clientConfig = clientConfig != null ? clientConfig : new ZKClientConfig();
+        ZKClientConfig autoConfig = ClientConfigsTracker
+                .configForQuorumConnectStr(connectString);
+        this.clientConfig = clientConfig != null
+                ? clientConfig
+                : autoConfig == null
+                    ? new ZKClientConfig()
+                    : autoConfig;
         ConnectStringParser connectStringParser = new ConnectStringParser(connectString);
         this.hostProvider = hostProvider;
 
@@ -1132,7 +1150,7 @@ public class ZooKeeper implements AutoCloseable {
 
     // default hostprovider
     private static HostProvider createDefaultHostProvider(String connectString) {
-        return new StaticHostProvider(new ConnectStringParser(connectString).getServerAddresses());
+        return new DefaultOsgiHostProvider(connectString);
     }
 
     // VisibleForTesting
@@ -1665,7 +1683,7 @@ public class ZooKeeper implements AutoCloseable {
     }
 
     private List<OpResult> validatePath(Iterable<Op> ops) {
-        List<OpResult> results = new ArrayList<OpResult>();
+        List<OpResult> results = new ArrayList<>();
         boolean error = false;
         for (Op op : ops) {
             try {
@@ -1694,7 +1712,7 @@ public class ZooKeeper implements AutoCloseable {
 
     private MultiOperationRecord generateMultiTransaction(Iterable<Op> ops) {
         // reconstructing transaction with the chroot prefix
-        List<Op> transaction = new ArrayList<Op>();
+        List<Op> transaction = new ArrayList<>();
         for (Op op : ops) {
             transaction.add(withRootPrefix(op));
         }
@@ -2664,6 +2682,31 @@ public class ZooKeeper implements AutoCloseable {
      */
     public void getEphemerals(AsyncCallback.EphemeralsCallback cb, Object ctx) {
         getEphemerals("/", cb, ctx);
+    }
+
+    /**
+     * Synchronous sync. Flushes channel between process and leader.
+     *
+     * @param path the given path
+     * @throws KeeperException If the server signals an error with a non-zero error code
+     * @throws InterruptedException If the server transaction is interrupted.
+     * @throws IllegalArgumentException if an invalid path is specified
+     */
+    public void sync(final String path) throws KeeperException, InterruptedException {
+        final String clientPath = path;
+        PathUtils.validatePath(clientPath);
+
+        final String serverPath = prependChroot(clientPath);
+
+        RequestHeader h = new RequestHeader();
+        h.setType(ZooDefs.OpCode.sync);
+        SyncRequest request = new SyncRequest();
+        SyncResponse response = new SyncResponse();
+        request.setPath(serverPath);
+        ReplyHeader r = cnxn.submitRequest(h, request, response, null);
+        if (r.getErr() != 0) {
+            throw KeeperException.create(KeeperException.Code.get(r.getErr()), clientPath);
+        }
     }
 
     /**
