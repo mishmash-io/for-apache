@@ -118,7 +118,7 @@
     <vertx.version>5.0.0</vertx.version>
 
     <junit.version>5.13.1</junit.version>
-    <junit-platform.version>1.13.1</junit-platform.version>
+    <junit-platform.version>1.13.2</junit-platform.version>
     <mockito.version>5.18.0</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
 
