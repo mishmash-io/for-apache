@@ -96,7 +96,7 @@
     <jackson.version>2.19.1</jackson.version>
     <stax2-api.version>4.2.2</stax2-api.version>
     <woodstox.version>7.1.1</woodstox.version>
-    <jetty.version>12.0.22</jetty.version>
+    <jetty.version>12.1.0</jetty.version>
     <jakarta-servlet.version>6.0.0</jakarta-servlet.version>
     <netty.version>4.2.4.Final</netty.version>
     <nimbus-jwt.version>10.3</nimbus-jwt.version>
