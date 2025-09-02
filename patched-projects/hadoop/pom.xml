@@ -502,12 +502,6 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>commons-lang</groupId>
-        <artifactId>commons-lang</artifactId>
-        <version>2.6</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
         <groupId>net.jcip</groupId>
         <artifactId>jcip-annotations</artifactId>
         <version>1.0</version>
@@ -970,11 +964,6 @@
     <dependency>
       <groupId>org.codehaus.jettison</groupId>
       <artifactId>jettison</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
