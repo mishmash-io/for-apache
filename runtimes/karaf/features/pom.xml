@@ -86,7 +86,7 @@
     <azure-netty.version>1.15.12</azure-netty.version>
     <azure-management.version>1.18.0</azure-management.version>
     <netty-quic.version>0.0.72.Final</netty-quic.version>
-    <nimbus-oidc.version>11.25</nimbus-oidc.version>
+    <nimbus-oidc.version>11.26</nimbus-oidc.version>
     <nimbus-lang-tag.version>1.7</nimbus-lang-tag.version>
     <nimbus-content-type.version>2.3</nimbus-content-type.version>
     <jcip-annotations.version>1.0</jcip-annotations.version>
@@ -96,8 +96,8 @@
     <msal4j-brokers.version>1.0.0</msal4j-brokers.version>
     <msal4j-persistence.version>1.3.0</msal4j-persistence.version>
     <msal4j-runtime.version>0.17.4</msal4j-runtime.version>
-    <reactor-core.version>3.7.6</reactor-core.version>
-    <reactor-netty.version>1.2.6</reactor-netty.version>
+    <reactor-core.version>3.7.9</reactor-core.version>
+    <reactor-netty.version>1.2.9</reactor-netty.version>
     <reactive-streams.version>1.0.4</reactive-streams.version>
   </properties>
 
