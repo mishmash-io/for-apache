@@ -1423,6 +1423,11 @@
               <testExcludes>
                 <exclude>**/hadoop/hdfs/TestDFSClientFailover.java</exclude>
               </testExcludes>
+              <compilerArgs>
+                <!-- we use custom log4j2 plugins in tests to trap logging activity, make log4j happy about it: -->
+                <arg>-Alog4j.graalvm.groupId=${project.groupId}</arg>
+                <arg>-Alog4j.graalvm.artifactId=${project.artifactId}</arg>
+              </compilerArgs>
             </configuration>
           </execution>
         </executions>
