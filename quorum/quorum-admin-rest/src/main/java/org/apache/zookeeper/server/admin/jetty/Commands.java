@@ -211,7 +211,7 @@ public class Commands {
         if (authProvider != null) {
             try {
                 final byte[] auth = authData.length == 2 ? authData[1].getBytes(StandardCharsets.UTF_8) : null;
-                final List<Id> ids = authProvider.authenticate(HttpServletRequest.class, request, auth);
+                final List<Id> ids = authProvider.handleAuthentication(HttpServletRequest.class, request, auth);
                 if (ids.isEmpty()) {
                     LOG.warn("Auth Id list is empty");
                     throw new KeeperException.AuthFailedException();
@@ -227,6 +227,18 @@ public class Commands {
         }
     }
 
+    /**
+     * Grant or deny authorization for a command by matching
+     * request-provided credentials with the ACLs present on a node.
+     *
+     * @param zkServer the ZooKeeper server object.
+     * @param ids the credentials extracted from the Authorization header.
+     * @param perm the set of permission bits required by the command.
+     * @param path the ZooKeeper node path whose ACLs should be used
+     * to satisfy the perm bits.
+     * @throws KeeperException.NoAuthException if one or more perm
+     * bits could not be satisfied.
+     */
     private static void handleAuthorization(final ZooKeeperServer zkServer,
                                             final List<Id> ids,
                                             final int perm,
@@ -237,7 +249,14 @@ public class Commands {
             throw new KeeperException.NoNodeException(path);
         }
         final List<ACL> acls = zkServer.getZKDatabase().aclForNode(dataNode);
-        zkServer.checkACL(null, acls, perm, ids, path, null);
+        // Check the individual bits of perm.
+        final int bitWidth = Integer.SIZE - Integer.numberOfLeadingZeros(perm);
+        for (int b = 0; b < bitWidth; b++) {
+            final int permBit = 1 << b;
+            if ((perm & permBit) != 0) {
+                zkServer.checkACL(null, acls, permBit, ids, path, null);
+            }
+        }
     }
 
     /**
@@ -783,7 +802,7 @@ public class Commands {
 
             // take snapshot and stream out data if needed
             try {
-                final File snapshotFile = zkServer.takeSnapshot(false, false, true);
+                final File snapshotFile = zkServer.takeSnapshot(false, false);
                 final long lastZxid = Util.getZxidFromName(snapshotFile.getName(), SNAPSHOT_FILE_PREFIX);
                 response.addHeader(RESPONSE_HEADER_LAST_ZXID, "0x" + ZxidUtils.zxidToString(lastZxid));
 
