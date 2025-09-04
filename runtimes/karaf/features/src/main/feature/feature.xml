@@ -104,7 +104,7 @@
     <bundle dependency="true">mvn:org.jspecify/jspecify/${jspecify.version}</bundle>
     <bundle dependency="true">mvn:jakarta.annotation/jakarta.annotation-api/${jakarta-annotation.version}</bundle>
     <bundle dependency="true">mvn:io.mishmash.stacks.osgi/wrapper-protobuf/${protobuf.version}</bundle>
-    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson-annotations.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-handler/${netty.version}</bundle>
@@ -139,7 +139,7 @@
     </details>
     <feature prerequisite="true" dependency="false">wrap</feature>
     <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.models;version=${azure-json.version}</bundle>
-    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson-annotations.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.nimbusds/oauth2-oidc-sdk/${nimbus-oidc.version}</bundle>
@@ -167,7 +167,7 @@
     <feature prerequisite="true" dependency="false">wrap</feature>
     <bundle dependency="true">wrap:mvn:com.azure/azure-json/${azure-json.version}$Bundle-SymbolicName=azure-json&amp;Bundle-Version=${azure-json.version}&amp;Export-Package=com.azure.json;version=${azure-json.version},com.azure.json.models;version=${azure-json.version}</bundle>
     <bundle dependency="true">wrap:mvn:com.azure/azure-xml/${azure-xml.version}$Bundle-SymbolicName=azure-xml&amp;Bundle-Version=${azure-xml.version}&amp;Export-Package=com.azure.xml;version=${azure-xml.version}&amp;Import-Package=javax.xml.*</bundle>
-    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson-annotations.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jackson.version}</bundle>
@@ -303,7 +303,7 @@
     </conditional>
     <bundle dependency="true">mvn:org.apache.commons/commons-lang3/${commons-lang.version}</bundle>
     <bundle dependency="true">mvn:jakarta.annotation/jakarta.annotation-api/${jakarta-annotation.version}</bundle>
-    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+    <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson-annotations.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jackson.version}</bundle>
