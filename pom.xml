@@ -129,7 +129,7 @@
     <osgi-ds.version>1.5.1</osgi-ds.version>
 
     <azure-identity.version>1.17.0</azure-identity.version>
-    <azure-resourcemanager.version>2.53.1</azure-resourcemanager.version>
+    <azure-resourcemanager.version>2.53.2</azure-resourcemanager.version>
     <openapi-nullable.version>0.2.6</openapi-nullable.version>
 
     <compute-azure.version>1.0.0</compute-azure.version>
