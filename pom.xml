@@ -77,7 +77,7 @@
     <zookeeper.stable.mishmash.io.patch>1</zookeeper.stable.mishmash.io.patch>
 
     <!-- Apache Hadoop versions -->
-    <hadoop.stable.version>3.4.1</hadoop.stable.version>
+    <hadoop.stable.version>3.4.2</hadoop.stable.version>
     <hadoop.stable.mishmash.io.patch>1</hadoop.stable.mishmash.io.patch>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
