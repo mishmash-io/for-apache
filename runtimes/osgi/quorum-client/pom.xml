@@ -154,19 +154,14 @@
                   <includes>
                   </includes>
                   <excludes>
-                    **/zookeeper/client/FourLetterWordMain.java,
-
                     **/zookeeper/metrics/provider/MetricsProviderBootstrap.java,
 
                     **/zookeeper/ZooKeeper.java,
                     **/zookeeper/common/ZKConfig.java,
 
                     **/zookeeper/ClientCnxnSocketNetty.java,
+                    **/zookeeper/common/NettyClientX509Util.java,
                     **/zookeeper/common/NettyUtils.java,
-                    **/zookeeper/common/SSLContextAndOptions.java,
-                    **/zookeeper/common/X509Exception.java,
-                    **/zookeeper/common/X509Util.java,
-                    **/zookeeper/common/ClientX509Util.java,
                     **/zookeeper/common/QuorumX509Util.java,
                   </excludes>
                 </artifactItem>
