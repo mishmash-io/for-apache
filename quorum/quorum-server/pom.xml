@@ -154,23 +154,13 @@
                   </includes>
                   <excludes>
                     **/zookeeper/server/admin/jetty/**,
+                    **/zookeeper/server/auth/admin/**,
                     **/zookeeper/server/controller/**,
 
                     **/zookeeper/server/SnapshotComparer*.java,
                     **/zookeeper/server/SnapshotFormatter*.java,
                     **/zookeeper/server/persistence/TxnLogToolkit*.java,
                     **/zookeeper/server/util/LogChopper*.java,
-
-                    **/zookeeper/server/auth/AuthenticationProvider*.java,
-                    **/zookeeper/server/auth/DigestAuthenticationProvider*.java,
-                    **/zookeeper/server/auth/EnsembleAuthenticationProvider*.java,
-                    **/zookeeper/server/auth/IPAuthenticationProvider*.java,
-                    **/zookeeper/server/auth/KeyAuthenticationProvider*.java,
-                    **/zookeeper/server/auth/ProviderRegistry*.java,
-                    **/zookeeper/server/auth/SASLAuthenticationProvider*.java,
-                    **/zookeeper/server/auth/ServerAuthenticationProvider*.java,
-                    **/zookeeper/server/auth/WrappedAuthenticationProvider*.java,
-                    **/zookeeper/server/auth/X509AuthenticationProvider*.java,
                   </excludes>
                 </artifactItem>
                 <artifactItem>

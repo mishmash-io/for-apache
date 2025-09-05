@@ -141,11 +141,8 @@
                   <overWrite>false</overWrite>
                   <includes>
                     **/zookeeper/server/admin/jetty/**,
+                    **/zookeeper/server/auth/admin/**,
                   </includes>
-                  <excludes>
-                    **/zookeeper/server/admin/jetty/Commands*.java,
-                    **/zookeeper/server/admin/jetty/JettyAdminServer*.java,
-                  </excludes>
                 </artifactItem>
               </artifactItems>
               <outputDirectory>${project.build.directory}/sources/java</outputDirectory>
