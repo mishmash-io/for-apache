@@ -86,7 +86,7 @@
     <azure-netty.version>1.15.12</azure-netty.version>
     <azure-management.version>1.19.0</azure-management.version>
     <netty-quic.version>0.0.72.Final</netty-quic.version>
-    <nimbus-oidc.version>11.26</nimbus-oidc.version>
+    <nimbus-oidc.version>11.28</nimbus-oidc.version>
     <nimbus-lang-tag.version>1.7</nimbus-lang-tag.version>
     <nimbus-content-type.version>2.3</nimbus-content-type.version>
     <jcip-annotations.version>1.0</jcip-annotations.version>
