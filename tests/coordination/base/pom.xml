@@ -212,6 +212,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.apache.maven.surefire</groupId>
+      <artifactId>surefire-junit-platform</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.burningwave</groupId>
       <artifactId>tools</artifactId>
       <scope>test</scope>
