@@ -76,7 +76,7 @@
 
   <properties>
     <zookeeper.version>3.9.4-mmio.1</zookeeper.version>
-    <jmockit.version>1.49</jmockit.version>
+    <jmockit.version>1.50</jmockit.version>
     <top.version>0.0.1</top.version>
     <test.instrumentation.opts></test.instrumentation.opts>
   </properties>
