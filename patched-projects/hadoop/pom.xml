@@ -82,7 +82,7 @@
     <httpcomponents.core.version>5.3.4</httpcomponents.core.version>
     <httpcomponents.client.version>5.5</httpcomponents.client.version>
     <jakarta-servlet.version>6.0.0</jakarta-servlet.version>
-    <curator.version>5.8.0</curator.version>
+    <curator.version>5.9.0</curator.version>
     <wildfly-openssl.version>2.2.5.Final</wildfly-openssl.version>
     <jsp-api.version>4.0.0</jsp-api.version>
     <jersey.version>3.1.11</jersey.version>
