@@ -120,7 +120,7 @@
 
     <junit.version>5.13.2</junit.version>
     <junit-platform.version>1.13.4</junit-platform.version>
-    <mockito.version>5.18.0</mockito.version>
+    <mockito.version>5.19.0</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
 
     <test.instrumentation.opts></test.instrumentation.opts>
