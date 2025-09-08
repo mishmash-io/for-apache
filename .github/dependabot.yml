@@ -1,6 +1,16 @@
 version: 2
 updates:
   - package-ecosystem: "maven"
-    directory: "/"
+    directories:
+      - "/"
+      - "/tests/coordination/base"
+      - "/tests/storage/block/balancer"
+      - "/tests/storage/block/base"
+      - "/tests/storage/block/blockmanagement"
+      - "/tests/storage/block/datanode"
+      - "/tests/storage/block/dfs-base"
+      - "/tests/storage/block/fs-base"
+      - "/tests/storage/block/misc"
+      - "/tests/storage/block/namenode"
     schedule:
       interval: "daily"
