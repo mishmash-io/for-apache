@@ -88,7 +88,7 @@
     <commons-cli.version>1.10.0</commons-cli.version>
     <commons-codec.version>1.18.0</commons-codec.version>
     <commons-collections.version>4.5.0</commons-collections.version>
-    <commons-compress.version>1.27.1</commons-compress.version>
+    <commons-compress.version>1.28.0</commons-compress.version>
     <commons-io.version>2.19.0</commons-io.version>
     <commons-lang.version>3.18.0</commons-lang.version>
     <guava.version>33.4.8-jre</guava.version>
