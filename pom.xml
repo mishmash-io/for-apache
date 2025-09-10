@@ -110,7 +110,7 @@
     <error_prone_annotations.version>2.41.0</error_prone_annotations.version>
     <failureaccess.version>1.0.3</failureaccess.version>
     <listenablefuture.version>9999.0-empty-to-avoid-conflict-with-guava</listenablefuture.version>
-    <j2objc.version>3.0.0</j2objc.version>
+    <j2objc.version>3.1</j2objc.version>
     <jspecify.version>1.0.0</jspecify.version>
     <log4j2.version>2.25.1</log4j2.version>
     <karaf.version>4.4.8</karaf.version>
