@@ -78,17 +78,32 @@
     </developer>
   </developers>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.karaf.jaas</groupId>
+        <artifactId>org.apache.karaf.jaas.boot</artifactId>
+        <version>${karaf.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.security</groupId>
+        <artifactId>security-oidc-common</artifactId>
+        <version>${project.version}</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.karaf.jaas</groupId>
       <artifactId>org.apache.karaf.jaas.boot</artifactId>
-      <version>${karaf.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.security</groupId>
       <artifactId>security-oidc-common</artifactId>
-      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

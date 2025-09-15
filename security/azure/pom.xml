@@ -78,16 +78,29 @@
     </developer>
   </developers>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.mishmash.stacks.security</groupId>
+        <artifactId>security-oidc-common</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.azure</groupId>
+        <artifactId>azure-identity</artifactId>
+        <version>${azure-identity.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>io.mishmash.stacks.security</groupId>
       <artifactId>security-oidc-common</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-identity</artifactId>
-      <version>${azure-identity.version}</version>
     </dependency>
   </dependencies>
 

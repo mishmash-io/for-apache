@@ -89,6 +89,16 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.data</groupId>
+        <artifactId>blocks-base</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.data</groupId>
+        <artifactId>blocks-high-availability</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -96,12 +106,10 @@
     <dependency>
       <groupId>io.mishmash.stacks.data</groupId>
       <artifactId>blocks-base</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.data</groupId>
       <artifactId>blocks-high-availability</artifactId>
-      <version>${project.version}</version>
     </dependency>
 
     <dependency>

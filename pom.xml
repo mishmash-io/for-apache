@@ -654,8 +654,6 @@
               <mailingLists>expand</mailingLists>
               <issueManagement>expand</issueManagement>
               <properties>remove</properties>
-              <build>remove</build>
-              <pluginManagement>remove</pluginManagement>
             </pomElements>
             <updatePomFile>true</updatePomFile>
           </configuration>
