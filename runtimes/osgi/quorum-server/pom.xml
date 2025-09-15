@@ -79,6 +79,28 @@
     </developer>
   </developers>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.mishmash.stacks.patches</groupId>
+        <artifactId>zookeeper-patches</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.quorum</groupId>
+        <artifactId>quorum-client-osgi</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.quorum</groupId>
+        <artifactId>quorum-client-secure-osgi</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
@@ -89,12 +111,10 @@
     <dependency>
       <groupId>io.mishmash.stacks.quorum</groupId>
       <artifactId>quorum-client-osgi</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.quorum</groupId>
       <artifactId>quorum-client-secure-osgi</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>io.netty</groupId>
@@ -190,6 +210,10 @@
             <Embed-Transitive>false</Embed-Transitive>
           </instructions>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

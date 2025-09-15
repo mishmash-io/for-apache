@@ -88,6 +88,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.quorum</groupId>
+        <artifactId>quorum-client-osgi</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -95,7 +100,6 @@
     <dependency>
       <groupId>io.mishmash.stacks.quorum</groupId>
       <artifactId>quorum-client-osgi</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>io.netty</groupId>
@@ -195,6 +199,10 @@
             <Fragment-Host>io.mishmash.stacks.quorum.client-osgi;bundle-version="[3.8,3.9)"</Fragment-Host>
           </instructions>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

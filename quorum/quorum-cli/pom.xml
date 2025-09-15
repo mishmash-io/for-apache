@@ -88,6 +88,16 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.quorum</groupId>
+        <artifactId>quorum-client</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.mishmash.stacks.quorum</groupId>
+        <artifactId>quorum-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -104,12 +114,10 @@
     <dependency>
       <groupId>io.mishmash.stacks.quorum</groupId>
       <artifactId>quorum-client</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>io.mishmash.stacks.quorum</groupId>
       <artifactId>quorum-server</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -211,6 +219,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
