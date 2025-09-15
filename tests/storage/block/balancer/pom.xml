@@ -91,13 +91,14 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
+      <!-- not needed when a flattened hadoop-patches is used -->
+      <!--dependency>
         <groupId>io.mishmash.stacks</groupId>
         <artifactId>distributed-computing-stacks</artifactId>
         <version>${top.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
+      </dependency-->
       <dependency>
         <groupId>io.mishmash.stacks.patches</groupId>
         <artifactId>hadoop-patches</artifactId>
