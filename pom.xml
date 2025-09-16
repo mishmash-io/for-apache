@@ -688,4 +688,12 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>local-tmp-dir</id>
+      <name>Local repository in /tmp</name>
+      <url>file:///tmp/maven-repo</url>
+    </repository>
+  </distributionManagement>
 </project>
