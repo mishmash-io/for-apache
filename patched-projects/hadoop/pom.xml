@@ -79,7 +79,7 @@
   </developers>
 
   <properties>
-    <httpcomponents.core.version>5.3.5</httpcomponents.core.version>
+    <httpcomponents.core.version>5.3.6</httpcomponents.core.version>
     <httpcomponents.client.version>5.5</httpcomponents.client.version>
     <jakarta-servlet.version>6.0.0</jakarta-servlet.version>
     <curator.version>5.9.0</curator.version>
