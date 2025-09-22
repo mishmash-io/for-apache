@@ -120,7 +120,7 @@
 
     <junit.version>5.13.4</junit.version>
     <junit-platform.version>1.13.4</junit-platform.version>
-    <mockito.version>5.19.0</mockito.version>
+    <mockito.version>5.20.0</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
     <surefire.version>3.5.4</surefire.version>
 
