@@ -118,7 +118,7 @@
     <jakarta-annotation.version>2.1.1</jakarta-annotation.version>
     <vertx.version>5.0.4</vertx.version>
 
-    <junit.version>5.13.4</junit.version>
+    <junit.version>6.0.0</junit.version>
     <junit-platform.version>1.14.0</junit-platform.version>
     <mockito.version>5.20.0</mockito.version>
     <hamcrest.version>3.0</hamcrest.version>
