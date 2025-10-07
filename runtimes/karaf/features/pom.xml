@@ -84,7 +84,7 @@
     <azure-xml.version>1.2.0</azure-xml.version>
     <azure-identity-broker.version>1.1.17</azure-identity-broker.version>
     <azure-netty.version>1.16.1</azure-netty.version>
-    <azure-management.version>1.19.1</azure-management.version>
+    <azure-management.version>1.19.2</azure-management.version>
     <netty-quic.version>0.0.74.Final</netty-quic.version>
     <nimbus-oidc.version>11.29.2</nimbus-oidc.version>
     <nimbus-lang-tag.version>1.7</nimbus-lang-tag.version>
