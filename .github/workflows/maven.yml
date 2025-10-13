@@ -36,6 +36,9 @@ jobs:
       run: mvn -DskipTests clean install deploy:deploy --file pom.xml
     - name: Download deps for offline tests
       run: mvn dependency:go-offline
+    - name: Download additional deps to keep surefire plugin happy
+      # to be removed once maven-surefire-plugin allows using a custom junit platform version
+      run: mvn dependency:get -Dartifact=org.junit.platform:junit-platform-launcher:1.12.1
     - name: Cache build artifacts
       uses: actions/cache/save@v4
       id: buildcache
