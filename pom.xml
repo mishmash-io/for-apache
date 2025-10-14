@@ -128,7 +128,7 @@
     <osgi-framework.version>1.10.0</osgi-framework.version>
     <osgi-ds.version>1.5.1</osgi-ds.version>
 
-    <azure-identity.version>1.18.0</azure-identity.version>
+    <azure-identity.version>1.18.1</azure-identity.version>
     <azure-resourcemanager.version>2.53.3</azure-resourcemanager.version>
     <openapi-nullable.version>0.2.7</openapi-nullable.version>
 
