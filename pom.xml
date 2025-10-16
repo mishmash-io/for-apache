@@ -103,7 +103,7 @@
     <nimbus-jwt.version>10.5</nimbus-jwt.version>
     <minidev-smart.version>2.6.0</minidev-smart.version>
     <kerby.version>2.1.0</kerby.version>
-    <protobuf.version>4.32.1</protobuf.version>
+    <protobuf.version>4.33.0</protobuf.version>
     <slf4j.version>2.0.17</slf4j.version>
     <snappy.version>1.1.10.8</snappy.version>
     <spotbugsannotations.version>4.9.7</spotbugsannotations.version>
