@@ -83,7 +83,7 @@
     <!-- needed to generate proper version response string -->
     <mishmash.io.patch>${zookeeper.stable.mishmash.io.patch}</mishmash.io.patch>
 
-    <logback-version>1.5.19</logback-version>
+    <logback-version>1.5.20</logback-version>
     <jmockit.version>1.50</jmockit.version>
     <jline.version>2.14.6</jline.version>
     <burningwave.mockdns.version>0.27.2</burningwave.mockdns.version>
