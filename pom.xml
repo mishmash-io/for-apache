@@ -130,7 +130,7 @@
 
     <azure-identity.version>1.18.1</azure-identity.version>
     <azure-resourcemanager.version>2.53.3</azure-resourcemanager.version>
-    <openapi-nullable.version>0.2.7</openapi-nullable.version>
+    <openapi-nullable.version>0.2.8</openapi-nullable.version>
 
     <compute-azure.version>1.0.0</compute-azure.version>
     <compute-azure-utils.version>1.0.0</compute-azure-utils.version>
