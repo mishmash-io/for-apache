@@ -125,7 +125,7 @@
               <goal>wget</goal>
             </goals>
             <configuration>
-              <url>https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/specification/imds/data-plane/Microsoft.InstanceMetadataService/stable/2023-07-01/imds.json</url>
+              <url>https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/specification/imds/data-plane/InstanceMetadataService/stable/2023-07-01/imds.json</url>
               <outputFileName>imds.json</outputFileName>
               <outputDirectory>${project.build.directory}/azure-openapi</outputDirectory>
             </configuration>
