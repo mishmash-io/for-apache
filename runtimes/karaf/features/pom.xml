@@ -90,7 +90,7 @@
     <nimbus-lang-tag.version>1.7</nimbus-lang-tag.version>
     <nimbus-content-type.version>2.3</nimbus-content-type.version>
     <jcip-annotations.version>1.0</jcip-annotations.version>
-    <asm.version>9.9</asm.version>
+    <asm.version>9.9.1</asm.version>
     <jna.version>5.18.1</jna.version>
     <msal4j.version>1.23.1</msal4j.version>
     <msal4j-brokers.version>1.0.0</msal4j-brokers.version>
