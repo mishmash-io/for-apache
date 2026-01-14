@@ -96,7 +96,7 @@
     <msal4j-brokers.version>1.0.0</msal4j-brokers.version>
     <msal4j-persistence.version>1.3.0</msal4j-persistence.version>
     <msal4j-runtime.version>0.17.4</msal4j-runtime.version>
-    <reactor-core.version>3.8.1</reactor-core.version>
+    <reactor-core.version>3.8.2</reactor-core.version>
     <reactor-netty.version>1.3.2</reactor-netty.version>
     <reactive-streams.version>1.0.4</reactive-streams.version>
   </properties>
