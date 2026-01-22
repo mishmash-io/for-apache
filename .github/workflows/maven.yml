@@ -157,6 +157,7 @@ jobs:
       run: cd tests/${{ matrix.testset }} && mvn --offline -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar test --file pom.xml
     - name: Create test reports
       run: cd tests/${{ matrix.testset }} && mvn surefire-report:report-only
+      if: always()
     - name: Upload tests report
       uses: actions/upload-artifact@v4
       if: always()
