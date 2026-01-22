@@ -155,6 +155,29 @@ jobs:
         OTEL_EXPORTER_OTLP_PROTOCOL: grpc
         OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:${{ matrix.telemetryport }}
       run: cd tests/${{ matrix.testset }} && mvn --offline -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar test --file pom.xml
+    - name: Create test reports
+      run: cd tests/${{ matrix.testset }} && mvn surefire-report:report-only
+    - name: Upload tests report
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: test-reports-${{ matrix.telemetryoutput }}
+        path: tests/${{ matrix.testset }}/target/reports
+    - name: Upload tests extra files
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: test-raw-files-${{ matrix.telemetryoutput }}
+        path: tests/${{ matrix.testset }}/target/surefire
+    - name: Upload tests raw reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      continue-on-error: true
+      with:
+        name: test-raw-reports-${{ matrix.telemetryoutput }}
+        path: tests/${{ matrix.testset }}/target/surefire-reports
     - name: Upload telemetry logs
       uses: actions/upload-artifact@v4
       if: always()
