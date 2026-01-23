@@ -331,6 +331,24 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.12.0</version>
+        <configuration>
+          <failOnError>false</failOnError>
+          <failOnWarnings>false</failOnWarnings>
+          <sourcepath>${project.build.directory}/workdir/zookeeper-server/src/test/java</sourcepath>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <sourceDirs>${project.build.directory}/workdir/zookeeper-server/src/test/java/</sourceDirs>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
