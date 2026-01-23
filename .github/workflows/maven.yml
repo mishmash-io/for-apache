@@ -156,7 +156,7 @@ jobs:
         OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:${{ matrix.telemetryport }}
       run: cd tests/${{ matrix.testset }} && mvn --offline -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar test --file pom.xml
     - name: Create test reports
-      run: cd tests/${{ matrix.testset }} && mvn surefire-report:report-only
+      run: cd tests/${{ matrix.testset }} && mvn javadoc:test-javadoc jxr:test-jxr-no-fork surefire-report:report-only
       if: always()
     - name: Upload tests report
       uses: actions/upload-artifact@v4
@@ -205,3 +205,31 @@ jobs:
 #    - name: Publish Test Report
 #      if: success() || failure()
 #      uses: scacap/action-surefire-report@v1
+  site:
+    name: Update project web site
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download test reports
+        uses: actions/download-artifact@v5
+        with:
+          path: test-reports
+          pattern: test-reports-*
+          merge-multiple: true
+      - name: Copy static files
+        run: cp -R site/* test-reports
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: test-reports/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

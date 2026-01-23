@@ -476,6 +476,44 @@
           </excludes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.12.0</version>
+        <configuration>
+          <failOnError>false</failOnError>
+          <failOnWarnings>false</failOnWarnings>
+          <sourceFileExcludes>
+            <exclude>**/hadoop/fs/**/*.java</exclude>
+            <exclude>**/hadoop/hdfs/**/*.java</exclude>
+          </sourceFileExcludes>
+          <sourcepath>
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-auth/src/test/java;
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-common/src/test/java;
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-kms/src/test/java;
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-minikdc/src/main/java;
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-minikdc/src/test/java
+          </sourcepath>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <excludes>
+            <exclude>**/hadoop/fs/**/*.java</exclude>
+            <exclude>**/hadoop/hdfs/**/*.java</exclude>
+          </excludes>
+          <sourceDirs>
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-auth/src/test/java,
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-common/src/test/java,
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-kms/src/test/java,
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-minikdc/src/main/java,
+            ${project.build.directory}/workdir/hadoop-common-project/hadoop-minikdc/src/test/java
+          </sourceDirs>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>

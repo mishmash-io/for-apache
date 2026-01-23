@@ -475,6 +475,34 @@
           </includes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.12.0</version>
+        <configuration>
+          <failOnError>false</failOnError>
+          <failOnWarnings>false</failOnWarnings>
+          <sourceFileIncludes>**/hadoop/hdfs/*.java</sourceFileIncludes>
+          <sourcepath>
+            ${project.build.directory}/workdir/hadoop-hdfs-project/hadoop-hdfs/src/test/java;
+            ${project.build.directory}/workdir/hadoop-hdfs-project/hadoop-hdfs-client/src/test/java;
+            ${project.build.directory}/workdir/hadoop-hdfs-project/hadoop-hdfs-httpfs/src/test/java
+          </sourcepath>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <includes>**/hadoop/hdfs/*.java</includes>
+          <sourceDirs>
+            ${project.build.directory}/workdir/hadoop-hdfs-project/hadoop-hdfs/src/test/java,
+            ${project.build.directory}/workdir/hadoop-hdfs-project/hadoop-hdfs-client/src/test/java,
+            ${project.build.directory}/workdir/hadoop-hdfs-project/hadoop-hdfs-httpfs/src/test/java
+          </sourceDirs>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
