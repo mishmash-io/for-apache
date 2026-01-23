@@ -227,7 +227,6 @@ jobs:
       - name: Copy static files
         run: cp -R site/* test-reports
       - name: Upload pages artifact
-        id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
           path: test-reports/
