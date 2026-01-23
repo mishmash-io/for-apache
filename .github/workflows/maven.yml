@@ -205,3 +205,32 @@ jobs:
 #    - name: Publish Test Report
 #      if: success() || failure()
 #      uses: scacap/action-surefire-report@v1
+  site:
+    name: Update project web site
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download test reports
+        uses: actions/download-artifact@v5
+        with:
+          path: test-reports
+          pattern: test-reports-*
+          merge-multiple: true
+      - name: Copy static files
+        run: cp -R site/* test-reports
+      - name: Upload pages artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: test-reports/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
