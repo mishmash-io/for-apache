@@ -52,9 +52,9 @@
   </organization>
 
   <scm>
-    <connection>scm:git:https://github.com/mishmash-io/for-apache.git</connection>
-    <developerConnection>scm:git:https://github.com/mishmash-io/for-apache.git</developerConnection>
-    <url>https://github.com/mishmash-io/for-apache</url>
+    <connection>scm:git:https://github.com/mishmash-io/distributed-computing-stacks.git</connection>
+    <developerConnection>scm:git:https://github.com/mishmash-io/distributed-computing-stacks.git</developerConnection>
+    <url>https://github.com/mishmash-io/distributed-computing-stacks</url>
   </scm>
 
   <developers>
