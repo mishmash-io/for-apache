@@ -218,6 +218,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
       - name: Download test reports
         uses: actions/download-artifact@v5
         with:
