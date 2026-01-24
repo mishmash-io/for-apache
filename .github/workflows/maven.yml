@@ -27,9 +27,9 @@ jobs:
       pull-requests: write
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
     - name: Set up JDK 25
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@17f84c3641ba7b8f6deff6309fc4c864478f5d62 # v3.14.1
       with:
         java-version: '25'
         distribution: 'temurin'
@@ -42,13 +42,13 @@ jobs:
       # to be removed once maven-surefire-plugin allows using a custom junit platform version
       run: mvn dependency:get -Dartifact=org.junit.platform:junit-platform-launcher:1.12.1
     - name: Cache build artifacts
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
       id: buildcache
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ github.run_id }}-${{ github.run_attempt }}
     - name: Archive deployables
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       continue-on-error: true
       with:
         name: deployable-repo
@@ -135,16 +135,16 @@ jobs:
           - /tmp/tests-parquet/${{ matrix.telemetryoutput }}:/parquet
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
     - name: Set up JDK 25
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@17f84c3641ba7b8f6deff6309fc4c864478f5d62 # v3.14.1
       with:
         java-version: '25'
         distribution: 'temurin'
     - name: Download latest OpenTelemetry java agent
       run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
     - name: Restore cached build artifacts
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
       id: buildcache
       with:
         path: ~/.m2/repository
@@ -161,42 +161,42 @@ jobs:
       run: cd tests/${{ matrix.testset }} && mvn javadoc:test-javadoc jxr:test-jxr-no-fork surefire-report:report-only
       if: always()
     - name: Upload tests report
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       if: always()
       continue-on-error: true
       with:
         name: test-reports-${{ matrix.telemetryoutput }}
         path: tests/${{ matrix.testset }}/target/reports
     - name: Upload tests extra files
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       if: always()
       continue-on-error: true
       with:
         name: test-raw-files-${{ matrix.telemetryoutput }}
         path: tests/${{ matrix.testset }}/target/surefire
     - name: Upload tests raw reports
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       if: always()
       continue-on-error: true
       with:
         name: test-raw-reports-${{ matrix.telemetryoutput }}
         path: tests/${{ matrix.testset }}/target/surefire-reports
     - name: Upload telemetry logs
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       if: always()
       continue-on-error: true
       with:
         name: build-telemetry-logs-${{ matrix.telemetryoutput }}
         path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
     - name: Upload telemetry metrics
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       if: always()
       continue-on-error: true
       with:
         name: build-telemetry-metrics-${{ matrix.telemetryoutput }}
         path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/metrics-*.parquet
     - name: Upload telemetry traces
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       if: always()
       continue-on-error: true
       with:
@@ -221,7 +221,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Download test reports
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           path: test-reports
           pattern: test-reports-*
@@ -229,9 +229,9 @@ jobs:
       - name: Copy static files
         run: cp -R site/* test-reports
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: test-reports/
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
