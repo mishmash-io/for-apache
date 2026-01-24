@@ -1,6 +1,6 @@
 # Open Source Stacks for Distributed Computing
 
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/mishmash-io/for-apache/badge)](https://scorecard.dev/viewer/?uri=github.com/mishmash-io/for-apache)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/mishmash-io/distributed-computing-stacks/badge)](https://scorecard.dev/viewer/?uri=github.com/mishmash-io/distributed-computing-stacks)
 
 
 #### In this repository you'll find ***derivative works*** of other open source projects that are popular for building distributed apps and clusters.
