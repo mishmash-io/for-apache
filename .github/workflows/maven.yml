@@ -226,7 +226,7 @@ jobs:
         with:
           path: test-reports
           pattern: test-reports-*
-          merge-multiple: true
+          merge-multiple: false
       - name: Copy static files
         run: cp -R site/* test-reports
       - name: Upload pages artifact
