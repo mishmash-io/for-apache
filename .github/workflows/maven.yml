@@ -39,7 +39,7 @@ jobs:
     - name: Build with Maven
       env:
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MMIO_GPG_PASSPHRASE }}
-      run: mvn -DskipTests clean install deploy --file pom.xml
+      run: mvn -DskipTests clean deploy --file pom.xml
     - name: Download deps for offline tests
       run: mvn dependency:go-offline
     - name: Download additional deps to keep surefire plugin happy
