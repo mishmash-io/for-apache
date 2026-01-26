@@ -72,6 +72,7 @@ jobs:
           - 'storage/block/balancer'
           - 'storage/block/blockmanagement'
           - 'storage/block/datanode'
+          - 'storage/block/namenode'
           - 'storage/block/dfs-base'
           - 'storage/block/fs-base'
           - 'storage/block/misc'
@@ -92,6 +93,8 @@ jobs:
             testset: 'storage/block/fs-base'
           - telemetryport: 4331
             testset: 'storage/block/misc'
+          - telemetryport: 4333
+            testset: 'storage/block/namenode'
           - telemetryoutput: 'coordination-base'
             testset: 'coordination/base'
           - telemetryoutput: 'storage-block-base'
@@ -108,6 +111,8 @@ jobs:
             testset: 'storage/block/fs-base'
           - telemetryoutput: 'storage-block-misc'
             testset: 'storage/block/misc'
+          - telemetryoutput: 'storage-block-namenode'
+            testset: 'storage/block/namenode'
           - testname: 'Base distributed coordination tests'
             testset: 'coordination/base'
           - testname: 'Base distributed block storage tests'
@@ -124,6 +129,8 @@ jobs:
             testset: 'storage/block/fs-base'
           - testname: 'Misc distributed block storage tests'
             testset: 'storage/block/misc'
+          - testname: 'Distributed block storage namenode tests'
+            testset: 'storage/block/namenode'
     name: Testing, ${{ join(matrix.*, ' - ') }}
 
     services:
