@@ -86,7 +86,7 @@
     <!-- Versions for dependencies common to all modules -->
     <bouncycastle.version>1.83</bouncycastle.version>
     <commons-cli.version>1.11.0</commons-cli.version>
-    <commons-codec.version>1.20.0</commons-codec.version>
+    <commons-codec.version>1.21.0</commons-codec.version>
     <commons-collections.version>4.5.0</commons-collections.version>
     <commons-compress.version>1.28.0</commons-compress.version>
     <commons-io.version>2.21.0</commons-io.version>
