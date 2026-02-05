@@ -81,23 +81,41 @@ jobs:
           - 'storage/block/fs-base'
           - 'storage/block/misc'
         include:
-          - telemetryport: 4317
+          - telemetrygrpcport: 4317
             testset: 'coordination/base'
-          - telemetryport: 4319
+          - telemetryhttpport: 4318
+            testset: 'coordination/base'
+          - telemetrygrpcport: 4319
             testset: 'storage/block/base'
-          - telemetryport: 4321
+          - telemetryhttpport: 4320
+            testset: 'storage/block/base'
+          - telemetrygrpcport: 4321
             testset: 'storage/block/balancer'
-          - telemetryport: 4323
+          - telemetryhttpport: 4322
+            testset: 'storage/block/balancer'
+          - telemetrygrpcport: 4323
             testset: 'storage/block/blockmanagement'
-          - telemetryport: 4325
+          - telemetryhttpport: 4324
+            testset: 'storage/block/blockmanagement'
+          - telemetrygrpcport: 4325
             testset: 'storage/block/datanode'
-          - telemetryport: 4327
+          - telemetryhttpport: 4326
+            testset: 'storage/block/datanode'
+          - telemetrygrpcport: 4327
             testset: 'storage/block/dfs-base'
-          - telemetryport: 4329
+          - telemetryhttpport: 4328
+            testset: 'storage/block/dfs-base'
+          - telemetrygrpcport: 4329
             testset: 'storage/block/fs-base'
-          - telemetryport: 4331
+          - telemetryhttpport: 4330
+            testset: 'storage/block/fs-base'
+          - telemetrygrpcport: 4331
             testset: 'storage/block/misc'
-          - telemetryport: 4333
+          - telemetryhttpport: 4332
+            testset: 'storage/block/misc'
+          - telemetrygrpcport: 4333
+            testset: 'storage/block/namenode'
+          - telemetryhttpport: 4334
             testset: 'storage/block/namenode'
           - telemetryoutput: 'coordination-base'
             testset: 'coordination/base'
@@ -137,13 +155,13 @@ jobs:
             testset: 'storage/block/namenode'
     name: Testing, ${{ join(matrix.*, ' - ') }}
 
-    services:
-      otel-to-parquet:
-        image: mishmashio/opentelemetry-parquet-server
-        ports:
-          - ${{ matrix.telemetryport }}:4317
-        volumes:
-          - /tmp/tests-parquet/${{ matrix.telemetryoutput }}:/parquet
+    # services:
+    #  otel-to-parquet:
+    #    image: mishmashio/opentelemetry-parquet-server
+    #    ports:
+    #      - ${{ matrix.telemetryport }}:4317
+    #    volumes:
+    #      - /tmp/tests-parquet/${{ matrix.telemetryoutput }}:/parquet
 
     steps:
     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -152,8 +170,22 @@ jobs:
       with:
         java-version: '25'
         distribution: 'temurin'
-    - name: Download latest OpenTelemetry java agent
-      run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+    - name: Setup tests telemetry collection
+      id: setup-telemetry
+      uses: mishmash-io/setup-telemetry-collection@abadea88c78a1b250cc1e8270591176de764d663
+      with:
+        java-agent-version: '2.24.0'
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        logs-artifact: telemetry-logs-${{ matrix.telemetryoutput }}
+        metrics-artifact: telemetry-metrics-${{ matrix.telemetryoutput }}
+        traces-artifact: telemetry-traces-${{ matrix.telemetryoutput }}
+        save-profiles: true
+        profiles-artifact: telemetry-profiles-${{ matrix.telemetryoutput }}
+        grpc-port: ${{ matrix.telemetrygrpcport }}
+        http-port: ${{ matrix.telemetryhttpport }}
+
+    #- name: Download latest OpenTelemetry java agent
+    #  run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
     - name: Restore cached build artifacts
       uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
       id: buildcache
@@ -164,10 +196,10 @@ jobs:
     - name: Run test set ${{ matrix.testset }}
       env:
         OTEL_SERVICE_NAME: maven-test-service
-        OTEL_RESOURCE_ATTRIBUTES: git.ref=${{ github.ref }},git.sha=${{ github.sha }}
-        OTEL_EXPORTER_OTLP_PROTOCOL: grpc
-        OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:${{ matrix.telemetryport }}
-      run: cd tests/${{ matrix.testset }} && mvn --offline -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:/tmp/opentelemetry-javaagent.jar test --file pom.xml
+        #OTEL_RESOURCE_ATTRIBUTES: git.ref=${{ github.ref }},git.sha=${{ github.sha }}
+        #OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+        #OTEL_EXPORTER_OTLP_ENDPOINT: http://localhost:${{ matrix.telemetryport }}
+      run: cd tests/${{ matrix.testset }} && mvn --offline -Dsurefire.rerunFailingTestsCount=2 -Dtest.instrumentation.opts=-javaagent:${{ steps.setup-telemetry.outputs.java-agent }} test --file pom.xml
     - name: Create test reports
       run: cd tests/${{ matrix.testset }} && mvn javadoc:test-javadoc jxr:test-jxr-no-fork surefire-report:report-only
       if: always()
@@ -192,29 +224,29 @@ jobs:
       with:
         name: test-raw-reports-${{ matrix.telemetryoutput }}
         path: tests/${{ matrix.testset }}/target/surefire-reports
-    - name: Gracefully shut down telemetry service
-      run: docker stop ${{ job.services.otel-to-parquet.id }}
-    - name: Upload telemetry logs
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-      if: always()
-      continue-on-error: true
-      with:
-        name: build-telemetry-logs-${{ matrix.telemetryoutput }}
-        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
-    - name: Upload telemetry metrics
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-      if: always()
-      continue-on-error: true
-      with:
-        name: build-telemetry-metrics-${{ matrix.telemetryoutput }}
-        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/metrics-*.parquet
-    - name: Upload telemetry traces
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-      if: always()
-      continue-on-error: true
-      with:
-        name: build-telemetry-traces-${{ matrix.telemetryoutput }}
-        path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/traces-*.parquet
+    #- name: Gracefully shut down telemetry service
+    #  run: docker stop ${{ job.services.otel-to-parquet.id }}
+    #- name: Upload telemetry logs
+    #  uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+    #  if: always()
+    #  continue-on-error: true
+    #  with:
+    #    name: build-telemetry-logs-${{ matrix.telemetryoutput }}
+    #    path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
+    #- name: Upload telemetry metrics
+    #  uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+    #  if: always()
+    #  continue-on-error: true
+    #  with:
+    #    name: build-telemetry-metrics-${{ matrix.telemetryoutput }}
+    #    path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/metrics-*.parquet
+    #- name: Upload telemetry traces
+    #  uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+    #  if: always()
+    #  continue-on-error: true
+    #  with:
+    #    name: build-telemetry-traces-${{ matrix.telemetryoutput }}
+    #    path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/traces-*.parquet
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 
 #    - name: Publish Test Report
