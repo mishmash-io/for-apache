@@ -75,7 +75,7 @@
   </developers>
 
   <properties>
-    <zookeeper.version>3.9.4-mmio.1</zookeeper.version>
+    <zookeeper.version>3.9.4-mmio.2</zookeeper.version>
     <jmockit.version>1.50</jmockit.version>
     <top.version>0.0.1</top.version>
     <test.instrumentation.opts></test.instrumentation.opts>
@@ -238,7 +238,7 @@
         <executions>
           <execution>
             <id>unpack-test-classes</id>
-            <phase>process-test-classes</phase>
+            <phase>generate-test-sources</phase>
             <goals>
               <goal>unpack</goal>
             </goals>
@@ -323,7 +323,7 @@
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <forkCount>1<!--0.5C--></forkCount>
           <reuseForks>false</reuseForks>
-          <argLine>-Djdk.net.hosts.file=${project.build.directory}/generated-test-resources/hosts -Xmx512m -Dtest.junit.threads=${surefire-forkcount} -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar ${test.instrumentation.opts}</argLine>
+          <argLine>-Djdk.net.hosts.file=${project.build.directory}/generated-test-resources/hosts -Xmx512m -Dtest.junit.threads=1 -Dzookeeper.junit.threadid=${surefire.forkNumber} -javaagent:"${settings.localRepository}"/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar ${test.instrumentation.opts}</argLine>
           <workingDirectory>${project.build.directory}/workdir/zookeeper-server</workingDirectory>
           <systemPropertyVariables>
             <build.test.dir>${project.build.directory}/surefire</build.test.dir>
