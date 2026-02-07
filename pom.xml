@@ -74,7 +74,7 @@
   <properties>
     <!-- Apache ZooKeeper versions -->
     <zookeeper.stable.version>3.9.4</zookeeper.stable.version>
-    <zookeeper.stable.mishmash.io.patch>1</zookeeper.stable.mishmash.io.patch>
+    <zookeeper.stable.mishmash.io.patch>2</zookeeper.stable.mishmash.io.patch>
 
     <!-- Apache Hadoop versions -->
     <hadoop.stable.version>3.4.2</hadoop.stable.version>
