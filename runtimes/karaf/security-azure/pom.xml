@@ -26,15 +26,13 @@
 
   <groupId>io.mishmash.stacks.security</groupId>
   <artifactId>security-karaf-azure</artifactId>
+  <version>${karaf-security-azure.version}</version>
   <packaging>bundle</packaging>
 
   <name>Distributed computing stacks Azure (Entra ID) security on Apache Karaf</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Integrates Apache Karaf with Azure Entra ID IAM for authentication and 
+    authorization.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
@@ -107,7 +105,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-karaf-common</artifactId>
-        <version>${project.version}</version>
+        <version>${karaf-security-common.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -119,7 +117,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-azure</artifactId>
-        <version>${project.version}</version>
+        <version>${security-azure.version}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>

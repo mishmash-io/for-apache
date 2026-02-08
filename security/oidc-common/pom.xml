@@ -26,15 +26,13 @@
 
   <groupId>io.mishmash.stacks.security</groupId>
   <artifactId>security-oidc-common</artifactId>
+  <version>${security-oidc-common.version}</version>
   <packaging>bundle</packaging>
 
   <name>OpenID Connect security for distributed computing stacks</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Helper classes for when integrating the distributed computing stacks with 
+    OIDC-based IAMs.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 

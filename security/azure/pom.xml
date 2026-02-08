@@ -26,15 +26,13 @@
 
   <groupId>io.mishmash.stacks.security</groupId>
   <artifactId>security-azure</artifactId>
+  <version>${security-azure.version}</version>
   <packaging>bundle</packaging>
 
   <name>Azure (Entra ID) security for distributed computing stacks</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Allows the distributed computing stacks to itegrate with Azure Entra ID 
+    for authentication and authorization.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
@@ -83,7 +81,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-oidc-common</artifactId>
-        <version>${project.version}</version>
+        <version>${security-oidc-common.version}</version>
       </dependency>
       <dependency>
         <groupId>com.azure</groupId>

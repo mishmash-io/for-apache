@@ -31,11 +31,9 @@
 
   <name>Base OSGi runtime package for running stacks on Microsoft Azure</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    This package helps distributed computing stacks to interact with Microsoft 
+    Azure compute environments - typically used by cluster topology discovery and
+    compute optimizations.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 

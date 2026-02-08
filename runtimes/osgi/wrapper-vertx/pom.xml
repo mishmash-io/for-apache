@@ -26,16 +26,12 @@
 
   <groupId>io.mishmash.stacks.osgi</groupId>
   <artifactId>wrapper-vertx</artifactId>
-  <version>${vertx.version}</version>
+  <version>${vertx.version}-mmio.${vertx-patch.version}</version>
   <packaging>bundle</packaging>
 
   <name>Wrapper OSGi bundle for Vert.x</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Simplifies bundling of Vert.x, potentially updating dependencies.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 

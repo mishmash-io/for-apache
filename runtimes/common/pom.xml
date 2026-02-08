@@ -31,11 +31,7 @@
 
   <name>Distributed computing stacks common code</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Common code for all distributed computing stacks compute and runtime environments.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 

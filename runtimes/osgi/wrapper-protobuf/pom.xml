@@ -26,16 +26,12 @@
 
   <groupId>io.mishmash.stacks.osgi</groupId>
   <artifactId>wrapper-protobuf</artifactId>
-  <version>${protobuf.version}</version>
+  <version>${protobuf.version}-mmio.${protobuf-patch.version}</version>
   <packaging>bundle</packaging>
 
   <name>Wrapper OSGi bundle for Protocol Buffers</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Simplifies bundling of Protocol Buffers, potentially updating dependencies.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
