@@ -26,15 +26,13 @@
 
   <groupId>io.mishmash.stacks.karaf</groupId>
   <artifactId>karaf-features</artifactId>
+  <version>${karaf-features.version}</version>
   <packaging>feature</packaging>
 
   <name>Apache Karaf features repository for distributed computing stacks</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Up-to-date Apache Karaf Features for automated deployments and updates when
+    running distributed computing stacks in Karaf runtimes.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
@@ -149,22 +147,22 @@
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-oidc-common</artifactId>
-        <version>${project.version}</version>
+        <version>${security-oidc-common.version}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-karaf-common</artifactId>
-        <version>${project.version}</version>
+        <version>${karaf-security-common.version}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-azure</artifactId>
-        <version>${project.version}</version>
+        <version>${security-azure.version}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-karaf-azure</artifactId>
-        <version>${project.version}</version>
+        <version>${karaf-security-azure.version}</version>
       </dependency>
 
       <dependency>
@@ -185,12 +183,12 @@
       <dependency>
         <groupId>io.mishmash.stacks.osgi</groupId>
         <artifactId>wrapper-vertx</artifactId>
-        <version>${vertx.version}</version>
+        <version>${vertx.version}-mmio.${vertx-patch.version}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.osgi</groupId>
         <artifactId>wrapper-protobuf</artifactId>
-        <version>${protobuf.version}</version>
+        <version>${protobuf.version}-mmio.${protobuf-patch.version}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.compute</groupId>
@@ -205,7 +203,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.compute</groupId>
         <artifactId>compute-shell-karaf</artifactId>
-        <version>${stacks-common.version}</version>
+        <version>${karaf-compute-shell.version}</version>
       </dependency>
 
 

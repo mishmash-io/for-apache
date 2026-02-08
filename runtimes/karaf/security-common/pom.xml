@@ -26,15 +26,13 @@
 
   <groupId>io.mishmash.stacks.security</groupId>
   <artifactId>security-karaf-common</artifactId>
+  <version>${karaf-security-common.version}</version>
   <packaging>bundle</packaging>
 
-  <name>Distributed computing stacks security on Apache Karaf</name>
+  <name>OpenID Connect security for Apache Karaf</name>
   <description>
-    A minimal Quorum coordination client for high-availability clustering.
-
-    Source code is originally developed by the Apache ZooKeeper project and then 
-    modified by mishmash io. For more info on the specific modifications done by mishmash io - 
-    visit our website and GitHub.
+    Integrates Apache Karaf with OpenID Connect-based IAMs for 
+    authentication and authorization.
   </description>
   <url>https://mishmash.io/open_source/distributed-computing-stacks</url>
 
@@ -89,7 +87,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.security</groupId>
         <artifactId>security-oidc-common</artifactId>
-        <version>${project.version}</version>
+        <version>${security-oidc-common.version}</version>
         <scope>provided</scope>
       </dependency>
     </dependencies>
