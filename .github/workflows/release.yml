@@ -1,0 +1,21 @@
+name: Release assets
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  release-assets:
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+    uses: mishmash-io/github-workflows/.github/workflows/maven_build_with_provenance.yml@5ef9d195e82359f235a8f32eac5f3bdff1aacd00
+    secrets: inherit
+    with:
+      java-version: 25
+      skip-tests: true
