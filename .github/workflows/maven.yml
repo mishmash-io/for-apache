@@ -14,52 +14,21 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   compile:
-    name: Compile everything
-    runs-on: ubuntu-latest
-
-    # allow 'Update dependency graph' step below to submit the generated graph
+    uses: mishmash-io/github-workflows/.github/workflows/maven_build_with_provenance.yml@5ef9d195e82359f235a8f32eac5f3bdff1aacd00
     permissions:
+      id-token: write
       contents: write
-      pull-requests: write
-
-    steps:
-    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-    - name: Set up JDK 25
-      uses: actions/setup-java@17f84c3641ba7b8f6deff6309fc4c864478f5d62 # v3.14.1
-      with:
-        java-version: '25'
-        distribution: 'temurin'
-        cache: 'maven'
-        gpg-private-key: ${{ secrets.MMIO_GPG_KEY }}
-        gpg-passphrase: MMIO_GPG_PASSPHRASE
-    - name: Build with Maven
-      env:
-        MAVEN_GPG_PASSPHRASE: ${{ secrets.MMIO_GPG_PASSPHRASE }}
-      run: mvn -DskipTests clean deploy --file pom.xml
-    - name: Download deps for offline tests
-      run: mvn dependency:go-offline
-    - name: Download additional deps to keep surefire plugin happy
-      # to be removed once maven-surefire-plugin allows using a custom junit platform version
-      run: mvn dependency:get -Dartifact=org.junit.platform:junit-platform-launcher:1.12.1
-    - name: Cache build artifacts
-      uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-      id: buildcache
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ github.run_id }}-${{ github.run_attempt }}
-    - name: Archive deployables
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-      continue-on-error: true
-      with:
-        name: deployable-repo
-        path: /tmp/maven-repo/
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
-      continue-on-error: true
+      attestations: write
+      artifact-metadata: write
+    secrets: inherit
+    with:
+      skip-tests: true
+      java-version: '25'
 
   test:
     needs: compile
@@ -155,18 +124,10 @@ jobs:
             testset: 'storage/block/namenode'
     name: Testing, ${{ join(matrix.*, ' - ') }}
 
-    # services:
-    #  otel-to-parquet:
-    #    image: mishmashio/opentelemetry-parquet-server
-    #    ports:
-    #      - ${{ matrix.telemetryport }}:4317
-    #    volumes:
-    #      - /tmp/tests-parquet/${{ matrix.telemetryoutput }}:/parquet
-
     steps:
-    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
     - name: Set up JDK 25
-      uses: actions/setup-java@17f84c3641ba7b8f6deff6309fc4c864478f5d62 # v3.14.1
+      uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
       with:
         java-version: '25'
         distribution: 'temurin'
@@ -184,14 +145,12 @@ jobs:
         grpc-port: ${{ matrix.telemetrygrpcport }}
         http-port: ${{ matrix.telemetryhttpport }}
 
-    #- name: Download latest OpenTelemetry java agent
-    #  run: curl -L -o /tmp/opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
     - name: Restore cached build artifacts
-      uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      uses: actions/cache/restore@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
       id: buildcache
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ github.run_id }}-${{ github.run_attempt }}
+        key: ${{ needs.compile.outputs.build-cache-key }}
         fail-on-cache-miss: true
     - name: Run test set ${{ matrix.testset }}
       env:
@@ -204,54 +163,27 @@ jobs:
       run: cd tests/${{ matrix.testset }} && mvn javadoc:test-javadoc jxr:test-jxr-no-fork surefire-report:report-only
       if: always()
     - name: Upload tests report
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       if: always()
       continue-on-error: true
       with:
         name: test-reports-${{ matrix.telemetryoutput }}
         path: tests/${{ matrix.testset }}/target/reports
     - name: Upload tests extra files
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       if: always()
       continue-on-error: true
       with:
         name: test-raw-files-${{ matrix.telemetryoutput }}
         path: tests/${{ matrix.testset }}/target/surefire
     - name: Upload tests raw reports
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       if: always()
       continue-on-error: true
       with:
         name: test-raw-reports-${{ matrix.telemetryoutput }}
         path: tests/${{ matrix.testset }}/target/surefire-reports
-    #- name: Gracefully shut down telemetry service
-    #  run: docker stop ${{ job.services.otel-to-parquet.id }}
-    #- name: Upload telemetry logs
-    #  uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-    #  if: always()
-    #  continue-on-error: true
-    #  with:
-    #    name: build-telemetry-logs-${{ matrix.telemetryoutput }}
-    #    path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/logs-*.parquet
-    #- name: Upload telemetry metrics
-    #  uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-    #  if: always()
-    #  continue-on-error: true
-    #  with:
-    #    name: build-telemetry-metrics-${{ matrix.telemetryoutput }}
-    #    path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/metrics-*.parquet
-    #- name: Upload telemetry traces
-    #  uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-    #  if: always()
-    #  continue-on-error: true
-    #  with:
-    #    name: build-telemetry-traces-${{ matrix.telemetryoutput }}
-    #    path: /tmp/tests-parquet/${{ matrix.telemetryoutput }}/traces-*.parquet
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 
-#    - name: Publish Test Report
-#      if: success() || failure()
-#      uses: scacap/action-surefire-report@v1
   site:
     name: Update project web site
     needs: test
@@ -265,9 +197,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Download test reports
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           path: test-reports
           pattern: test-reports-*
@@ -275,7 +207,7 @@ jobs:
       - name: Copy static files
         run: cp -R site/* test-reports
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: test-reports/
       - name: Deploy to GitHub Pages
