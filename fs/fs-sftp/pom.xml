@@ -26,7 +26,7 @@
 
   <groupId>io.mishmash.stacks.fs</groupId>
   <artifactId>fs-sftp</artifactId>
-  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}.{hadoop.stable.mishmash.io.update}</version>
+  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}.${hadoop.stable.mishmash.io.update}</version>
   <packaging>jar</packaging>
 
   <name>SFTP Filesystem client</name>

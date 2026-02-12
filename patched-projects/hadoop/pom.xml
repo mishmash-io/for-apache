@@ -26,7 +26,7 @@
 
   <groupId>io.mishmash.stacks.patches</groupId>
   <artifactId>hadoop-patches</artifactId>
-  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}.{hadoop.stable.mishmash.io.update}</version>
+  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}.${hadoop.stable.mishmash.io.update}</version>
 
   <name>mishmash io patches of Apache Hadoop</name>
   <description>
