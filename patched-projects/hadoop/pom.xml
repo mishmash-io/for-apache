@@ -20,13 +20,13 @@
   <parent>
     <groupId>io.mishmash.stacks</groupId>
     <artifactId>distributed-computing-stacks</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <groupId>io.mishmash.stacks.patches</groupId>
   <artifactId>hadoop-patches</artifactId>
-  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}</version>
+  <version>${hadoop.stable.version}-mmio.${hadoop.stable.mishmash.io.patch}.{hadoop.stable.mishmash.io.update}</version>
 
   <name>mishmash io patches of Apache Hadoop</name>
   <description>
@@ -220,7 +220,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.quorum</groupId>
         <artifactId>quorum-client</artifactId>
-        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.curator</groupId>
@@ -353,7 +353,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.patches</groupId>
         <artifactId>zookeeper-patches</artifactId>
-        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
         <scope>test</scope>
         <exclusions>
           <exclusion>
@@ -369,7 +369,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.patches</groupId>
         <artifactId>zookeeper-patches</artifactId>
-        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
         <scope>test</scope>
         <classifier>tests</classifier>
         <exclusions>

@@ -20,13 +20,13 @@
   <parent>
     <groupId>io.mishmash.stacks</groupId>
     <artifactId>distributed-computing-stacks</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <groupId>io.mishmash.stacks.patches</groupId>
   <artifactId>zookeeper-patches</artifactId>
-  <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+  <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
   <packaging>jar</packaging>
 
   <name>mishmash io patches of Apache ZooKeeper</name>
@@ -81,7 +81,7 @@
 
   <properties>
     <!-- needed to generate proper version response string -->
-    <mishmash.io.patch>${zookeeper.stable.mishmash.io.patch}</mishmash.io.patch>
+    <mishmash.io.patch>${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</mishmash.io.patch>
 
     <logback-version>1.5.29</logback-version>
     <jmockit.version>1.50</jmockit.version>

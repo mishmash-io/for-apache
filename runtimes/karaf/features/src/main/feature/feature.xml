@@ -19,7 +19,7 @@
   <feature
       name="quorum-client"
       description="Quorum coordination client"
-      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}">
+      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}">
     <details>
       Details on 
       
@@ -29,12 +29,12 @@
     <feature prerequisite="true" dependency="false">scr</feature>
     <bundle dependency="true">wrap:mvn:org.apache.yetus/audience-annotations/${yetus.version}$Bundle-SymbolicName=Apache Yetus Audience Annotations&amp;Bundle-Version=${yetus.version}</bundle>
     <bundle dependency="true">mvn:org.slf4j/slf4j-api/${slf4j.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.quorum/quorum-client-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</bundle>
+    <bundle>mvn:io.mishmash.stacks.quorum/quorum-client-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</bundle>
   </feature>
   <feature
       name="quorum-client-secure"
       description="Quorum coordination secure client"
-      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}">
+      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}">
     <details>
       Details on 
       
@@ -53,12 +53,12 @@
     <bundle dependency="true">mvn:io.netty/netty-codec/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.quorum/quorum-client-secure-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</bundle>
+    <bundle>mvn:io.mishmash.stacks.quorum/quorum-client-secure-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</bundle>
   </feature>
   <feature
       name="quorum-server"
       description="Quorum coordination server"
-      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}">
+      version="${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}">
     <details>
       Details on 
       
@@ -80,7 +80,7 @@
     <bundle dependency="true">mvn:io.netty/netty-codec/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-native-epoll/${netty.version}</bundle>
     <bundle dependency="true">mvn:io.netty/netty-transport-classes-epoll/${netty.version}</bundle>
-    <bundle>mvn:io.mishmash.stacks.quorum/quorum-server-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</bundle>
+    <bundle>mvn:io.mishmash.stacks.quorum/quorum-server-osgi/${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</bundle>
   </feature>
 
   <feature
