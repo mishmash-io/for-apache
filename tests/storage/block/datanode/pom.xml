@@ -74,8 +74,8 @@
   </developers>
 
   <properties>
-    <top.version>0.0.1</top.version>
-    <hadoop.version>3.4.2-mmio.1</hadoop.version>
+    <top.version>1.0.0</top.version>
+    <hadoop.version>3.4.2-mmio.1.1</hadoop.version>
 
     <hadoop.common.build.dir>${project.build.directory}</hadoop.common.build.dir>
     <hadoop.log.dir>${project.build.directory}/log</hadoop.log.dir>
