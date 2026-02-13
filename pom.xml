@@ -79,8 +79,8 @@
 
     <!-- Apache Hadoop versions -->
     <hadoop.stable.version>3.4.2</hadoop.stable.version>
-    <hadoop.stable.mishmash.io.patch>1</hadoop.stable.mishmash.io.patch>
-    <hadoop.stable.mishmash.io.update>1</hadoop.stable.mishmash.io.update>
+    <hadoop.stable.mishmash.io.patch>2</hadoop.stable.mishmash.io.patch>
+    <hadoop.stable.mishmash.io.update>0</hadoop.stable.mishmash.io.update>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
