@@ -20,13 +20,13 @@
   <parent>
     <groupId>io.mishmash.stacks</groupId>
     <artifactId>distributed-computing-stacks</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <groupId>io.mishmash.stacks.misc</groupId>
   <artifactId>openid</artifactId>
-  <version>1.0.0</version>
+  <version>${misc-openid.version}</version>
 
   <name>OpenID Connect and UMA tools for SASL authentication and authorization</name>
   <description>

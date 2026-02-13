@@ -20,7 +20,7 @@
   <parent>
     <groupId>io.mishmash.stacks</groupId>
     <artifactId>distributed-computing-stacks</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <relativePath>../../../pom.xml</relativePath>
   </parent>
 
@@ -104,7 +104,7 @@
       <dependency>
         <groupId>io.mishmash.stacks.patches</groupId>
         <artifactId>zookeeper-patches</artifactId>
-        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -168,17 +168,17 @@
       <dependency>
         <groupId>io.mishmash.stacks.quorum</groupId>
         <artifactId>quorum-client-osgi</artifactId>
-        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.quorum</groupId>
         <artifactId>quorum-client-secure-osgi</artifactId>
-        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.quorum</groupId>
         <artifactId>quorum-server-osgi</artifactId>
-        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}</version>
+        <version>${zookeeper.stable.version}-mmio.${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</version>
       </dependency>
       <dependency>
         <groupId>io.mishmash.stacks.osgi</groupId>
