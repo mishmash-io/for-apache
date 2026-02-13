@@ -19,18 +19,14 @@
 
   <groupId>io.mishmash.test.stacks</groupId>
   <artifactId>test-coordination-base</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
-  <name>Modifications and extensions of Apache ZooKeeper, by mishmash io</name>
+  <name>Quorum/base tests</name>
   <description>
-    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+    This artifact only exists to split testing into common categories.
 
-    This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
-    specific modifications by mishmash io visit our website and GitHub.
-
-    It is recommended that you don't use this package directly, but rather - one of the 
-    minimal client or server packages.
+    It should not be installed or deployed.
   </description>
   <url>https://mishmash.io/open_source/apache_big_data</url>
 

@@ -21,15 +21,11 @@
   <artifactId>test-storage-blocks-misc</artifactId>
   <version>1.0.0</version>
 
-  <name>Modifications and extensions of Apache Hadoop, by mishmash io</name>
+  <name>Storage/block/misc tests</name>
   <description>
-    Apache ZooKeeper is a service for coordinating processes of distributed applications.
+    This artifact only exists to split testing into common categories.
 
-    This package contains Apache ZooKeeper as modified by mishmash io. For more info on the 
-    specific modifications visit our website and github.
-
-    It is recommended that you don't use this package directly, but rather - one of the 
-    dependency-reduced client or server packages.
+    It should not be installed or deployed.
   </description>
   <url>https://mishmash.io/open_source/apache_big_data</url>
 
