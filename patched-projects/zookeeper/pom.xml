@@ -84,7 +84,7 @@
     <mishmash.io.patch>${zookeeper.stable.mishmash.io.patch}.${zookeeper.stable.mishmash.io.update}</mishmash.io.patch>
 
     <jmockit.version>1.50</jmockit.version>
-    <jline.version>4.4.1</jline.version>
+    <jline.version>4.4.2</jline.version>
     <burningwave.mockdns.version>0.27.2</burningwave.mockdns.version>
   </properties>
 
