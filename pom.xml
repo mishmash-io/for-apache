@@ -122,7 +122,7 @@
     <protobuf.version>4.36.1</protobuf.version>
     <protobuf-patch.version>1.0</protobuf-patch.version>
     <flatbuffers.version>25.2.10</flatbuffers.version>
-    <slf4j.version>2.0.18</slf4j.version>
+    <slf4j.version>2.0.19</slf4j.version>
     <logback-version>1.6.3</logback-version>
     <snappy.version>1.1.10.8</snappy.version>
     <spotbugsannotations.version>4.10.4</spotbugsannotations.version>
