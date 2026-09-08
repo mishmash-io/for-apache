@@ -13,7 +13,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-FROM maven:3-eclipse-temurin-26-alpine@sha256:9cbcc5b82c2deb26c1b608bdcdfebd9bc71e5edada8c07a430c36826c41f7b2b AS base-builder
+FROM maven:3-eclipse-temurin-25-noble@sha256:d67198007bb4441b07d45587320f83154de80ece3608f80408ef14c6ea847753 AS base-builder
 
 ENV INSTALL_BASE=/opt/stacks
 ENV INSTALL_COMMON_BASE=${INSTALL_BASE}/common
