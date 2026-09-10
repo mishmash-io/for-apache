@@ -212,4 +212,4 @@ necessary entries to the classpath, add additional JVM args, etc.
 
 ## About the distributed computing stacks
 
-This document only covers the distributed computing stacks images. For a broader view of the entire distributed computing stacks project, start at the [main documentation here.](../../#readme)
+This document only covers the distributed computing stacks images. For a broader view of the entire distributed computing stacks project, start at the [main documentation here.](../#readme)
