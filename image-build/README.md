@@ -207,3 +207,9 @@ is not disabled, the functions add a JVM command-line option to point the OpenTe
 2. Install a shell script in `libexec/shellprofile.d` and in it add the
 necessary entries to the classpath, add additional JVM args, etc.
 3. Add to the build files - `Dockerfile`, `build-container-images.sh`, etc
+
+---
+
+## About the distributed computing stacks
+
+This document only covers the distributed computing stacks images. For a broader view of the entire distributed computing stacks project, start at the [main documentation here.](../../#readme)
