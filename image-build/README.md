@@ -28,23 +28,23 @@ Here's a list of the available stacks images and their contents:
 
 - `stacks-jetty-base`
 
-  Jars used by both jetty clients and servers.
+  Jars used by both [Eclipse Jetty](https://jetty.org/) clients and servers.
 
 - `stacks-jetty-client`
   
-  The jetty client libraries.
+  The [Eclipse Jetty](https://jetty.org/) client libraries.
 
 - `stacks-jetty-server`
   
-  The jetty server libraries.
+  The [Eclipse Jetty](https://jetty.org/) server libraries.
 
 - `stacks-jetty-servlet`
   
-  Extends the jetty server stack with servlet support.
+  Extends the [Eclipse Jetty](https://jetty.org/) server stack with servlet support.
 
 - `stacks-gson`
   
-  Google Gson for JSON serialization and deserialization.
+  [Google Gson](https://github.com/google/gson) for JSON serialization and deserialization.
 
 - `stacks-yaml`
 
@@ -52,39 +52,40 @@ Here's a list of the available stacks images and their contents:
 
 - `stacks-jackson`
 
-  Jackson for JSON serialization and deserialization.
+  [Jackson](https://github.com/fasterxml/jackson) for JSON serialization and deserialization.
 
 - `stacks-jackson-yaml`
   
-  Adds YAML support to the Jackson stack.
+  Adds YAML support to the [Jackson](https://github.com/fasterxml/jackson) stack.
 
 - `stacks-logging`
   
-  Logging backend, more about it [here.](logging/README.md)
+  Logging backend, more about it [here.](logging/#readme)
 
 - `stacks-slf4j`
   
-  SLF4J logging facade. Needs the [logging backend stack.](logging/README.md)
+  [SLF4J logging facade.](https://www.slf4j.org) Needs the [logging backend stack.](logging/#readme)
 
 - `stacks-netty`
   
-  Base Netty networking functionality.
+  Base [Netty](https://netty.io) networking functionality, including native transport support.
 
 - `stacks-opentelemetry-agent`
   
-  Sets up the OpenTelemetry Java agent.
+  Sets up the [OpenTelemetry Java agent.](https://opentelemetry.io/docs/zero-code/java/agent/) For configuration options - [read this.](opentelemetry-agent/#readme)
 
 - `stacks-sasl-oidc`
   
-  Provides a SASL module for OIDC (OpenID Connect) authentication.
+  Provides a SASL login module with OIDC (OpenID Connect) authentication.
+  Refer to [its own docs](sasl-oidc/#readme) for details.
 
 - `stacks-bouncy-castle`
   
-  The bouncy castle cryptographic libraries.
+  The [Bouncy Castle](https://www.bouncycastle.org) cryptographic libraries.
 
 - `shellprofiles-container`
   
-  Utility scripts when running stacks in containerized environments.
+  Utility scripts when running stacks in containerized environments. [Learn more here](shellprofiles-container/#readme)
 
 - `stacks-quorum-client`
 
